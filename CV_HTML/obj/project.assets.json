@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dimit\\Desktop\\SLAM\\M. GUICHARD.F\\CV_HTML\\CV_HTML.csproj",
+      "projectUniqueName": "C:\\Users\\dimit\\Documents\\GitHub\\SLAM\\CV_HTML\\CV_HTML.csproj",
       "projectName": "CV_HTML",
-      "projectPath": "C:\\Users\\dimit\\Desktop\\SLAM\\M. GUICHARD.F\\CV_HTML\\CV_HTML.csproj",
+      "projectPath": "C:\\Users\\dimit\\Documents\\GitHub\\SLAM\\CV_HTML\\CV_HTML.csproj",
       "packagesPath": "C:\\Users\\dimit\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dimit\\Desktop\\SLAM\\M. GUICHARD.F\\CV_HTML\\obj\\",
+      "outputPath": "C:\\Users\\dimit\\Documents\\GitHub\\SLAM\\CV_HTML\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\dimit\\AppData\\Roaming\\NuGet\\NuGet.Config"

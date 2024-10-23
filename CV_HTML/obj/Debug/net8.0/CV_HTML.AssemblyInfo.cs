@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CV_HTML")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d9d0a2249242d831f0df6478c6b1adefaff5cd6f")]
 [assembly: System.Reflection.AssemblyProductAttribute("CV_HTML")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CV_HTML")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

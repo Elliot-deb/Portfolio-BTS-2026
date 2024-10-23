@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CV_HTML
-build_property.ProjectDir = C:\Users\dimit\Desktop\SLAM\M. GUICHARD.F\CV_HTML\
+build_property.ProjectDir = C:\Users\dimit\Documents\GitHub\SLAM\CV_HTML\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
