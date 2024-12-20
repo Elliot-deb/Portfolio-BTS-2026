@@ -32,10 +32,11 @@ header, main, footer {
 header {
   padding: 2em;
   text-align: center;
-  background-image: url('./images/bg.jpg');
+  background-image: url('bg01.jpg');
   background-size: cover;
-  background-position: fixed;
-  color: white;
+  background-position: center;
+  background-attachment: fixed; 
+  color: ;
 }
 
 header section {
@@ -141,7 +142,7 @@ ul.job-description li:before{
 
 footer {
  padding: 1em 1.5em;
- background: #A7B8BF;
+ background: #171616;
  color: white;
  text-align: right;
 }
