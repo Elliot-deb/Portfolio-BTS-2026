@@ -137,6 +137,31 @@
             color: #2980b9;
         }
         
+        /* Filtre et recherche */
+        .filters {
+            margin: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .search-box {
+            flex-grow: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            min-width: 200px;
+        }
+        
+        .stats {
+            background-color: white;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
         /* Styles responsifs */
         @media (max-width: 600px) {
             .verb-form {
@@ -197,44 +222,169 @@
         </div>
         
         <h2>Liste de référence des verbes irréguliers</h2>
+        <div class="filters">
+            <input type="text" id="search-box" class="search-box" placeholder="Rechercher un verbe...">
+            <button id="reset-search">Réinitialiser</button>
+        </div>
+        
         <div class="verb-list" id="verb-list">
             <!-- Les cartes de verbes seront générées en JavaScript -->
         </div>
     </div>
 
     <script>
-        // Liste des verbes irréguliers avec leurs formes et traductions
+        // Liste étendue des verbes irréguliers avec leurs formes et traductions
         const irregularVerbs = [
+            { infinitive: "arise", preterit: "arose", participle: "arisen", translation: "survenir, se lever" },
+            { infinitive: "awake", preterit: "awoke", participle: "awoken", translation: "se réveiller" },
             { infinitive: "be", preterit: "was/were", participle: "been", translation: "être" },
+            { infinitive: "bear", preterit: "bore", participle: "borne/born", translation: "porter, supporter" },
+            { infinitive: "beat", preterit: "beat", participle: "beaten", translation: "battre" },
+            { infinitive: "become", preterit: "became", participle: "become", translation: "devenir" },
             { infinitive: "begin", preterit: "began", participle: "begun", translation: "commencer" },
+            { infinitive: "bend", preterit: "bent", participle: "bent", translation: "plier, se courber" },
+            { infinitive: "bet", preterit: "bet", participle: "bet", translation: "parier" },
+            { infinitive: "bid", preterit: "bid", participle: "bid", translation: "offrir un prix, enchérir" },
+            { infinitive: "bind", preterit: "bound", participle: "bound", translation: "lier, attacher" },
+            { infinitive: "bite", preterit: "bit", participle: "bitten", translation: "mordre" },
+            { infinitive: "bleed", preterit: "bled", participle: "bled", translation: "saigner" },
+            { infinitive: "blow", preterit: "blew", participle: "blown", translation: "souffler" },
             { infinitive: "break", preterit: "broke", participle: "broken", translation: "casser" },
+            { infinitive: "breed", preterit: "bred", participle: "bred", translation: "élever, reproduire" },
             { infinitive: "bring", preterit: "brought", participle: "brought", translation: "apporter" },
+            { infinitive: "broadcast", preterit: "broadcast", participle: "broadcast", translation: "diffuser" },
+            { infinitive: "build", preterit: "built", participle: "built", translation: "construire" },
+            { infinitive: "burn", preterit: "burnt/burned", participle: "burnt/burned", translation: "brûler" },
+            { infinitive: "burst", preterit: "burst", participle: "burst", translation: "éclater" },
             { infinitive: "buy", preterit: "bought", participle: "bought", translation: "acheter" },
+            { infinitive: "cast", preterit: "cast", participle: "cast", translation: "jeter, lancer" },
             { infinitive: "catch", preterit: "caught", participle: "caught", translation: "attraper" },
             { infinitive: "choose", preterit: "chose", participle: "chosen", translation: "choisir" },
+            { infinitive: "cling", preterit: "clung", participle: "clung", translation: "s'accrocher" },
             { infinitive: "come", preterit: "came", participle: "come", translation: "venir" },
             { infinitive: "cost", preterit: "cost", participle: "cost", translation: "coûter" },
+            { infinitive: "creep", preterit: "crept", participle: "crept", translation: "ramper" },
             { infinitive: "cut", preterit: "cut", participle: "cut", translation: "couper" },
+            { infinitive: "deal", preterit: "dealt", participle: "dealt", translation: "traiter, négocier" },
+            { infinitive: "dig", preterit: "dug", participle: "dug", translation: "creuser" },
             { infinitive: "do", preterit: "did", participle: "done", translation: "faire" },
             { infinitive: "draw", preterit: "drew", participle: "drawn", translation: "dessiner" },
+            { infinitive: "dream", preterit: "dreamt/dreamed", participle: "dreamt/dreamed", translation: "rêver" },
             { infinitive: "drink", preterit: "drank", participle: "drunk", translation: "boire" },
             { infinitive: "drive", preterit: "drove", participle: "driven", translation: "conduire" },
+            { infinitive: "dwell", preterit: "dwelt/dwelled", participle: "dwelt/dwelled", translation: "habiter" },
             { infinitive: "eat", preterit: "ate", participle: "eaten", translation: "manger" },
             { infinitive: "fall", preterit: "fell", participle: "fallen", translation: "tomber" },
+            { infinitive: "feed", preterit: "fed", participle: "fed", translation: "nourrir" },
             { infinitive: "feel", preterit: "felt", participle: "felt", translation: "sentir" },
+            { infinitive: "fight", preterit: "fought", participle: "fought", translation: "combattre" },
             { infinitive: "find", preterit: "found", participle: "found", translation: "trouver" },
+            { infinitive: "flee", preterit: "fled", participle: "fled", translation: "fuir" },
+            { infinitive: "fling", preterit: "flung", participle: "flung", translation: "lancer violemment" },
             { infinitive: "fly", preterit: "flew", participle: "flown", translation: "voler" },
+            { infinitive: "forbid", preterit: "forbade", participle: "forbidden", translation: "interdire" },
+            { infinitive: "forecast", preterit: "forecast", participle: "forecast", translation: "prévoir" },
             { infinitive: "forget", preterit: "forgot", participle: "forgotten", translation: "oublier" },
+            { infinitive: "forgive", preterit: "forgave", participle: "forgiven", translation: "pardonner" },
+            { infinitive: "freeze", preterit: "froze", participle: "frozen", translation: "geler" },
             { infinitive: "get", preterit: "got", participle: "got/gotten", translation: "obtenir" },
             { infinitive: "give", preterit: "gave", participle: "given", translation: "donner" },
             { infinitive: "go", preterit: "went", participle: "gone", translation: "aller" },
+            { infinitive: "grind", preterit: "ground", participle: "ground", translation: "moudre" },
+            { infinitive: "grow", preterit: "grew", participle: "grown", translation: "grandir, pousser" },
+            { infinitive: "hang", preterit: "hung", participle: "hung", translation: "suspendre" },
             { infinitive: "have", preterit: "had", participle: "had", translation: "avoir" },
             { infinitive: "hear", preterit: "heard", participle: "heard", translation: "entendre" },
+            { infinitive: "hide", preterit: "hid", participle: "hidden", translation: "cacher" },
+            { infinitive: "hit", preterit: "hit", participle: "hit", translation: "frapper" },
             { infinitive: "hold", preterit: "held", participle: "held", translation: "tenir" },
+            { infinitive: "hurt", preterit: "hurt", participle: "hurt", translation: "blesser" },
             { infinitive: "keep", preterit: "kept", participle: "kept", translation: "garder" },
+            { infinitive: "kneel", preterit: "knelt", participle: "knelt", translation: "s'agenouiller" },
             { infinitive: "know", preterit: "knew", participle: "known", translation: "savoir/connaître" },
+            { infinitive: "lay", preterit: "laid", participle: "laid", translation: "poser" },
+            { infinitive: "lead", preterit: "led", participle: "led", translation: "mener, conduire" },
+            { infinitive: "lean", preterit: "leant/leaned", participle: "leant/leaned", translation: "s'incliner, s'appuyer" },
+            { infinitive: "leap", preterit: "leapt/leaped", participle: "leapt/leaped", translation: "bondir" },
+            { infinitive: "learn", preterit: "learnt/learned", participle: "learnt/learned", translation: "apprendre" },
             { infinitive: "leave", preterit: "left", participle: "left", translation: "quitter/partir" },
-            { infinitive: "let", preterit: "let", participle: "let", translation: "laisser/permettre" }
+            { infinitive: "lend", preterit: "lent", participle: "lent", translation: "prêter" },
+            { infinitive: "let", preterit: "let", participle: "let", translation: "laisser/permettre" },
+            { infinitive: "lie", preterit: "lay", participle: "lain", translation: "être allongé" },
+            { infinitive: "light", preterit: "lit/lighted", participle: "lit/lighted", translation: "allumer" },
+            { infinitive: "lose", preterit: "lost", participle: "lost", translation: "perdre" },
+            { infinitive: "make", preterit: "made", participle: "made", translation: "faire, fabriquer" },
+            { infinitive: "mean", preterit: "meant", participle: "meant", translation: "signifier" },
+            { infinitive: "meet", preterit: "met", participle: "met", translation: "rencontrer" },
+            { infinitive: "mow", preterit: "mowed", participle: "mown/mowed", translation: "tondre" },
+            { infinitive: "overcome", preterit: "overcame", participle: "overcome", translation: "surmonter" },
+            { infinitive: "overtake", preterit: "overtook", participle: "overtaken", translation: "dépasser" },
+            { infinitive: "pay", preterit: "paid", participle: "paid", translation: "payer" },
+            { infinitive: "put", preterit: "put", participle: "put", translation: "mettre" },
+            { infinitive: "read", preterit: "read", participle: "read", translation: "lire" },
+            { infinitive: "ride", preterit: "rode", participle: "ridden", translation: "monter (à cheval, vélo)" },
+            { infinitive: "ring", preterit: "rang", participle: "rung", translation: "sonner" },
+            { infinitive: "rise", preterit: "rose", participle: "risen", translation: "s'élever, se lever" },
+            { infinitive: "run", preterit: "ran", participle: "run", translation: "courir" },
+            { infinitive: "saw", preterit: "sawed", participle: "sawn/sawed", translation: "scier" },
+            { infinitive: "say", preterit: "said", participle: "said", translation: "dire" },
+            { infinitive: "see", preterit: "saw", participle: "seen", translation: "voir" },
+            { infinitive: "seek", preterit: "sought", participle: "sought", translation: "chercher" },
+            { infinitive: "sell", preterit: "sold", participle: "sold", translation: "vendre" },
+            { infinitive: "send", preterit: "sent", participle: "sent", translation: "envoyer" },
+            { infinitive: "set", preterit: "set", participle: "set", translation: "fixer, mettre" },
+            { infinitive: "sew", preterit: "sewed", participle: "sewn/sewed", translation: "coudre" },
+            { infinitive: "shake", preterit: "shook", participle: "shaken", translation: "secouer" },
+            { infinitive: "shine", preterit: "shone", participle: "shone", translation: "briller" },
+            { infinitive: "shoot", preterit: "shot", participle: "shot", translation: "tirer" },
+            { infinitive: "show", preterit: "showed", participle: "shown/showed", translation: "montrer" },
+            { infinitive: "shrink", preterit: "shrank", participle: "shrunk", translation: "rétrécir" },
+            { infinitive: "shut", preterit: "shut", participle: "shut", translation: "fermer" },
+            { infinitive: "sing", preterit: "sang", participle: "sung", translation: "chanter" },
+            { infinitive: "sink", preterit: "sank", participle: "sunk", translation: "couler" },
+            { infinitive: "sit", preterit: "sat", participle: "sat", translation: "s'asseoir" },
+            { infinitive: "sleep", preterit: "slept", participle: "slept", translation: "dormir" },
+            { infinitive: "slide", preterit: "slid", participle: "slid", translation: "glisser" },
+            { infinitive: "smell", preterit: "smelt/smelled", participle: "smelt/smelled", translation: "sentir (odeur)" },
+            { infinitive: "sow", preterit: "sowed", participle: "sown/sowed", translation: "semer" },
+            { infinitive: "speak", preterit: "spoke", participle: "spoken", translation: "parler" },
+            { infinitive: "speed", preterit: "sped/speeded", participle: "sped/speeded", translation: "accélérer" },
+            { infinitive: "spell", preterit: "spelt/spelled", participle: "spelt/spelled", translation: "épeler" },
+            { infinitive: "spend", preterit: "spent", participle: "spent", translation: "dépenser, passer (du temps)" },
+            { infinitive: "spill", preterit: "spilt/spilled", participle: "spilt/spilled", translation: "renverser" },
+            { infinitive: "spin", preterit: "spun", participle: "spun", translation: "tourner, filer" },
+            { infinitive: "spit", preterit: "spat", participle: "spat", translation: "cracher" },
+            { infinitive: "split", preterit: "split", participle: "split", translation: "fendre, diviser" },
+            { infinitive: "spread", preterit: "spread", participle: "spread", translation: "étaler, répandre" },
+            { infinitive: "spring", preterit: "sprang", participle: "sprung", translation: "bondir, jaillir" },
+            { infinitive: "stand", preterit: "stood", participle: "stood", translation: "être debout" },
+            { infinitive: "steal", preterit: "stole", participle: "stolen", translation: "voler (dérober)" },
+            { infinitive: "stick", preterit: "stuck", participle: "stuck", translation: "coller" },
+            { infinitive: "sting", preterit: "stung", participle: "stung", translation: "piquer" },
+            { infinitive: "stink", preterit: "stank", participle: "stunk", translation: "puer" },
+            { infinitive: "strike", preterit: "struck", participle: "struck/stricken", translation: "frapper" },
+            { infinitive: "strive", preterit: "strove", participle: "striven", translation: "s'efforcer" },
+            { infinitive: "swear", preterit: "swore", participle: "sworn", translation: "jurer" },
+            { infinitive: "sweep", preterit: "swept", participle: "swept", translation: "balayer" },
+            { infinitive: "swim", preterit: "swam", participle: "swum", translation: "nager" },
+            { infinitive: "swing", preterit: "swung", participle: "swung", translation: "balancer" },
+            { infinitive: "take", preterit: "took", participle: "taken", translation: "prendre" },
+            { infinitive: "teach", preterit: "taught", participle: "taught", translation: "enseigner" },
+            { infinitive: "tear", preterit: "tore", participle: "torn", translation: "déchirer" },
+            { infinitive: "tell", preterit: "told", participle: "told", translation: "dire, raconter" },
+            { infinitive: "think", preterit: "thought", participle: "thought", translation: "penser" },
+            { infinitive: "throw", preterit: "threw", participle: "thrown", translation: "jeter, lancer" },
+            { infinitive: "understand", preterit: "understood", participle: "understood", translation: "comprendre" },
+            { infinitive: "undertake", preterit: "undertook", participle: "undertaken", translation: "entreprendre" },
+            { infinitive: "wake", preterit: "woke", participle: "woken", translation: "réveiller" },
+            { infinitive: "wear", preterit: "wore", participle: "worn", translation: "porter (vêtement)" },
+            { infinitive: "weave", preterit: "wove", participle: "woven", translation: "tisser" },
+            { infinitive: "weep", preterit: "wept", participle: "wept", translation: "pleurer" },
+            { infinitive: "win", preterit: "won", participle: "won", translation: "gagner" },
+            { infinitive: "wind", preterit: "wound", participle: "wound", translation: "enrouler" },
+            { infinitive: "withdraw", preterit: "withdrew", participle: "withdrawn", translation: "retirer" },
+            { infinitive: "wring", preterit: "wrung", participle: "wrung", translation: "tordre" },
+            { infinitive: "write", preterit: "wrote", participle: "written", translation: "écrire" }
         ];
 
         // Variables globales
@@ -288,8 +438,40 @@
         // Fonction pour générer la liste de référence des verbes
         function generateVerbList() {
             const verbListContainer = document.getElementById('verb-list');
+            verbListContainer.innerHTML = '';
             
             irregularVerbs.forEach(verb => {
+                const verbCard = document.createElement('div');
+                verbCard.className = 'verb-card';
+                verbCard.innerHTML = `
+                    <p class="infinitive">${verb.infinitive}</p>
+                    <p>Prétérit: ${verb.preterit}</p>
+                    <p>Participe passé: ${verb.participle}</p>
+                    <p>Traduction: ${verb.translation}</p>
+                `;
+                verbListContainer.appendChild(verbCard);
+            });
+        }
+        
+        // Fonction de recherche de verbes
+        function searchVerbs() {
+            const searchTerm = document.getElementById('search-box').value.toLowerCase();
+            const verbListContainer = document.getElementById('verb-list');
+            verbListContainer.innerHTML = '';
+            
+            const filteredVerbs = irregularVerbs.filter(verb => 
+                verb.infinitive.toLowerCase().includes(searchTerm) || 
+                verb.translation.toLowerCase().includes(searchTerm) ||
+                verb.preterit.toLowerCase().includes(searchTerm) ||
+                verb.participle.toLowerCase().includes(searchTerm)
+            );
+            
+            if (filteredVerbs.length === 0) {
+                verbListContainer.innerHTML = '<div class="verb-card">Aucun verbe trouvé.</div>';
+                return;
+            }
+            
+            filteredVerbs.forEach(verb => {
                 const verbCard = document.createElement('div');
                 verbCard.className = 'verb-card';
                 verbCard.innerHTML = `
@@ -306,6 +488,11 @@
         window.onload = function() {
             document.getElementById('check-btn').addEventListener('click', checkAnswers);
             document.getElementById('next-btn').addEventListener('click', displayNewVerb);
+            document.getElementById('search-box').addEventListener('input', searchVerbs);
+            document.getElementById('reset-search').addEventListener('click', function() {
+                document.getElementById('search-box').value = '';
+                generateVerbList();
+            });
             generateVerbList();
             displayNewVerb();
         };
