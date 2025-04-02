@@ -1,38 +1,314 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>CV - Elliot - Menu</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="icon" href="./images/favicon.ico">
-		
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice de verbes irréguliers en anglais</title>
+    <style>
+        /* Styles généraux */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #3498db;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+        }
+        
+        /* Section exercice */
+        .exercise-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+        
+        .verb-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+        
+        .verb-form {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .verb-form label {
+            width: 130px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .verb-form input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            flex-grow: 1;
+        }
+        
+        button {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #27ae60;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        /* Liste des verbes */
+        .verb-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .verb-card {
+            background-color: white;
+            border-radius: 6px;
+            padding: 15px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .verb-card p {
+            margin: 5px 0;
+        }
+        
+        .verb-card .infinitive {
+            font-weight: bold;
+            color: #2980b9;
+        }
+        
+        /* Styles responsifs */
+        @media (max-width: 600px) {
+            .verb-form {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .verb-form label {
+                margin-bottom: 5px;
+            }
+            
+            .verb-form input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Exercice sur les verbes irréguliers en anglais</h1>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="exercise-container">
+            <h2>Testez vos connaissances</h2>
+            <p>Complétez les formes du verbe pour vérifier votre maîtrise des verbes irréguliers.</p>
+            
+            <div id="exercise">
+                <div class="verb-container">
+                    <div class="verb-form">
+                        <label for="infinitive">Infinitif :</label>
+                        <input type="text" id="infinitive" readonly>
+                    </div>
+                    <div class="verb-form">
+                        <label for="preterit">Prétérit :</label>
+                        <input type="text" id="preterit" placeholder="Entrez le prétérit...">
+                    </div>
+                    <div class="verb-form">
+                        <label for="participle">Participe passé :</label>
+                        <input type="text" id="participle" placeholder="Entrez le participe passé...">
+                    </div>
+                    <div class="verb-form">
+                        <label for="traduction">Traduction :</label>
+                        <input type="text" id="translation" readonly>
+                    </div>
+                </div>
+                
+                <button id="check-btn">Vérifier</button>
+                <button id="next-btn">Nouveau verbe</button>
+                
+                <div id="result" class="result">
+                    <div class="feedback"></div>
+                    <div class="correction"></div>
+                </div>
+            </div>
+        </div>
+        
+        <h2>Liste de référence des verbes irréguliers</h2>
+        <div class="verb-list" id="verb-list">
+            <!-- Les cartes de verbes seront générées en JavaScript -->
+        </div>
+    </div>
 
+    <script>
+        // Liste des verbes irréguliers avec leurs formes et traductions
+        const irregularVerbs = [
+            { infinitive: "be", preterit: "was/were", participle: "been", translation: "être" },
+            { infinitive: "begin", preterit: "began", participle: "begun", translation: "commencer" },
+            { infinitive: "break", preterit: "broke", participle: "broken", translation: "casser" },
+            { infinitive: "bring", preterit: "brought", participle: "brought", translation: "apporter" },
+            { infinitive: "buy", preterit: "bought", participle: "bought", translation: "acheter" },
+            { infinitive: "catch", preterit: "caught", participle: "caught", translation: "attraper" },
+            { infinitive: "choose", preterit: "chose", participle: "chosen", translation: "choisir" },
+            { infinitive: "come", preterit: "came", participle: "come", translation: "venir" },
+            { infinitive: "cost", preterit: "cost", participle: "cost", translation: "coûter" },
+            { infinitive: "cut", preterit: "cut", participle: "cut", translation: "couper" },
+            { infinitive: "do", preterit: "did", participle: "done", translation: "faire" },
+            { infinitive: "draw", preterit: "drew", participle: "drawn", translation: "dessiner" },
+            { infinitive: "drink", preterit: "drank", participle: "drunk", translation: "boire" },
+            { infinitive: "drive", preterit: "drove", participle: "driven", translation: "conduire" },
+            { infinitive: "eat", preterit: "ate", participle: "eaten", translation: "manger" },
+            { infinitive: "fall", preterit: "fell", participle: "fallen", translation: "tomber" },
+            { infinitive: "feel", preterit: "felt", participle: "felt", translation: "sentir" },
+            { infinitive: "find", preterit: "found", participle: "found", translation: "trouver" },
+            { infinitive: "fly", preterit: "flew", participle: "flown", translation: "voler" },
+            { infinitive: "forget", preterit: "forgot", participle: "forgotten", translation: "oublier" },
+            { infinitive: "get", preterit: "got", participle: "got/gotten", translation: "obtenir" },
+            { infinitive: "give", preterit: "gave", participle: "given", translation: "donner" },
+            { infinitive: "go", preterit: "went", participle: "gone", translation: "aller" },
+            { infinitive: "have", preterit: "had", participle: "had", translation: "avoir" },
+            { infinitive: "hear", preterit: "heard", participle: "heard", translation: "entendre" },
+            { infinitive: "hold", preterit: "held", participle: "held", translation: "tenir" },
+            { infinitive: "keep", preterit: "kept", participle: "kept", translation: "garder" },
+            { infinitive: "know", preterit: "knew", participle: "known", translation: "savoir/connaître" },
+            { infinitive: "leave", preterit: "left", participle: "left", translation: "quitter/partir" },
+            { infinitive: "let", preterit: "let", participle: "let", translation: "laisser/permettre" }
+        ];
 
-			<header id="header">
-				<h1>CV Elliot Simonet</h1>
-				<p>Cv de Elliot Simonet <br/>
-				|Année 2024 - 2025|</p>
-			</header>
+        // Variables globales
+        let currentVerb = null;
 
-			<form>
-				  <button type="button" 
-        onclick="window.location.href='cv.html';" 
-        style="padding: 10px 20px; font-size: 16px; color: white; background-color: green; border: 2px solid black; border-radius: 5px; cursor: pointer;">
-        Découvrir
-    </button>
-			</form>
-			
-			<footer id="footer">
-				<ul class="copyright">
-					<li>CV - Elliot - menu</li>
-				</ul>
-			</footer>
+        // Fonction pour obtenir un verbe aléatoire
+        function getRandomVerb() {
+            const randomIndex = Math.floor(Math.random() * irregularVerbs.length);
+            return irregularVerbs[randomIndex];
+        }
 
+        // Fonction pour afficher un nouveau verbe
+        function displayNewVerb() {
+            currentVerb = getRandomVerb();
+            document.getElementById('infinitive').value = currentVerb.infinitive;
+            document.getElementById('translation').value = currentVerb.translation;
+            document.getElementById('preterit').value = '';
+            document.getElementById('participle').value = '';
+            document.getElementById('result').style.display = 'none';
+        }
 
-			<script src="assets/js/main.js"></script>
+        // Fonction pour vérifier les réponses
+        function checkAnswers() {
+            const userPreterit = document.getElementById('preterit').value.trim().toLowerCase();
+            const userParticiple = document.getElementById('participle').value.trim().toLowerCase();
+            const resultDiv = document.getElementById('result');
+            const feedbackDiv = resultDiv.querySelector('.feedback');
+            const correctionDiv = resultDiv.querySelector('.correction');
+            
+            // Vérifier si les réponses sont correctes
+            const correctPreterit = currentVerb.preterit.split('/').some(form => form.trim().toLowerCase() === userPreterit);
+            const correctParticiple = currentVerb.participle.split('/').some(form => form.trim().toLowerCase() === userParticiple);
+            
+            resultDiv.style.display = 'block';
+            
+            if (correctPreterit && correctParticiple) {
+                resultDiv.className = 'result correct';
+                feedbackDiv.textContent = 'Bravo ! Vos réponses sont correctes.';
+                correctionDiv.textContent = '';
+            } else {
+                resultDiv.className = 'result incorrect';
+                feedbackDiv.textContent = 'Il y a des erreurs dans vos réponses.';
+                correctionDiv.innerHTML = `
+                    <p>Les formes correctes sont :</p>
+                    <p>Prétérit : ${currentVerb.preterit}</p>
+                    <p>Participe passé : ${currentVerb.participle}</p>
+                `;
+            }
+        }
 
-	</body>
+        // Fonction pour générer la liste de référence des verbes
+        function generateVerbList() {
+            const verbListContainer = document.getElementById('verb-list');
+            
+            irregularVerbs.forEach(verb => {
+                const verbCard = document.createElement('div');
+                verbCard.className = 'verb-card';
+                verbCard.innerHTML = `
+                    <p class="infinitive">${verb.infinitive}</p>
+                    <p>Prétérit: ${verb.preterit}</p>
+                    <p>Participe passé: ${verb.participle}</p>
+                    <p>Traduction: ${verb.translation}</p>
+                `;
+                verbListContainer.appendChild(verbCard);
+            });
+        }
+
+        // Initialisation de la page
+        window.onload = function() {
+            document.getElementById('check-btn').addEventListener('click', checkAnswers);
+            document.getElementById('next-btn').addEventListener('click', displayNewVerb);
+            generateVerbList();
+            displayNewVerb();
+        };
+    </script>
+</body>
 </html>
