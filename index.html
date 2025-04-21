@@ -3,666 +3,819 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Révisions CEJM BTS - Quiz Interactifs</title>
+    <title>Révision CEJM BTS - QCM Interactif</title>
     <style>
-        :root {
-            --primary: #3498db;
-            --secondary: #2c3e50;
-            --success: #2ecc71;
-            --danger: #e74c3c;
-            --warning: #f39c12;
-            --light: #f5f5f5;
-            --dark: #34495e;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
         body {
-            background-color: #f0f2f5;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
         }
         
         header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background-color: #2c3e50;
             color: white;
-            padding: 1.5rem;
+            padding: 20px;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-bottom: 30px;
         }
         
         h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
+            margin: 0;
+            font-size: 28px;
         }
         
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+            margin-top: 30px;
         }
         
-        .container {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+        h3 {
+            color: #2980b9;
+            margin-top: 25px;
         }
         
-        nav {
+        .chapter {
             background-color: white;
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-        
-        .themes {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 1rem;
-        }
-        
-        .theme-btn {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.6rem 1rem;
+            padding: 20px;
             border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .theme-btn:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
-        }
-        
-        .quiz-container {
-            background-color: white;
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
-        }
-        
-        .quiz-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .question-counter {
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--primary);
-        }
-        
-        .score-container {
-            font-size: 1.1rem;
-            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
         }
         
         .question {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            font-weight: 500;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #3498db;
+            border-radius: 3px;
         }
         
         .options {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            margin-left: 20px;
         }
         
         .option {
-            background-color: var(--light);
-            padding: 1rem;
-            border-radius: 5px;
+            margin: 8px 0;
+            padding: 8px;
             cursor: pointer;
-            transition: all 0.2s;
-            border: 2px solid transparent;
+            transition: background-color 0.3s;
         }
         
         .option:hover {
-            background-color: #e9f5fe;
-            border-color: #a7d2f3;
+            background-color: #e8f4fc;
         }
         
-        .option.selected {
-            background-color: #d6ebff;
-            border-color: var(--primary);
-        }
-        
-        .option.correct {
-            background-color: #d4edda;
-            border-color: var(--success);
-        }
-        
-        .option.incorrect {
-            background-color: #f8d7da;
-            border-color: var(--danger);
-        }
-        
-        .feedback {
-            padding: 1rem;
-            border-radius: 5px;
-            margin-bottom: 1.5rem;
-            display: none;
-        }
-        
-        .feedback.correct {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .feedback.incorrect {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        
-        .explanation {
-            background-color: #e9f5fe;
-            padding: 1rem;
-            border-radius: 5px;
-            margin-top: 1rem;
-            display: none;
-        }
-        
-        .controls {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 2rem;
+        .option input {
+            margin-right: 10px;
         }
         
         button {
-            padding: 0.8rem 1.5rem;
+            background-color: #3498db;
+            color: white;
             border: none;
-            border-radius: 5px;
+            padding: 10px 15px;
+            border-radius: 4px;
             cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s;
+            font-size: 16px;
+            transition: background-color 0.3s;
         }
         
-        .check-btn {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .check-btn:hover {
+        button:hover {
             background-color: #2980b9;
         }
         
-        .next-btn {
-            background-color: var(--secondary);
-            color: white;
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
             display: none;
         }
         
-        .next-btn:hover {
-            background-color: #1a252f;
+        .correct {
+            background-color: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
         }
         
-        .progress-container {
-            height: 10px;
-            width: 100%;
-            background-color: #e0e0e0;
+        .incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .explanation {
+            margin-top: 10px;
+            font-style: italic;
+            color: #6c757d;
+        }
+        
+        .score-display {
+            text-align: center;
+            font-size: 18px;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #e2e3e5;
             border-radius: 5px;
-            margin-bottom: 2rem;
-            overflow: hidden;
         }
         
-        .progress-bar {
-            height: 100%;
-            background-color: var(--primary);
-            width: 0%;
-            transition: width 0.3s ease;
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
         }
         
-        .results {
-            text-align: center;
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #f1f1f1;
+            margin-right: 5px;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .tab.active {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .tab-content {
             display: none;
         }
         
-        .results h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-        
-        .results p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .results-score {
-            font-size: 3rem;
-            font-weight: bold;
-            color: var(--primary);
-            margin: 1rem 0;
-        }
-        
-        .restart-btn {
-            background-color: var(--primary);
-            color: white;
-            padding: 0.8rem 2rem;
-            font-size: 1.1rem;
-        }
-        
-        .restart-btn:hover {
-            background-color: #2980b9;
-        }
-
-        .start-screen {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .start-screen h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--secondary);
-        }
-
-        .start-screen p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .start-btn {
-            background-color: var(--primary);
-            color: white;
-            padding: 1rem 2.5rem;
-            font-size: 1.2rem;
-            border-radius: 30px;
-        }
-
-        .start-btn:hover {
-            background-color: #2980b9;
-            transform: scale(1.05);
+        .tab-content.active {
+            display: block;
         }
         
         @media (max-width: 768px) {
-            .container {
-                padding: 0 0.5rem;
+            body {
+                padding: 10px;
             }
             
-            .quiz-container {
-                padding: 1.5rem 1rem;
-            }
-            
-            .controls {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            button {
-                width: 100%;
+            .chapter {
+                padding: 15px;
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Révisions CEJM BTS</h1>
-        <p>Culture Économique, Juridique et Managériale</p>
+        <h1>Révision CEJM BTS - QCM Interactif</h1>
+        <p>Testez vos connaissances avec plus de 80 questions couvrant tous les chapitres</p>
     </header>
-    
-    <div class="container">
-        <nav>
-            <h3>Sélectionnez un thème :</h3>
-            <div class="themes">
-                <button class="theme-btn" data-theme="economie">Économie</button>
-                <button class="theme-btn" data-theme="juridique">Juridique</button>
-                <button class="theme-btn" data-theme="management">Management</button>
-                <button class="theme-btn" data-theme="all">Tous les thèmes</button>
-            </div>
-        </nav>
-        
-        <div class="quiz-container">
-            <div class="start-screen">
-                <h2>Bienvenue dans votre outil de révision CEJM</h2>
-                <p>Ce quiz interactif vous permettra de tester vos connaissances sur les différents concepts de Culture Économique, Juridique et Managériale du BTS. Sélectionnez un thème ci-dessus ou commencez par un quiz général.</p>
-                <button class="start-btn">Commencer</button>
-            </div>
 
-            <div id="quiz" style="display: none;">
-                <div class="quiz-header">
-                    <div class="question-counter">Question <span id="current-question">1</span>/<span id="total-questions">10</span></div>
-                    <div class="score-container">Score: <span id="score">0</span></div>
+    <div class="tabs">
+        <div class="tab active" onclick="openTab('approche-economique')">Approche Économique</div>
+        <div class="tab" onclick="openTab('approche-juridique')">Approche Juridique</div>
+        <div class="tab" onclick="openTab('approche-manageriale')">Approche Managériale</div>
+    </div>
+
+    <div id="approche-economique" class="tab-content active">
+        <div class="chapter">
+            <h2>Chapitre 1 - Les fondements de l'économie</h2>
+            
+            <div class="question" id="q1">
+                <p>1. Quelle est la définition correcte de l'économie ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q1" value="a"> Activité humaine visant à produire des ressources pour satisfaire des besoins</div>
+                    <div class="option"><input type="radio" name="q1" value="b"> Science qui étudie uniquement les échanges monétaires</div>
+                    <div class="option"><input type="radio" name="q1" value="c"> Méthode de gestion des entreprises privées</div>
                 </div>
-                
-                <div class="progress-container">
-                    <div class="progress-bar"></div>
-                </div>
-                
-                <div class="question-container">
-                    <div class="question" id="question-text">Question will appear here</div>
-                    <div class="options" id="options-container">
-                        <!-- Options will be inserted here by JavaScript -->
-                    </div>
-                </div>
-                
-                <div class="feedback" id="feedback"></div>
-                <div class="explanation" id="explanation"></div>
-                
-                <div class="controls">
-                    <button class="check-btn" id="check-btn">Vérifier</button>
-                    <button class="next-btn" id="next-btn">Question suivante</button>
-                </div>
+                <button onclick="checkAnswer('q1', 'a', 'L\'économie est définie comme une activité humaine visant à produire des ressources pour satisfaire des besoins, ce qui conduit au développement des échanges entre les agents économiques.')">Vérifier</button>
+                <div class="result" id="result-q1"></div>
             </div>
             
-            <div class="results" id="results">
-                <h2>Quiz terminé !</h2>
-                <p>Votre score final est :</p>
-                <div class="results-score"><span id="final-score">0</span>/<span id="final-total">0</span></div>
-                <p id="performance-text">Performance text will appear here</p>
-                <button class="restart-btn" id="restart-btn">Recommencer</button>
+            <div class="question" id="q2">
+                <p>2. Quelle est la principale différence entre une économie fermée et une économie ouverte ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q2" value="a"> L'économie fermée n'a pas de banques centrales</div>
+                    <div class="option"><input type="radio" name="q2" value="b"> L'économie ouverte développe le commerce international en complément des échanges internes</div>
+                    <div class="option"><input type="radio" name="q2" value="c"> L'économie fermée est toujours plus performante</div>
+                </div>
+                <button onclick="checkAnswer('q2', 'b', 'Une économie ouverte se caractérise par le développement du commerce international en complément des échanges entre les agents du pays, contrairement à une économie fermée où les échanges sont exclusivement internes.')">Vérifier</button>
+                <div class="result" id="result-q2"></div>
+            </div>
+            
+            <div class="question" id="q3">
+                <p>3. Quels sont les deux types de flux entre les agents économiques ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q3" value="a"> Flux physiques et flux numériques</div>
+                    <div class="option"><input type="radio" name="q3" value="b"> Flux monétaires et flux réels</div>
+                    <div class="option"><input type="radio" name="q3" value="c"> Flux directs et flux indirects</div>
+                </div>
+                <button onclick="checkAnswer('q3', 'b', 'Les deux types de flux entre agents économiques sont les flux monétaires (échanges de monnaie) et les flux réels (échanges de biens ou services).')">Vérifier</button>
+                <div class="result" id="result-q3"></div>
+            </div>
+            
+            <div class="question" id="q4">
+                <p>4. Qu'est-ce que la coopétition dans les relations interentreprises ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q4" value="a"> Des entreprises concurrentes qui travaillent ensemble</div>
+                    <div class="option"><input type="radio" name="q4" value="b"> Une fusion complète entre deux entreprises</div>
+                    <div class="option"><input type="radio" name="q4" value="c"> Une forme de monopole déguisé</div>
+                </div>
+                <button onclick="checkAnswer('q4', 'a', 'La coopétition désigne une situation où des entreprises concurrentes travaillent ensemble sur certains aspects tout en restant concurrentes sur d\'autres. Elle est autorisée sauf si elle détourne le jeu de la concurrence.')">Vérifier</button>
+                <div class="result" id="result-q4"></div>
+            </div>
+            
+            <div class="question" id="q5">
+                <p>5. Quelle est la différence entre financement interne et financement externe ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q5" value="a"> Le financement interne provient des actionnaires, le financement externe des banques</div>
+                    <div class="option"><input type="radio" name="q5" value="b"> Le financement interne utilise l'épargne de l'agent, le financement externe fait appel à d'autres agents</div>
+                    <div class="option"><input type="radio" name="q5" value="c"> Le financement interne est toujours préférable au financement externe</div>
+                </div>
+                <button onclick="checkAnswer('q5', 'b', 'Le financement interne consiste à utiliser son épargne pour financer ses investissements, tandis que le financement externe fait appel à d\'autres agents économiques (banques ou ménages) pour se procurer des ressources financières.')">Vérifier</button>
+                <div class="result" id="result-q5"></div>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <h2>Chapitre 2 - Le fonctionnement des marchés</h2>
+            
+            <div class="question" id="q6">
+                <p>6. Quelle est la définition correcte d'un marché en économie ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q6" value="a"> Un lieu physique où se vendent des produits</div>
+                    <div class="option"><input type="radio" name="q6" value="b"> Lieu réel ou virtuel où se rencontrent l'offre et la demande en vue d'un échange</div>
+                    <div class="option"><input type="radio" name="q6" value="c"> Un système de distribution des produits aux consommateurs</div>
+                </div>
+                <button onclick="checkAnswer('q6', 'b', 'Un marché est défini comme un lieu réel ou virtuel où se rencontrent l\'offre et la demande en vue d\'un échange. Il peut concerner différents types de biens ou services.')">Vérifier</button>
+                <div class="result" id="result-q6"></div>
+            </div>
+            
+            <div class="question" id="q7">
+                <p>7. Quels sont les trois principaux types de marchés selon la nature des biens échangés ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q7" value="a"> Marché primaire, secondaire et tertiaire</div>
+                    <div class="option"><input type="radio" name="q7" value="b"> Marché des capitaux, marché du travail, marché des biens et services</div>
+                    <div class="option"><input type="radio" name="q7" value="c"> Marché local, national et international</div>
+                </div>
+                <button onclick="checkAnswer('q7', 'b', 'Les trois principaux types de marchés sont : marché des capitaux/financier, marché du travail, et marché des biens et services.')">Vérifier</button>
+                <div class="result" id="result-q7"></div>
+            </div>
+            
+            <div class="question" id="q8">
+                <p>8. Quels sont les effets caractéristiques d'un marché en situation de monopole ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q8" value="a"> Fort développement de l'innovation et baisse des prix</div>
+                    <div class="option"><input type="radio" name="q8" value="b"> Retard sur l'innovation et prix élevés (price maker)</div>
+                    <div class="option"><input type="radio" name="q8" value="c"> Grande diversité de l'offre et prix compétitifs</div>
+                </div>
+                <button onclick="checkAnswer('q8', 'b', 'Un monopole (un seul offreur face à une multitude de demandeurs) entraîne généralement un retard sur l\'innovation et des prix élevés, car l\'offreur est price maker (fixeur de prix).')">Vérifier</button>
+                <div class="result" id="result-q8"></div>
+            </div>
+            
+            <div class="question" id="q9">
+                <p>9. Quelles sont les cinq caractéristiques de la concurrence pure et parfaite ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q9" value="a"> Atomicité, homogénéité, libre entrée/sortie, transparence, libre circulation des facteurs</div>
+                    <div class="option"><input type="radio" name="q9" value="b"> Grand nombre d'acheteurs, produits différenciés, barrières à l'entrée, information parfaite, mobilité des travailleurs</div>
+                    <div class="option"><input type="radio" name="q9" value="c"> Quelques offreurs, produits similaires, entrée libre, information partielle, mobilité limitée</div>
+                </div>
+                <button onclick="checkAnswer('q9', 'a', 'Les 5 caractéristiques de la concurrence pure et parfaite sont : atomicité du marché, homogénéité du produit, libre entrée et sortie du marché, transparence de l\'information, et libre circulation des facteurs de production.')">Vérifier</button>
+                <div class="result" id="result-q9"></div>
+            </div>
+            
+            <div class="question" id="q10">
+                <p>10. Comment évolue le prix selon la loi de l'offre et de la demande ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q10" value="a"> Si O > D : hausse du prix ; Si O < D : baisse du prix</div>
+                    <div class="option"><input type="radio" name="q10" value="b"> Si O > D : baisse du prix ; Si O < D : hausse du prix</div>
+                    <div class="option"><input type="radio" name="q10" value="c"> Le prix est fixé par l'État indépendamment de l'offre et de la demande</div>
+                </div>
+                <button onclick="checkAnswer('q10', 'b', 'Selon la loi de l\'offre et de la demande : si l\'offre (O) est supérieure à la demande (D), le prix baisse (disponibilité du produit) ; si l\'offre est inférieure à la demande, le prix augmente (rareté du produit).')">Vérifier</button>
+                <div class="result" id="result-q10"></div>
+            </div>
+            
+            <div class="question" id="q11">
+                <p>11. Qu'est-ce qu'une externalité en économie ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q11" value="a"> Un effet secondaire non intentionnel d'une politique économique</div>
+                    <div class="option"><input type="radio" name="q11" value="b"> Effet de l'action d'un agent sur la situation d'un autre sans compensation</div>
+                    <div class="option"><input type="radio" name="q11" value="c"> Une forme particulière de taxation indirecte</div>
+                </div>
+                <button onclick="checkAnswer('q11', 'b', 'Une externalité est l\'effet de l\'action d\'un agent sur la situation d\'un autre agent sans que ce dernier ne paie ou ne reçoive une compensation. Elle peut être positive (gain) ou négative (perte ou coût supplémentaire).')">Vérifier</button>
+                <div class="result" id="result-q11"></div>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <h2>Chapitre 6 - La régulation économique par l'état</h2>
+            
+            <div class="question" id="q12">
+                <p>12. Quelles sont les cinq fonctions régaliennes de l'État ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q12" value="a"> Éducation, santé, transport, énergie, communication</div>
+                    <div class="option"><input type="radio" name="q12" value="b"> Diplomatie, armée, police, justice, monnaie</div>
+                    <div class="option"><input type="radio" name="q12" value="c"> Production, distribution, consommation, épargne, investissement</div>
+                </div>
+                <button onclick="checkAnswer('q12', 'b', 'Les cinq fonctions régaliennes de l\'État sont : la diplomatie, l\'armée, la police, la justice et la monnaie. Ce sont des fonctions qui appartiennent à tout État du fait de sa nature juridique.')">Vérifier</button>
+                <div class="result" id="result-q12"></div>
+            </div>
+            
+            <div class="question" id="q13">
+                <p>13. Quels sont les trois fondements des fonctions économiques de l'État ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q13" value="a"> Croissance économique, développement durable, développement économique</div>
+                    <div class="option"><input type="radio" name="q13" value="b"> Stabilité des prix, plein emploi, équilibre commercial</div>
+                    <div class="option"><input type="radio" name="q13" value="c"> Production, distribution, consommation</div>
+                </div>
+                <button onclick="checkAnswer('q13', 'a', 'Les trois fondements des fonctions économiques de l\'État sont : la croissance économique (augmentation du PIB), le développement durable (satisfaction des besoins sans compromettre les générations futures), et le développement économique (enrichissement et amélioration des conditions de vie).')">Vérifier</button>
+                <div class="result" id="result-q13"></div>
+            </div>
+            
+            <div class="question" id="q14">
+                <p>14. Quels sont les quatre objectifs du "carré magique" de Kaldor ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q14" value="a"> Inflation, chômage, croissance, productivité</div>
+                    <div class="option"><input type="radio" name="q14" value="b"> Croissance économique, stabilité des prix, équilibre du commerce extérieur, plein emploi</div>
+                    <div class="option"><input type="radio" name="q14" value="c"> Balance commerciale, dette publique, inflation, taux d'intérêt</div>
+                </div>
+                <button onclick="checkAnswer('q14', 'b', 'Les quatre objectifs du "carré magique" sont : croissance économique (PIB), stabilité des prix (taux d\'inflation), équilibre du commerce extérieur (balance des transactions courantes), et plein emploi (taux de chômage).')">Vérifier</button>
+                <div class="result" id="result-q14"></div>
+            </div>
+            
+            <div class="question" id="q15">
+                <p>15. Quelle est la différence entre politique budgétaire et politique monétaire ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q15" value="a"> La politique budgétaire agit sur les impôts et dépenses publiques, la politique monétaire sur la masse monétaire</div>
+                    <div class="option"><input type="radio" name="q15" value="b"> La politique budgétaire est menée par la banque centrale, la politique monétaire par le gouvernement</div>
+                    <div class="option"><input type="radio" name="q15" value="c"> La politique budgétaire concerne uniquement les entreprises, la politique monétaire les ménages</div>
+                </div>
+                <button onclick="checkAnswer('q15', 'a', 'La politique budgétaire est la régulation par les pouvoirs publics de l\'économie en mobilisant le budget de l\'État (impôts, dépenses). La politique monétaire vise à agir sur la quantité de monnaie en circulation et les conditions de financement (taux d\'intérêt).')">Vérifier</button>
+                <div class="result" id="result-q15"></div>
+            </div>
+            
+            <div class="question" id="q16">
+                <p>16. Quelles sont les deux règles budgétaires du pacte de stabilité européen ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q16" value="a"> Inflation < 2% et chômage < 5%</div>
+                    <div class="option"><input type="radio" name="q16" value="b"> Déficit public < 3% du PIB et endettement < 60% du PIB</div>
+                    <div class="option"><input type="radio" name="q16" value="c"> Croissance > 2% et balance commerciale excédentaire</div>
+                </div>
+                <button onclick="checkAnswer('q16', 'b', 'Le pacte de stabilité impose deux règles budgétaires principales : déficit public inférieur à 3% du PIB, et endettement public inférieur à 60% du PIB. Des exceptions existent via la clause de sauvegarde.')">Vérifier</button>
+                <div class="result" id="result-q16"></div>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <h2>Chapitre 9 - Les choix de production de l'entreprise</h2>
+            
+            <div class="question" id="q17">
+                <p>17. Quels sont les deux principaux facteurs de production ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q17" value="a"> Matières premières et énergie</div>
+                    <div class="option"><input type="radio" name="q17" value="b"> Travail et capital</div>
+                    <div class="option"><input type="radio" name="q17" value="c"> Technologie et innovation</div>
+                </div>
+                <button onclick="checkAnswer('q17', 'b', 'Les deux principaux facteurs de production sont le travail (ensemble des personnes qui travaillent) et le capital (ensemble des moyens de production matériels et immatériels).')">Vérifier</button>
+                <div class="result" id="result-q17"></div>
+            </div>
+            
+            <div class="question" id="q18">
+                <p>18. Quelle est la différence entre capital fixe et capital circulant ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q18" value="a"> Le capital fixe est immatériel, le capital circulant est matériel</div>
+                    <div class="option"><input type="radio" name="q18" value="b"> Le capital fixe a une longue durée d'utilisation, le capital circulant est consommé ou transformé</div>
+                    <div class="option"><input type="radio" name="q18" value="c"> Le capital fixe est plus cher que le capital circulant</div>
+                </div>
+                <button onclick="checkAnswer('q18', 'b', 'Le capital fixe comprend les biens dont la durée d\'utilisation est longue (plusieurs années), tandis que le capital circulant comprend les biens qui ne servent qu\'une seule fois car ils sont transformés ou consommés.')">Vérifier</button>
+                <div class="result" id="result-q18"></div>
+            </div>
+            
+            <div class="question" id="q19">
+                <p>19. Comment calcule-t-on la productivité d'un facteur de production ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q19" value="a"> Quantité produite / quantité de facteur utilisée</div>
+                    <div class="option"><input type="radio" name="q19" value="b"> Chiffre d'affaires / nombre de salariés</div>
+                    <div class="option"><input type="radio" name="q19" value="c"> Valeur ajoutée / coût total de production</div>
+                </div>
+                <button onclick="checkAnswer('q19', 'a', 'La productivité se calcule comme le rapport entre ce qui a été produit (quantité produite) et les ressources mises en œuvre (quantité de facteur utilisée) pour obtenir cette production.')">Vérifier</button>
+                <div class="result" id="result-q19"></div>
+            </div>
+            
+            <div class="question" id="q20">
+                <p>20. Quels sont les deux principaux effets des gains de productivité ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q20" value="a"> Hausse des salaires et réduction du temps de travail</div>
+                    <div class="option"><input type="radio" name="q20" value="b"> Baisse des prix de vente et augmentation des revenus issus de la valeur ajoutée</div>
+                    <div class="option"><input type="radio" name="q20" value="c"> Réduction des effectifs et augmentation des dividendes</div>
+                </div>
+                <button onclick="checkAnswer('q20', 'b', 'Les gains de productivité entraînent deux effets principaux : baisse des prix de vente suite à une baisse des coûts de production, et augmentation des revenus issus du partage de la valeur ajoutée.')">Vérifier</button>
+                <div class="result" id="result-q20"></div>
+            </div>
+            
+            <div class="question" id="q21">
+                <p>21. Qu'est-ce que la chaîne de valeur selon Michael Porter ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q21" value="a"> L'ensemble des fournisseurs d'une entreprise</div>
+                    <div class="option"><input type="radio" name="q21" value="b"> Analyse des activités de l'entreprise en termes de coûts et de qualité pour identifier des avantages concurrentiels</div>
+                    <div class="option"><input type="radio" name="q21" value="c"> Le processus de création de valeur pour les actionnaires</div>
+                </div>
+                <button onclick="checkAnswer('q21', 'b', 'La chaîne de valeur selon Porter est une analyse, en termes de coûts et de qualité, des activités de l\'entreprise pouvant constituer un avantage concurrentiel. Elle distingue activités principales et activités de soutien.')">Vérifier</button>
+                <div class="result" id="result-q21"></div>
+            </div>
+            
+            <div class="question" id="q22">
+                <p>22. Qu'est-ce que l'impartition (ou externalisation) ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q22" value="a"> Création d'une filiale à l'étranger</div>
+                    <div class="option"><input type="radio" name="q22" value="b"> Stratégie visant à confier à des prestataires extérieurs des biens ou services au lieu de les produire soi-même</div>
+                    <div class="option"><input type="radio" name="q22" value="c"> Fusion de deux entreprises concurrentes</div>
+                </div>
+                <button onclick="checkAnswer('q22', 'b', 'L\'impartition est une stratégie visant à confier à des prestataires extérieurs des biens ou des services au lieu de les produire soi-même. Le fondement est de faire soi-même les activités qui créent de la valeur et externaliser celles qui en détruisent.')">Vérifier</button>
+                <div class="result" id="result-q22"></div>
+            </div>
+            
+            <div class="question" id="q23">
+                <p>23. Parmi ces éléments, lequel n'est PAS une forme d'impartition ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q23" value="a"> La sous-traitance</div>
+                    <div class="option"><input type="radio" name="q23" value="b"> La franchise</div>
+                    <div class="option"><input type="radio" name="q23" value="c"> Le brevet</div>
+                </div>
+                <button onclick="checkAnswer('q23', 'c', 'Les formes d\'impartition incluent : GIE, sous-traitance, externalisation, concession, franchise, filiales communes. Le brevet est un titre de propriété industrielle, non une forme d\'impartition.')">Vérifier</button>
+                <div class="result" id="result-q23"></div>
             </div>
         </div>
     </div>
-    
-    <script>
-        // Quiz data
-        const quizData = {
-            economie: [
-                {
-                    question: "Qu'est-ce que la politique conjoncturelle ?",
-                    options: [
-                        "Une politique visant à transformer le système économique",
-                        "Une politique visant à réguler l'économie à court terme",
-                        "Une politique visant à améliorer la compétitivité des entreprises",
-                        "Une politique visant à augmenter la demande globale"
-                    ],
-                    correctIndex: 1,
-                    explanation: "Les politiques conjoncturelles sont des politiques visant à réguler l'économie à court terme, par opposition aux politiques structurelles qui visent à transformer le système économique."
-                },
-                {
-                    question: "Quels sont les quatre objectifs de la politique conjoncturelle selon le 'carré magique' ?",
-                    options: [
-                        "Croissance économique, plein emploi, stabilité des prix, équilibre du commerce extérieur",
-                        "Innovation, compétitivité, productivité, rentabilité",
-                        "Redistribution, allocation, stabilisation, régulation",
-                        "Offre, demande, prix, quantité"
-                    ],
-                    correctIndex: 0,
-                    explanation: "Le 'carré magique' représente graphiquement les quatre objectifs de la politique conjoncturelle: la croissance économique (mesurée par le PIB), le plein emploi (taux de chômage), la stabilité des prix (taux d'inflation) et l'équilibre du commerce extérieur."
-                },
-                {
-                    question: "Comment est mesurée la croissance économique nationale ?",
-                    options: [
-                        "Par le taux d'inflation",
-                        "Par l'IDH (Indice de Développement Humain)",
-                        "Par le PIB (Produit Intérieur Brut)",
-                        "Par la balance commerciale"
-                    ],
-                    correctIndex: 2,
-                    explanation: "La croissance économique nationale est mesurée par le PIB (Produit Intérieur Brut), qui est la somme des valeurs ajoutées créées par toutes les entreprises sur le territoire."
-                },
-                {
-                    question: "Qu'est-ce que la politique de l'offre ?",
-                    options: [
-                        "Mesures visant à augmenter la consommation des ménages",
-                        "Mesures visant à améliorer la compétitivité des entreprises pour relancer l'investissement privé et l'emploi",
-                        "Mesures visant à réduire les importations",
-                        "Mesures visant à augmenter les dépenses publiques"
-                    ],
-                    correctIndex: 1,
-                    explanation: "La politique de l'offre comprend des mesures visant à améliorer la compétitivité des entreprises pour relancer l'investissement privé et l'emploi, notamment par la baisse des prélèvements et la flexibilité du marché du travail."
-                },
-                {
-                    question: "Quelles sont les fonctions économiques de l'État ?",
-                    options: [
-                        "Diplomatie, armée, police, justice, monnaie",
-                        "Législative, exécutive, judiciaire",
-                        "Allocation, redistribution, stabilisation (ou régulation)",
-                        "Production, consommation, épargne, investissement"
-                    ],
-                    correctIndex: 2,
-                    explanation: "Les trois fonctions économiques de l'État sont la fonction d'allocation, la fonction de redistribution et la fonction de stabilisation (ou régulation)."
-                },
-                {
-                    question: "Qu'est-ce qu'une externalité en économie ?",
-                    options: [
-                        "Un effet de l'action d'un agent sur la situation d'un autre agent sans compensation",
-                        "Un échange commercial avec un pays étranger",
-                        "Une taxe sur les importations",
-                        "Une subvention à l'exportation"
-                    ],
-                    correctIndex: 0,
-                    explanation: "Une externalité est un effet de l'action d'un agent économique sur la situation d'un autre agent sans que ce dernier ne paie ou ne reçoive une compensation."
-                },
-                {
-                    question: "Quels sont les facteurs de production mobilisés par une entreprise ?",
-                    options: [
-                        "Le facteur travail et le facteur capital",
-                        "L'offre et la demande",
-                        "Les inputs et les outputs",
-                        "Les coûts fixes et les coûts variables"
-                    ],
-                    correctIndex: 0,
-                    explanation: "Les deux facteurs de production principaux mobilisés par une entreprise sont le facteur travail (ensemble des ménages qui travaillent en échange d'un salaire) et le facteur capital (ensemble des moyens de production matériels et immatériels)."
-                },
-                {
-                    question: "Qu'est-ce que la productivité ?",
-                    options: [
-                        "La quantité produite dans un temps donné",
-                        "Le rapport entre ce qui a été produit et les ressources mises en œuvre pour obtenir cette production",
-                        "La différence entre les coûts et les recettes",
-                        "La capacité à produire des biens à des prix inférieurs à ceux des concurrents"
-                    ],
-                    correctIndex: 1,
-                    explanation: "La productivité est le rapport entre ce qui a été produit et les ressources mises en œuvre pour obtenir cette production. Elle se calcule par la formule: Quantité produite / quantité de facteur utilisée."
-                },
-                {
-                    question: "Quelles sont les limites de la politique budgétaire expansionniste ?",
-                    options: [
-                        "L'inflation galopante et la dévaluation monétaire",
-                        "La hausse des taux d'intérêt et la stagflation",
-                        "L'effet boule de neige, l'effet d'éviction par le taux d'intérêt, l'effet d'éviction par l'extérieur et l'effet du fardeau de la dette",
-                        "La baisse de la compétitivité et l'augmentation du chômage"
-                    ],
-                    correctIndex: 2,
-                    explanation: "Les quatre effets pervers liés aux politiques budgétaires expansionnistes sont: l'effet boule de neige (endettement croissant), l'effet d'éviction par le taux d'intérêt, l'effet d'éviction par l'extérieur (importations) et l'effet du fardeau de la dette."
-                },
-                {
-                    question: "Qu'est-ce que les coûts de production ?",
-                    options: [
-                        "Le prix de vente d'un produit",
-                        "Les bénéfices réalisés par l'entreprise",
-                        "Ensemble des coûts et charges qui ont permis la réalisation du produit mis sur le marché",
-                        "Les investissements réalisés par l'entreprise"
-                    ],
-                    correctIndex: 2,
-                    explanation: "Les coûts de production représentent l'ensemble des coûts et charges qui ont permis la réalisation du produit mis sur le marché. On distingue les coûts fixes (sans lien avec les volumes de production) et les coûts variables (en lien avec les volumes de production)."
-                }
-            ],
-            juridique: [
-                {
-                    question: "Qu'est-ce qu'un contrat en droit ?",
-                    options: [
-                        "Un document officiel délivré par l'administration",
-                        "Un accord de volonté entre deux ou plusieurs personnes destiné à créer des obligations de droit",
-                        "Une loi votée par le Parlement",
-                        "Un jugement rendu par un tribunal"
-                    ],
-                    correctIndex: 1,
-                    explanation: "Un contrat est un accord de volonté entre deux ou plusieurs personnes destiné à créer des obligations de droit. Il est formé par la rencontre de l'offre et de l'acceptation."
-                },
-                {
-                    question: "Quelles sont les 3 conditions de validité d'un contrat ?",
-                    options: [
-                        "Consentement, capacité juridique, objet du contrat",
-                        "Signature, témoins, enregistrement officiel",
-                        "Écrit, paiement, livraison",
-                        "Publicité, enregistrement, notification"
-                    ],
-                    correctIndex: 0,
-                    explanation: "Les trois conditions cumulatives de validité d'un contrat sont: le consentement (libre et sain d'esprit), la capacité juridique des parties et l'objet du contrat (licite, possible, déterminé)."
-                },
-                {
-                    question: "Qu'est-ce qu'une clause abusive ?",
-                    options: [
-                        "Une clause illégale dans un contrat",
-                        "Une clause qui crée un déséquilibre significatif entre les droits et obligations des parties au détriment du consommateur",
-                        "Une clause qui favorise le professionnel",
-                        "Une clause imposée par le législateur"
-                    ],
-                    correctIndex: 1,
-                    explanation: "Une clause abusive est une clause qui crée, au détriment du consommateur (ou du non-professionnel), un déséquilibre significatif entre les droits et obligations des parties au contrat. Elle est réputée non écrite."
-                },
-                {
-                    question: "Quels sont les vices du consentement qui peuvent rendre un contrat nul ?",
-                    options: [
-                        "Erreur, dol, violence",
-                        "Mensonge, tromperie, intimidation",
-                        "Fraude, abus, contrainte",
-                        "Préjudice, dommage, faute"
-                    ],
-                    correctIndex: 0,
-                    explanation: "Les trois vices du consentement qui peuvent rendre un contrat nul sont: l'erreur (fausse représentation involontaire de la réalité), le dol (manœuvres frauduleuses) et la violence (pression physique, morale ou économique)."
-                },
-                {
-                    question: "Qu'est-ce que la force obligatoire du contrat ?",
-                    options: [
-                        "L'obligation de rédiger un contrat par écrit",
-                        "Le fait que le contrat s'impose au juge",
-                        "Le principe selon lequel le contrat ne peut être modifié ou révoqué sans le consentement mutuel des parties",
-                        "L'obligation d'exécuter le contrat sous contrôle judiciaire"
-                    ],
-                    correctIndex: 2,
-                    explanation: "La force obligatoire du contrat est le principe selon lequel le contrat ne peut être modifié ou révoqué sans le consentement mutuel des parties, sauf exceptions légales."
-                },
-                {
-                    question: "Qu'est-ce qu'un brevet d'invention ?",
-                    options: [
-                        "Une certification de qualité",
-                        "Un titre de monopole temporaire d'exploitation pour protéger les innovations",
-                        "Une autorisation administrative d'exercer une activité",
-                        "Un label écologique"
-                    ],
-                    correctIndex: 1,
-                    explanation: "Un brevet d'invention est un titre de monopole temporaire d'exploitation délivré pour protéger les innovations techniques. Sa durée est de 20 ans sous condition de paiement d'annuités."
-                },
-                {
-                    question: "Quelles sont les conditions pour qu'une innovation soit protégée par un brevet ?",
-                    options: [
-                        "Être rentable, être commercialisable, avoir un marché",
-                        "Être une solution technique à un problème technique, être nouvelle, impliquer une activité inventive, être susceptible d'une application industrielle",
-                        "Être inscrite au registre du commerce, être déclarée aux impôts, avoir un financement",
-                        "Être approuvée par l'État, respecter les normes, avoir un prix compétitif"
-                    ],
-                    correctIndex: 1,
-                    explanation: "Pour être protégée par un brevet, une innovation doit: être une solution technique à un problème technique, être nouvelle, impliquer une activité inventive et être susceptible d'une application industrielle."
-                },
-                {
-                    question: "Qu'est-ce qu'une marque en droit de la propriété industrielle ?",
-                    options: [
-                        "Un logo d'entreprise",
-                        "Un signe distinctif permettant de distinguer les produits d'une entreprise par rapport à ceux de ses concurrents",
-                        "Un nom commercial",
-                        "Une certification de qualité"
-                    ],
-                    correctIndex: 1,
-                    explanation: "Une marque est un signe distinctif permettant de distinguer les produits d'une entreprise par rapport à ceux de ses concurrents. Elle confère un monopole d'exploitation pour 10 ans dans chaque domaine déposé, renouvelable."
-                },
-                {
-                    question: "Qu'est-ce que l'entente illicite en droit de la concurrence ?",
-                    options: [
-                        "Un accord commercial légal entre entreprises",
-                        "Une alliance stratégique",
-                        "Accords entre entreprises et pratiques concertées susceptibles de porter atteinte au libre jeu de la concurrence",
-                        "Une fusion-acquisition"
-                    ],
-                    correctIndex: 2,
-                    explanation: "L'entente illicite est un accord entre entreprises ou des pratiques concertées susceptibles de porter atteinte au libre jeu de la concurrence. Elle peut être verticale (entre acteurs de différents niveaux) ou horizontale (entre concurrents)."
-                },
-                {
-                    question: "Quelle est la différence entre une obligation de moyens et une obligation de résultat ?",
-                    options: [
-                        "L'obligation de moyens concerne le paiement, l'obligation de résultat concerne la livraison",
-                        "L'obligation de moyens s'applique aux contrats écrits, l'obligation de résultat aux contrats verbaux",
-                        "Pour l'obligation de résultat, le débiteur s'engage à réaliser ce qui a été promis; pour l'obligation de moyens, il s'engage à tout mettre en œuvre sans garantie de résultat",
-                        "L'obligation de moyens est plus contraignante que l'obligation de résultat"
-                    ],
-                    correctIndex: 2,
-                    explanation: "Pour l'obligation de résultat, le débiteur s'engage à réaliser ce qui a été promis quels que soient les aléas. Pour l'obligation de moyens, il s'engage à tout mettre en œuvre au risque de ne pas atteindre ce qui a été promis."
-                }
-            ],
-            management: [
-                {
-                    question: "Que signifie le concept de 'destruction créatrice' selon Schumpeter ?",
-                    options: [
-                        "La destruction de l'environnement pour créer des richesses",
-                        "Le processus par lequel l'entrepreneur recourt aux innovations pour briser la routine des structures traditionnelles et favoriser des transformations structurelles",
-                        "La fermeture d'entreprises non rentables pour en créer de nouvelles",
-                        "La suppression d'emplois pour en créer de nouveaux plus productifs"
-                    ],
-                    correctIndex: 1,
-                    explanation: "La théorie de la destruction créatrice de Schumpeter explique que l'entrepreneur recourt aux innovations pour briser la routine des structures traditionnelles (destruction) et favorise ainsi les transformations structurelles importantes de la société (création)."
-                },
-                {
-                    question: "Qu'est-ce que la RSE (Responsabilité Sociétale des Entreprises) ?",
-                    options: [
-                        "Une obligation légale pour toutes les entreprises",
-                        "Un concept désignant l'intégration, par l'entreprise, des préoccupations sociales/sociétales, environnementales et économiques dans ses activités",
-                        "Une certification ISO obligatoire",
-                        "Un label écologique européen"
-                    ],
-                    correctIndex: 1,
-                    explanation: "La RSE est un concept désignant l'intégration, par l'entreprise, des préoccupations sociales/sociétales, environnementales et économiques dans ses activités et ses relations avec les parties prenantes."
-                },
-                {
-                    question: "Quelles sont les 5 fonctions du management ?",
-                    options: [
-                        "Production, finance, marketing, ressources humaines, logistique",
-                        "Planification, organisation, direction, coordination, contrôle",
-                        "Fixer les objectifs, définir les moyens, gérer les ressources humaines, contrôler les résultats, apporter les corrections",
-                        "Acheter, produire, vendre, embaucher, licencier"
-                    ],
-                    correctIndex: 2,
-                    explanation: "Les cinq fonctions du management sont: fixer les objectifs, définir les moyens, gérer les ressources humaines, contrôler les résultats par rapport aux objectifs fixés, et apporter les corrections si besoin."
-                },
-                {
-                    question: "Qu'est-ce que la performance globale d'une entreprise ?",
-                    options: [
-                        "La maximisation du profit",
-                        "L'atteinte des objectifs fixés en termes d'efficacité et d'efficience",
-                        "Être performant au niveau économique, social et environnemental en même temps",
-                        "La capacité à surpasser la concurrence"
-                    ],
-                    correctIndex: 2,
-                    explanation: "La performance globale consiste à être performant au niveau économique, social et environnemental en même temps, plutôt que de se concentrer uniquement sur la performance financière."
-                },
-                {
-                    question: "Qu'est-ce que la chaîne de valeur selon Michael Porter ?",
-                    options: [
-                        "L'ensemble des fournisseurs et distributeurs d'une entreprise",
-                        "Le processus de création de valeur pour les actionnaires",
-                        "Analyse, en termes de coûts et de qualité, des activités de l'entreprise pouvant constituer un avantage concurrentiel",
-                        "La valorisation boursière d'une entreprise"
-                    ],
-                    correctIndex: 2,
-                    explanation: "La chaîne de valeur selon Porter est une analyse, en termes de coûts et de qualité, des activités de l'entreprise pouvant constituer un avantage concurrentiel. Elle distingue les activités principales et les activités de soutien."
-                },
-                {
-                    question: "Qu'est-ce que l'impartition ?",
-                    options: [
-                        "La répartition des bénéfices entre les actionnaires",
-                        "L'affectation des ressources entre différents services de l'entreprise",
-                        "Stratégie visant à confier à des prestataires extérieurs des biens ou des services au lieu de les produire soi-même",
-                        "Le partage des responsabilités entre les dirigeants"
-                    ],
-                    correctIndex: 2,
-                    explanation: "L'impartition est une stratégie visant à confier à des prestataires extérieurs des biens ou des services au lieu de les produire
+
+    <div id="approche-juridique" class="tab-content">
+        <div class="chapter">
+            <h2>Chapitre 3 - La formation du contrat</h2>
+            
+            <div class="question" id="q24">
+                <p>24. Qu'est-ce qu'une situation précontractuelle ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q24" value="a"> Période durant laquelle les parties négocient avant de conclure un contrat</div>
+                    <div class="option"><input type="radio" name="q24" value="b"> Situation où un contrat est annulé avant son exécution</div>
+                    <div class="option"><input type="radio" name="q24" value="c"> Phase de réflexion avant de décider de contracter</div>
+                </div>
+                <button onclick="checkAnswer('q24', 'a', 'Une situation précontractuelle est la période durant laquelle les parties vont négocier afin d\'aboutir à un accord permettant de satisfaire au mieux leurs intérêts respectifs. Elle inclut les pourparlers et les avant-contrats.')">Vérifier</button>
+                <div class="result" id="result-q24"></div>
+            </div>
+            
+            <div class="question" id="q25">
+                <p>25. Quelle obligation pèse sur les parties durant les pourparlers ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q25" value="a"> Obligation de confidentialité absolue</div>
+                    <div class="option"><input type="radio" name="q25" value="b"> Obligation de bonne foi</div>
+                    <div class="option"><input type="radio" name="q25" value="c"> Obligation de conclure le contrat</div>
+                </div>
+                <button onclick="checkAnswer('q25', 'b', 'Durant les pourparlers (période de négociation), les parties ont une obligation de bonne foi. Une rupture brutale, pour nuire ou sans motif légitime peut engager la responsabilité civile extracontractuelle.')">Vérifier</button>
+                <div class="result" id="result-q25"></div>
+            </div>
+            
+            <div class="question" id="q26">
+                <p>26. Qu'est-ce qu'un avant-contrat ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q26" value="a"> Un contrat simplifié à durée déterminée</div>
+                    <div class="option"><input type="radio" name="q26" value="b"> Un contrat précédant le contrat définitif, obligeant les parties à conclure ce dernier</div>
+                    <div class="option"><input type="radio" name="q26" value="c"> Une version provisoire du contrat final</div>
+                </div>
+                <button onclick="checkAnswer('q26', 'b', 'Un avant-contrat est un contrat précédant le contrat définitif qui oblige les parties à conclure ce dernier dans les conditions qu\'il décrit. En cas de non-respect, la responsabilité civile contractuelle peut être engagée.')">Vérifier</button>
+                <div class="result" id="result-q26"></div>
+            </div>
+            
+            <div class="question" id="q27">
+                <p>27. Quelle est la différence entre promesse unilatérale et promesse synallagmatique ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q27" value="a"> La promesse unilatérale engage une seule partie, la synallagmatique engage les deux</div>
+                    <div class="option"><input type="radio" name="q27" value="b"> La promesse unilatérale est orale, la synallagmatique est écrite</div>
+                    <div class="option"><input type="radio" name="q27" value="c"> La promesse unilatérale est temporaire, la synallagmatique est définitive</div>
+                </div>
+                <button onclick="checkAnswer('q27', 'a', 'La promesse unilatérale de contrat engage seulement le promettant à conclure si le bénéficiaire accepte. La promesse synallagmatique engage les deux parties à conclure si une condition définie se réalise.')">Vérifier</button>
+                <div class="result" id="result-q27"></div>
+            </div>
+            
+            <div class="question" id="q28">
+                <p>28. Qu'est-ce que la liberté contractuelle ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q28" value="a"> Liberté de contracter ou pas, avec qui on souhaite et selon les conditions voulues</div>
+                    <div class="option"><input type="radio" name="q28" value="b"> Droit de rompre un contrat à tout moment</div>
+                    <div class="option"><input type="radio" name="q28" value="c"> Possibilité de modifier un contrat après signature</div>
+                </div>
+                <button onclick="checkAnswer('q28', 'a', 'La liberté contractuelle signifie qu\'on est libre de contracter ou pas avec qui on souhaite et selon les conditions voulues. Elle connaît cependant des limites (ordre public, bonnes mœurs...).')">Vérifier</button>
+                <div class="result" id="result-q28"></div>
+            </div>
+            
+            <div class="question" id="q29">
+                <p>29. Parmi ces contrats, lequel est unilatéral ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q29" value="a"> Contrat de vente</div>
+                    <div class="option"><input type="radio" name="q29" value="b"> Contrat de travail</div>
+                    <div class="option"><input type="radio" name="q29" value="c"> Contrat de don</div>
+                </div>
+                <button onclick="checkAnswer('q29', 'c', 'Un contrat unilatéral est un contrat où une seule partie a des obligations (comme le contrat de don). Les contrats synallagmatiques (vente, travail) engagent les deux parties.')">Vérifier</button>
+                <div class="result" id="result-q29"></div>
+            </div>
+            
+            <div class="question" id="q30">
+                <p>30. Quelles sont les trois conditions de validité d'un contrat ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q30" value="a"> Consentement, capacité, objet licite</div>
+                    <div class="option"><input type="radio" name="q30" value="b"> Écrit, signature, enregistrement</div>
+                    <div class="option"><input type="radio" name="q30" value="c"> Négociation, rédaction, exécution</div>
+                </div>
+                <button onclick="checkAnswer('q30', 'a', 'Les trois conditions cumulatives de validité d\'un contrat sont : le consentement (libre et éclairé), la capacité juridique des parties, et un objet licite et certain.')">Vérifier</button>
+                <div class="result" id="result-q30"></div>
+            </div>
+            
+            <div class="question" id="q31">
+                <p>31. Quels sont les trois vices du consentement ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q31" value="a"> Erreur, dol, violence</div>
+                    <div class="option"><input type="radio" name="q31" value="b"> Tromperie, menace, pression</div>
+                    <div class="option"><input type="radio" name="q31" value="c"> Ignorance, négligence, imprudence</div>
+                </div>
+                <button onclick="checkAnswer('q31', 'a', 'Les trois vices du consentement sont : l\'erreur (fausse représentation involontaire), le dol (manœuvres frauduleuses), et la violence (pression physique ou morale).')">Vérifier</button>
+                <div class="result" id="result-q31"></div>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <h2>Chapitre 4 - La mise en œuvre du contrat</h2>
+            
+            <div class="question" id="q32">
+                <p>32. Qu'est-ce qu'une clause de réserve de propriété ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q32" value="a"> Clause qui limite la responsabilité du vendeur</div>
+                    <div class="option"><input type="radio" name="q32" value="b"> Clause permettant au créancier de conserver la propriété du bien vendu jusqu'au complet paiement</div>
+                    <div class="option"><input type="radio" name="q32" value="c"> Clause qui réserve certains droits à l'acheteur</div>
+                </div>
+                <button onclick="checkAnswer('q32', 'b', 'La clause de réserve de propriété permet au vendeur (créancier) de conserver la propriété du bien vendu jusqu\'à complet paiement par l\'acheteur, même si la possession a été transférée.')">Vérifier</button>
+                <div class="result" id="result-q32"></div>
+            </div>
+            
+            <div class="question" id="q33">
+                <p>33. Qu'est-ce qu'une clause abusive ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q33" value="a"> Clause mal rédigée ou incomplète</div>
+                    <div class="option"><input type="radio" name="q33" value="b"> Clause qui crée un déséquilibre significatif entre les droits et obligations des parties</div>
+                    <div class="option"><input type="radio" name="q33" value="c"> Clause qui n'a pas été négociée entre les parties</div>
+                </div>
+                <button onclick="checkAnswer('q33', 'b', 'Une clause abusive crée, au détriment du consommateur (ou du non-professionnel), un déséquilibre significatif entre les droits et obligations des parties. Elle est réputée non écrite.')">Vérifier</button>
+                <div class="result" id="result-q33"></div>
+            </div>
+            
+            <div class="question" id="q34">
+                <p>34. Qu'est-ce que la force obligatoire du contrat ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q34" value="a"> Obligation de respecter les termes du contrat une fois conclu</div>
+                    <div class="option"><input type="radio" name="q34" value="b"> Pouvoir de contraindre l'autre partie à exécuter le contrat</div>
+                    <div class="option"><input type="radio" name="q34" value="c"> Capacité à modifier unilatéralement le contrat</div>
+                </div>
+                <button onclick="checkAnswer('q34', 'a', 'La force obligatoire signifie que le contrat ne peut être modifié ou révoqué sans le consentement mutuel des parties (sauf exceptions légales). C\'est le principe "pacta sunt servanda".')">Vérifier</button>
+                <div class="result" id="result-q34"></div>
+            </div>
+            
+            <div class="question" id="q35">
+                <p>35. Qu'est-ce que l'effet relatif du contrat ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q35" value="a"> Le contrat doit être proportionné à son objet</div>
+                    <div class="option"><input type="radio" name="q35" value="b"> Le contrat ne peut être exécuté que par les parties et à leur profit</div>
+                    <div class="option"><input type="radio" name="q35" value="c"> Le contrat doit être équilibré entre les parties</div>
+                </div>
+                <button onclick="checkAnswer('q35', 'b', 'L\'effet relatif signifie que le contrat ne produit d\'effets qu\'entre les parties (et leurs héritiers ou ayants cause) et ne peut profiter ou nuire à des tiers étrangers au contrat.')">Vérifier</button>
+                <div class="result" id="result-q35"></div>
+            </div>
+            
+            <div class="question" id="q36">
+                <p>36. Qu'est-ce que la théorie de l'imprévision ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q36" value="a"> Théorie permettant de rompre un contrat en cas de difficultés imprévues</div>
+                    <div class="option"><input type="radio" name="q36" value="b"> Théorie permettant de renégocier un contrat devenu excessivement onéreux</div>
+                    <div class="option"><input type="radio" name="q36" value="c"> Théorie limitant la responsabilité en cas de force majeure</div>
+                </div>
+                <button onclick="checkAnswer('q36', 'b', 'La théorie de l\'imprévision permet, lorsque des circonstances imprévisibles rendent l\'exécution excessivement onéreuse, de demander la renégociation du contrat. À défaut d\'accord, le juge peut le réviser ou y mettre fin.')">Vérifier</button>
+                <div class="result" id="result-q36"></div>
+            </div>
+            
+            <div class="question" id="q37">
+                <p>37. Parmi ces sanctions, laquelle ne fait PAS partie des sanctions de l'inexécution contractuelle ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q37" value="a"> Exécution forcée en nature</div>
+                    <div class="option"><input type="radio" name="q37" value="b"> Résolution du contrat</div>
+                    <div class="option"><input type="radio" name="q37" value="c"> Emprisonnement du contractant défaillant</div>
+                </div>
+                <button onclick="checkAnswer('q37', 'c', 'Les sanctions de l\'inexécution contractuelle incluent : exécution forcée, résolution, réduction du prix, dommages-intérêts. L\'emprisonnement n\'est pas une sanction civile contractuelle.')">Vérifier</button>
+                <div class="result" id="result-q37"></div>
+            </div>
+            
+            <div class="question" id="q38">
+                <p>38. Quels sont les trois éléments à prouver pour engager la responsabilité contractuelle ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q38" value="a"> Faute, préjudice, lien de causalité</div>
+                    <div class="option"><input type="radio" name="q38" value="b"> Intention, négligence, dommage</div>
+                    <div class="option"><input type="radio" name="q38" value="c"> Mauvaise foi, rupture, sanction</div>
+                </div>
+                <button onclick="checkAnswer('q38', 'a', 'Pour engager la responsabilité contractuelle, il faut prouver : une faute contractuelle (inexécution), un préjudice, et un lien de causalité entre les deux.')">Vérifier</button>
+                <div class="result" id="result-q38"></div>
+            </div>
+            
+            <div class="question" id="q39">
+                <p>39. Quelle est la différence entre obligation de résultat et obligation de moyens ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q39" value="a"> L'obligation de résultat est plus contraignante que l'obligation de moyens</div>
+                    <div class="option"><input type="radio" name="q39" value="b"> Le débiteur s'engage à atteindre un résultat dans le premier cas, à mettre en œuvre des moyens dans le second</div>
+                    <div class="option"><input type="radio" name="q39" value="c"> L'obligation de résultat concerne les contrats commerciaux, l'obligation de moyens les contrats civils</div>
+                </div>
+                <button onclick="checkAnswer('q39', 'b', 'Dans l\'obligation de résultat, le débiteur s\'engage à atteindre un résultat précis. Dans l\'obligation de moyens, il s\'engage seulement à mettre en œuvre les moyens appropriés, sans garantir le résultat.')">Vérifier</button>
+                <div class="result" id="result-q39"></div>
+            </div>
+        </div>
+
+        <div class="chapter">
+            <h2>Chapitre 7 - La régulation de l'activité économique par le droit</h2>
+            
+            <div class="question" id="q40">
+                <p>40. Quels sont les trois principes du décret d'Allarde de 1789 ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q40" value="a"> Liberté d'entreprendre, liberté d'exploitation, liberté de concurrence</div>
+                    <div class="option"><input type="radio" name="q40" value="b"> Égalité, fraternité, propriété</div>
+                    <div class="option"><input type="radio" name="q40" value="c"> Responsabilité, transparence, loyauté</div>
+                </div>
+                <button onclick="checkAnswer('q40', 'a', 'Le décret d\'Allarde établit trois principes : liberté d\'entreprendre, liberté d\'exploitation, et liberté de concurrence, dans le but de lutter contre les corporations de l\'Ancien Régime.')">Vérifier</button>
+                <div class="result" id="result-q40"></div>
+            </div>
+            
+            <div class="question" id="q41">
+                <p>41. Qu'est-ce qu'une AAI (Autorité Administrative Indépendante) ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q41" value="a"> Un organe gouvernemental chargé de contrôler les entreprises publiques</div>
+                    <div class="option"><input type="radio" name="q41" value="b"> Un organe indépendant de l'État et des entreprises, disposant de prérogatives pour réguler et contrôler des secteurs économiques</div>
+                    <div class="option"><input type="radio" name="q41" value="c"> Une association professionnelle chargée de réguler un secteur d'activité</div>
+                </div>
+                <button onclick="checkAnswer('q41', 'b', 'Une AAI est un organe qui, agissant au nom de l\'État tout en étant indépendant de celui-ci et des entreprises, dispose de prérogatives pour assurer ses missions de régulation et de contrôle des secteurs économiques.')">Vérifier</button>
+                <div class="result" id="result-q41"></div>
+            </div>
+            
+            <div class="question" id="q42">
+                <p>42. Quelle est la différence entre entente verticale et entente horizontale ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q42" value="a"> L'entente verticale concerne des acteurs à différents niveaux de la chaîne, l'horizontale des concurrents</div>
+                    <div class="option"><input type="radio" name="q42" value="b"> L'entente verticale est toujours licite, l'horizontale toujours illicite</div>
+                    <div class="option"><input type="radio" name="q42" value="c"> L'entente verticale est temporaire, l'horizontale permanente</div>
+                </div>
+                <button onclick="checkAnswer('q42', 'a', 'Une entente verticale est un accord entre acteurs à différents niveaux de la chaîne d\'activité (ex: producteur-distributeur). Une entente horizontale est un accord entre concurrents pour un même produit/service.')">Vérifier</button>
+                <div class="result" id="result-q42"></div>
+            </div>
+            
+            <div class="question" id="q43">
+                <p>43. Qu'est-ce qu'un abus de position dominante ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q43" value="a"> Utilisation d'une position dominante pour imposer ses conditions et fausser la concurrence</div>
+                    <div class="option"><input type="radio" name="q43" value="b"> Simple détention d'une part de marché importante</div>
+                    <div class="option"><input type="radio" name="q43" value="c"> Refus de collaborer avec d'autres entreprises du secteur</div>
+                </div>
+                <button onclick="checkAnswer('q43', 'a', 'L\'abus de position dominante consiste pour une entreprise leader à utiliser sa position dominante pour imposer ses conditions de production et de vente, faussant ainsi le jeu de la concurrence.')">Vérifier</button>
+                <div class="result" id="result-q43"></div>
+            </div>
+            
+            <div class="question" id="q44">
+                <p>44. Parmi ces éléments, lequel n'est PAS une forme de concurrence déloyale ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q44" value="a"> Désorganisation</div>
+                    <div class="option"><input type="radio" name="q44" value="b"> Confusion</div>
+                    <div class="option"><input type="radio" name="q44" value="c"> Innovation</div>
+                </div>
+                <button onclick="checkAnswer('q44', 'c', 'Les quatre formes de concurrence déloyale sont : désorganisation, confusion, dénigrement et parasitisme. L\'innovation est au contraire une pratique saine et encouragée.')">Vérifier</button>
+                <div class="result" id="result-q44"></div>
+            </div>
+            
+            <div class="question" id="q45">
+                <p>45. Quelles sont les quatre caractéristiques pour qu'une innovation soit brevetable ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q45" value="a"> Être une solution technique à un problème technique, être nouveau, impliquer une activité inventive, être susceptible d'application industrielle</div>
+                    <div class="option"><input type="radio" name="q45" value="b"> Être utile, original, commercialisable et rentable</div>
+                    <div class="option"><input type="radio" name="q45" value="c"> Être complexe, unique, protégeable et défendable</div>
+                </div>
+                <button onclick="checkAnswer('q45', 'a', 'Pour être brevetable, une innovation doit : être une solution technique à un problème technique, être nouvelle, impliquer une activité inventive, et être susceptible d\'application industrielle.')">Vérifier</button>
+                <div class="result" id="result-q45"></div>
+            </div>
+            
+            <div class="question" id="q46">
+                <p>46. Quelle est la durée de protection d'un brevet en France ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q46" value="a"> 10 ans</div>
+                    <div class="option"><input type="radio" name="q46" value="b"> 20 ans</div>
+                    <div class="option"><input type="radio" name="q46" value="c"> 50 ans</div>
+                </div>
+                <button onclick="checkAnswer('q46', 'b', 'Un brevet d\'invention est protégé pendant 20 ans en France, sous condition de paiement d\'annuités. Cette durée permet au titulaire d\'exploiter son innovation en monopole.')">Vérifier</button>
+                <div class="result" id="result-q46"></div>
+            </div>
+            
+            <div class="question" id="q47">
+                <p>47. Quelle est la condition essentielle pour protéger une marque ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q47" value="a"> Être distinctif</div>
+                    <div class="option"><input type="radio" name="q47" value="b"> Être connu du public</div>
+                    <div class="option"><input type="radio" name="q47" value="c"> Être utilisé commercialement depuis plus d'un an</div>
+                </div>
+                <button onclick="checkAnswer('q47', 'a', 'La condition essentielle pour protéger une marque est d\'être distinctif, c\'est-à-dire d\'avoir l\'aptitude à identifier les produits et à les distinguer de ceux des concurrents sans être descriptif.')">Vérifier</button>
+                <div class="result" id="result-q47"></div>
+            </div>
+            
+            <div class="question" id="q48">
+                <p>48. Quelle est la durée de protection d'une marque en France ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q48" value="a"> 5 ans</div>
+                    <div class="option"><input type="radio" name="q48" value="b"> 10 ans</div>
+                    <div class="option"><input type="radio" name="q48" value="c"> 20 ans</div>
+                </div>
+                <button onclick="checkAnswer('q48', 'b', 'Une marque est protégée pendant 10 ans en France dans chaque domaine déposé, sous condition de paiement de droits selon le "principe de spécialité". La protection est renouvelable indéfiniment.')">Vérifier</button>
+                <div class="result" id="result-q48"></div>
+            </div>
+            
+            <div class="question" id="q49">
+                <p>49. Quelle est la sanction pénale maximale pour contrefaçon de marque ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q49" value="a"> 150 000€ d'amende et 2 ans d'emprisonnement</div>
+                    <div class="option"><input type="radio" name="q49" value="b"> 400 000€ d'amende et 4 ans d'emprisonnement</div>
+                    <div class="option"><input type="radio" name="q49" value="c"> 1 000 000€ d'amende et 10 ans d'emprisonnement</div>
+                </div>
+                <button onclick="checkAnswer('q49', 'b', 'La contrefaçon de marque est sanctionnée pénalement par une amende pouvant aller jusqu\'à 400 000€ et 4 ans d\'emprisonnement pour le dirigeant de la société contrefactrice.')">Vérifier</button>
+                <div class="result" id="result-q49"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="approche-manageriale" class="tab-content">
+        <div class="chapter">
+            <h2>Chapitre 5 - L'environnement de l'entreprise</h2>
+            
+            <div class="question" id="q50">
+                <p>50. Comment Schumpeter définit-il l'entrepreneur ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q50" value="a"> Personne qui gère une entreprise familiale</div>
+                    <div class="option"><input type="radio" name="q50" value="b"> Personne qui prend des risques en investissant des capitaux pour développer une innovation</div>
+                    <div class="option"><input type="radio" name="q50" value="c"> Dirigeant salarié d'une grande entreprise</div>
+                </div>
+                <button onclick="checkAnswer('q50', 'b', 'Selon Schumpeter, l\'entrepreneur est une personne qui prend des risques en investissant des capitaux pour développer une innovation afin de profiter des opportunités du marché.')">Vérifier</button>
+                <div class="result" id="result-q50"></div>
+            </div>
+            
+            <div class="question" id="q51">
+                <p>51. Qu'est-ce que la théorie de la destruction créatrice selon Schumpeter ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q51" value="a"> Processus par lequel les innovations remplacent les anciennes structures économiques</div>
+                    <div class="option"><input type="radio" name="q51" value="b"> Méthode de gestion des coûts de production</div>
+                    <div class="option"><input type="radio" name="q51" value="c"> Stratégie marketing visant à renouveler les produits</div>
+                </div>
+                <button onclick="checkAnswer('q51', 'a', 'La destruction créatrice décrit comment l\'entrepreneur recourt aux innovations pour briser les structures traditionnelles (destruction) et favoriser des transformations importantes (création), générant croissance et emplois nouveaux.')">Vérifier</button>
+                <div class="result" id="result-q51"></div>
+            </div>
+            
+            <div class="question" id="q52">
+                <p>52. Quelles sont les quatre principales finalités de l'entreprise selon Peter Drucker ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q52" value="a"> Profit, expansion, domination, innovation</div>
+                    <div class="option"><input type="radio" name="q52" value="b"> Économique, sociale, sociétale, environnementale</div>
+                    <div class="option"><input type="radio" name="q52" value="c"> Production, distribution, vente, service</div>
+                </div>
+                <button onclick="checkAnswer('q52', 'b', 'Les quatre finalités sont : économique (profit et satisfaction client), sociale (salariés), sociétale (communauté), environnementale (préservation nature). Pour Drucker, la première finalité est de développer une clientèle.')">Vérifier</button>
+                <div class="result" id="result-q52"></div>
+            </div>
+            
+            <div class="question" id="q53">
+                <p>53. Qu'est-ce que la RSE (Responsabilité Sociétale des Entreprises) ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q53" value="a"> Obligation légale de publier des rapports financiers</div>
+                    <div class="option"><input type="radio" name="q53" value="b"> Intégration des préoccupations sociales, environnementales et économiques dans les activités</div>
+                    <div class="option"><input type="radio" name="q53" value="c"> Stratégie marketing visant à améliorer l'image de l'entreprise</div>
+                </div>
+                <button onclick="checkAnswer('q53', 'b', 'La RSE est l\'intégration volontaire par les entreprises des préoccupations sociales/sociétales, environnementales et économiques dans leurs activités et relations avec les parties prenantes.')">Vérifier</button>
+                <div class="result" id="result-q53"></div>
+            </div>
+            
+            <div class="question" id="q54">
+                <p>54. Parmi ces étapes, laquelle ne fait PAS partie du processus de création d'entreprise ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q54" value="a"> Réaliser une étude de marché</div>
+                    <div class="option"><input type="radio" name="q54" value="b"> Établir un business plan</div>
+                    <div class="option"><input type="radio" name="q54" value="c"> Obtenir un prêt garanti par l'État</div>
+                </div>
+                <button onclick="checkAnswer('q54', 'c', 'Les 6 étapes principales sont : trouver une idée, étude de marché, business plan, recherche de financements, choix du statut, démarches administratives. Un prêt garanti est une option, pas une étape obligatoire.')">Vérifier</button>
+                <div class="result" id="result-q54"></div>
+            </div>
+            
+            <div class="question" id="q55">
+                <p>55. Qu'est-ce que la démarche managériale ?</p>
+                <div class="options">
+                    <div class="option"><input type="radio" name="q55" value="a"> Capacité à gérer les ressources de l'entreprise de manière optimale</div>
+                    <div class="option"><input type="radio" name="q55" value="b"> Processus de création d'une nouvelle entreprise</div>
+                    <div class="option"><input type="radio" name="q55" value="c"> Technique de motivation des salariés</div>
+                </div>
+                <button onclick="checkAnswer('q55', 'a', 'La démarche managériale est la capacité à gérer les ressources de l\'entreprise (humaines, financières, matérielles) de manière optimale pour développer et assurer sa pérennité.')">Vérifier</
