@@ -3,177 +3,285 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercice de verbes irréguliers en anglais</title>
+    <title>Quiz de révision CEJM - BTS</title>
     <style>
-        /* Styles généraux */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        :root {
+            --primary: #3498db;
+            --secondary: #2980b9;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --light: #f5f5f5;
+            --dark: #34495e;
+        }
+        
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f5f7fa;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
             color: #333;
+            background-color: #f4f7f9;
+            padding-bottom: 50px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
         }
         
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
         }
         
-        header {
-            background-color: #3498db;
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
             color: white;
-            padding: 20px 0;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        h1 {
-            margin: 0;
-            font-size: 28px;
-        }
-        
-        h2 {
-            color: #2980b9;
-            margin-top: 30px;
-        }
-        
-        /* Section exercice */
-        .exercise-container {
-            background-color: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            margin-top: 30px;
-        }
-        
-        .verb-container {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 20px;
-        }
-        
-        .verb-form {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .verb-form label {
-            width: 130px;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-        
-        .verb-form input {
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-            flex-grow: 1;
-        }
-        
-        button {
-            background-color: #2ecc71;
-            color: white;
+            padding: 10px 20px;
             border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
-            transition: background-color 0.3s;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin: 5px;
         }
         
-        button:hover {
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+        }
+        
+        .btn-success:hover {
             background-color: #27ae60;
         }
         
-        .result {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 4px;
+        .btn-danger {
+            background-color: var(--danger);
+        }
+        
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        
+        .btn-warning {
+            background-color: var(--warning);
+        }
+        
+        .btn-warning:hover {
+            background-color: #e67e22;
+        }
+        
+        #menu {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .menu-btn {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .menu-btn:hover {
+            background-color: var(--light);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .menu-btn-eco {
+            border-left: 5px solid #3498db;
+        }
+        
+        .menu-btn-jur {
+            border-left: 5px solid #e74c3c;
+        }
+        
+        .menu-btn-man {
+            border-left: 5px solid #2ecc71;
+        }
+        
+        .menu-btn-all {
+            border-left: 5px solid #f39c12;
+        }
+        
+        section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        h2 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .quiz-container {
             display: none;
         }
         
-        .correct {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .incorrect {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        
-        .feedback {
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        
-        /* Liste des verbes */
-        .verb-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .verb-card {
-            background-color: white;
-            border-radius: 6px;
-            padding: 15px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-        
-        .verb-card p {
-            margin: 5px 0;
-        }
-        
-        .verb-card .infinitive {
-            font-weight: bold;
-            color: #2980b9;
-        }
-        
-        /* Filtre et recherche */
-        .filters {
-            margin: 20px 0;
+        .quiz-header {
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
         
-        .search-box {
-            flex-grow: 1;
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-            min-width: 200px;
+        .quiz-header .progress {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark);
         }
         
-        .stats {
-            background-color: white;
-            border-radius: 6px;
-            padding: 15px;
-            margin-top: 20px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        .quiz-header .score {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
         }
         
-        /* Styles responsifs */
+        .question-container {
+            margin-bottom: 25px;
+        }
+        
+        .question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .options {
+            list-style: none;
+        }
+        
+        .option {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .option:hover {
+            background-color: #e9ecef;
+        }
+        
+        .option.selected {
+            background-color: rgba(52, 152, 219, 0.2);
+            border-color: var(--primary);
+        }
+        
+        .option.correct {
+            background-color: rgba(46, 204, 113, 0.2);
+            border-color: var(--success);
+        }
+        
+        .option.incorrect {
+            background-color: rgba(231, 76, 60, 0.2);
+            border-color: var(--danger);
+        }
+        
+        .explanation {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--primary);
+            padding: 10px 15px;
+            margin-top: 15px;
+            font-size: 0.95rem;
+            display: none;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .results-container {
+            text-align: center;
+            display: none;
+        }
+        
+        .results-container h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .results-score {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 20px 0;
+        }
+        
+        .score-message {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+        }
+        
+        .results-actions {
+            margin-top: 25px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
         @media (max-width: 600px) {
-            .verb-form {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .controls {
                 flex-direction: column;
-                align-items: flex-start;
+                gap: 10px;
             }
             
-            .verb-form label {
-                margin-bottom: 5px;
-            }
-            
-            .verb-form input {
+            .btn {
                 width: 100%;
             }
         }
@@ -182,320 +290,377 @@
 <body>
     <header>
         <div class="container">
-            <h1>Exercice sur les verbes irréguliers en anglais</h1>
+            <h1>Quiz de révision CEJM</h1>
+            <p>Testez vos connaissances en Culture Économique, Juridique et Managériale</p>
         </div>
     </header>
     
     <div class="container">
-        <div class="exercise-container">
-            <h2>Testez vos connaissances</h2>
-            <p>Complétez les formes du verbe pour vérifier votre maîtrise des verbes irréguliers.</p>
-            
-            <div id="exercise">
-                <div class="verb-container">
-                    <div class="verb-form">
-                        <label for="infinitive">Infinitif :</label>
-                        <input type="text" id="infinitive" readonly>
-                    </div>
-                    <div class="verb-form">
-                        <label for="preterit">Prétérit :</label>
-                        <input type="text" id="preterit" placeholder="Entrez le prétérit...">
-                    </div>
-                    <div class="verb-form">
-                        <label for="participle">Participe passé :</label>
-                        <input type="text" id="participle" placeholder="Entrez le participe passé...">
-                    </div>
-                    <div class="verb-form">
-                        <label for="traduction">Traduction :</label>
-                        <input type="text" id="translation" readonly>
-                    </div>
-                </div>
-                
-                <button id="check-btn">Vérifier</button>
-                <button id="next-btn">Nouveau verbe</button>
-                
-                <div id="result" class="result">
-                    <div class="feedback"></div>
-                    <div class="correction"></div>
-                </div>
+        <section id="menu">
+            <h2>Choisissez votre thème de révision</h2>
+            <button class="menu-btn menu-btn-eco" onclick="startQuiz('eco')">Approche Économique</button>
+            <button class="menu-btn menu-btn-jur" onclick="startQuiz('jur')">Approche Juridique</button>
+            <button class="menu-btn menu-btn-man" onclick="startQuiz('man')">Approche Managériale</button>
+            <button class="menu-btn menu-btn-all" onclick="startQuiz('all')">Mode Examen (Tous les thèmes)</button>
+        </section>
+        
+        <section class="quiz-container" id="quiz-container">
+            <div class="quiz-header">
+                <div class="progress">Question <span id="current-question">1</span>/<span id="total-questions">10</span></div>
+                <div class="score">Score: <span id="score">0</span></div>
             </div>
-        </div>
+            
+            <div class="question-container">
+                <div class="question" id="question-text">Chargement de la question...</div>
+                <ul class="options" id="options-list"></ul>
+                <div class="explanation" id="explanation"></div>
+            </div>
+            
+            <div class="controls">
+                <button class="btn btn-warning" id="hint-btn" onclick="showExplanation()">Indice</button>
+                <button class="btn" id="next-btn" onclick="nextQuestion()" disabled>Question suivante</button>
+            </div>
+        </section>
         
-        <h2>Liste de référence des verbes irréguliers</h2>
-        <div class="filters">
-            <input type="text" id="search-box" class="search-box" placeholder="Rechercher un verbe...">
-            <button id="reset-search">Réinitialiser</button>
-        </div>
-        
-        <div class="verb-list" id="verb-list">
-            <!-- Les cartes de verbes seront générées en JavaScript -->
-        </div>
+        <section class="results-container" id="results-container">
+            <h3>Résultats du quiz</h3>
+            <div class="results-score"><span id="final-score">0</span>/<span id="max-score">10</span></div>
+            <div class="score-message" id="score-message">Chargement de votre évaluation...</div>
+            
+            <div class="results-actions">
+                <button class="btn btn-success" onclick="retryQuiz()">Recommencer ce quiz</button>
+                <button class="btn" onclick="backToMenu()">Retour au menu</button>
+            </div>
+        </section>
     </div>
+    
+    <footer>
+        <div class="container">
+            <p>Quiz de révision CEJM pour BTS - Développé pour faciliter vos révisions</p>
+        </div>
+    </footer>
 
     <script>
-        // Liste étendue des verbes irréguliers avec leurs formes et traductions
-        const irregularVerbs = [
-            { infinitive: "arise", preterit: "arose", participle: "arisen", translation: "survenir, se lever" },
-            { infinitive: "awake", preterit: "awoke", participle: "awoken", translation: "se réveiller" },
-            { infinitive: "be", preterit: "was/were", participle: "been", translation: "être" },
-            { infinitive: "bear", preterit: "bore", participle: "borne/born", translation: "porter, supporter" },
-            { infinitive: "beat", preterit: "beat", participle: "beaten", translation: "battre" },
-            { infinitive: "become", preterit: "became", participle: "become", translation: "devenir" },
-            { infinitive: "begin", preterit: "began", participle: "begun", translation: "commencer" },
-            { infinitive: "bend", preterit: "bent", participle: "bent", translation: "plier, se courber" },
-            { infinitive: "bet", preterit: "bet", participle: "bet", translation: "parier" },
-            { infinitive: "bid", preterit: "bid", participle: "bid", translation: "offrir un prix, enchérir" },
-            { infinitive: "bind", preterit: "bound", participle: "bound", translation: "lier, attacher" },
-            { infinitive: "bite", preterit: "bit", participle: "bitten", translation: "mordre" },
-            { infinitive: "bleed", preterit: "bled", participle: "bled", translation: "saigner" },
-            { infinitive: "blow", preterit: "blew", participle: "blown", translation: "souffler" },
-            { infinitive: "break", preterit: "broke", participle: "broken", translation: "casser" },
-            { infinitive: "breed", preterit: "bred", participle: "bred", translation: "élever, reproduire" },
-            { infinitive: "bring", preterit: "brought", participle: "brought", translation: "apporter" },
-            { infinitive: "broadcast", preterit: "broadcast", participle: "broadcast", translation: "diffuser" },
-            { infinitive: "build", preterit: "built", participle: "built", translation: "construire" },
-            { infinitive: "burn", preterit: "burnt/burned", participle: "burnt/burned", translation: "brûler" },
-            { infinitive: "burst", preterit: "burst", participle: "burst", translation: "éclater" },
-            { infinitive: "buy", preterit: "bought", participle: "bought", translation: "acheter" },
-            { infinitive: "cast", preterit: "cast", participle: "cast", translation: "jeter, lancer" },
-            { infinitive: "catch", preterit: "caught", participle: "caught", translation: "attraper" },
-            { infinitive: "choose", preterit: "chose", participle: "chosen", translation: "choisir" },
-            { infinitive: "cling", preterit: "clung", participle: "clung", translation: "s'accrocher" },
-            { infinitive: "come", preterit: "came", participle: "come", translation: "venir" },
-            { infinitive: "cost", preterit: "cost", participle: "cost", translation: "coûter" },
-            { infinitive: "creep", preterit: "crept", participle: "crept", translation: "ramper" },
-            { infinitive: "cut", preterit: "cut", participle: "cut", translation: "couper" },
-            { infinitive: "deal", preterit: "dealt", participle: "dealt", translation: "traiter, négocier" },
-            { infinitive: "dig", preterit: "dug", participle: "dug", translation: "creuser" },
-            { infinitive: "do", preterit: "did", participle: "done", translation: "faire" },
-            { infinitive: "draw", preterit: "drew", participle: "drawn", translation: "dessiner" },
-            { infinitive: "dream", preterit: "dreamt/dreamed", participle: "dreamt/dreamed", translation: "rêver" },
-            { infinitive: "drink", preterit: "drank", participle: "drunk", translation: "boire" },
-            { infinitive: "drive", preterit: "drove", participle: "driven", translation: "conduire" },
-            { infinitive: "dwell", preterit: "dwelt/dwelled", participle: "dwelt/dwelled", translation: "habiter" },
-            { infinitive: "eat", preterit: "ate", participle: "eaten", translation: "manger" },
-            { infinitive: "fall", preterit: "fell", participle: "fallen", translation: "tomber" },
-            { infinitive: "feed", preterit: "fed", participle: "fed", translation: "nourrir" },
-            { infinitive: "feel", preterit: "felt", participle: "felt", translation: "sentir" },
-            { infinitive: "fight", preterit: "fought", participle: "fought", translation: "combattre" },
-            { infinitive: "find", preterit: "found", participle: "found", translation: "trouver" },
-            { infinitive: "flee", preterit: "fled", participle: "fled", translation: "fuir" },
-            { infinitive: "fling", preterit: "flung", participle: "flung", translation: "lancer violemment" },
-            { infinitive: "fly", preterit: "flew", participle: "flown", translation: "voler" },
-            { infinitive: "forbid", preterit: "forbade", participle: "forbidden", translation: "interdire" },
-            { infinitive: "forecast", preterit: "forecast", participle: "forecast", translation: "prévoir" },
-            { infinitive: "forget", preterit: "forgot", participle: "forgotten", translation: "oublier" },
-            { infinitive: "forgive", preterit: "forgave", participle: "forgiven", translation: "pardonner" },
-            { infinitive: "freeze", preterit: "froze", participle: "frozen", translation: "geler" },
-            { infinitive: "get", preterit: "got", participle: "got/gotten", translation: "obtenir" },
-            { infinitive: "give", preterit: "gave", participle: "given", translation: "donner" },
-            { infinitive: "go", preterit: "went", participle: "gone", translation: "aller" },
-            { infinitive: "grind", preterit: "ground", participle: "ground", translation: "moudre" },
-            { infinitive: "grow", preterit: "grew", participle: "grown", translation: "grandir, pousser" },
-            { infinitive: "hang", preterit: "hung", participle: "hung", translation: "suspendre" },
-            { infinitive: "have", preterit: "had", participle: "had", translation: "avoir" },
-            { infinitive: "hear", preterit: "heard", participle: "heard", translation: "entendre" },
-            { infinitive: "hide", preterit: "hid", participle: "hidden", translation: "cacher" },
-            { infinitive: "hit", preterit: "hit", participle: "hit", translation: "frapper" },
-            { infinitive: "hold", preterit: "held", participle: "held", translation: "tenir" },
-            { infinitive: "hurt", preterit: "hurt", participle: "hurt", translation: "blesser" },
-            { infinitive: "keep", preterit: "kept", participle: "kept", translation: "garder" },
-            { infinitive: "kneel", preterit: "knelt", participle: "knelt", translation: "s'agenouiller" },
-            { infinitive: "know", preterit: "knew", participle: "known", translation: "savoir/connaître" },
-            { infinitive: "lay", preterit: "laid", participle: "laid", translation: "poser" },
-            { infinitive: "lead", preterit: "led", participle: "led", translation: "mener, conduire" },
-            { infinitive: "lean", preterit: "leant/leaned", participle: "leant/leaned", translation: "s'incliner, s'appuyer" },
-            { infinitive: "leap", preterit: "leapt/leaped", participle: "leapt/leaped", translation: "bondir" },
-            { infinitive: "learn", preterit: "learnt/learned", participle: "learnt/learned", translation: "apprendre" },
-            { infinitive: "leave", preterit: "left", participle: "left", translation: "quitter/partir" },
-            { infinitive: "lend", preterit: "lent", participle: "lent", translation: "prêter" },
-            { infinitive: "let", preterit: "let", participle: "let", translation: "laisser/permettre" },
-            { infinitive: "lie", preterit: "lay", participle: "lain", translation: "être allongé" },
-            { infinitive: "light", preterit: "lit/lighted", participle: "lit/lighted", translation: "allumer" },
-            { infinitive: "lose", preterit: "lost", participle: "lost", translation: "perdre" },
-            { infinitive: "make", preterit: "made", participle: "made", translation: "faire, fabriquer" },
-            { infinitive: "mean", preterit: "meant", participle: "meant", translation: "signifier" },
-            { infinitive: "meet", preterit: "met", participle: "met", translation: "rencontrer" },
-            { infinitive: "mow", preterit: "mowed", participle: "mown/mowed", translation: "tondre" },
-            { infinitive: "overcome", preterit: "overcame", participle: "overcome", translation: "surmonter" },
-            { infinitive: "overtake", preterit: "overtook", participle: "overtaken", translation: "dépasser" },
-            { infinitive: "pay", preterit: "paid", participle: "paid", translation: "payer" },
-            { infinitive: "put", preterit: "put", participle: "put", translation: "mettre" },
-            { infinitive: "read", preterit: "read", participle: "read", translation: "lire" },
-            { infinitive: "ride", preterit: "rode", participle: "ridden", translation: "monter (à cheval, vélo)" },
-            { infinitive: "ring", preterit: "rang", participle: "rung", translation: "sonner" },
-            { infinitive: "rise", preterit: "rose", participle: "risen", translation: "s'élever, se lever" },
-            { infinitive: "run", preterit: "ran", participle: "run", translation: "courir" },
-            { infinitive: "saw", preterit: "sawed", participle: "sawn/sawed", translation: "scier" },
-            { infinitive: "say", preterit: "said", participle: "said", translation: "dire" },
-            { infinitive: "see", preterit: "saw", participle: "seen", translation: "voir" },
-            { infinitive: "seek", preterit: "sought", participle: "sought", translation: "chercher" },
-            { infinitive: "sell", preterit: "sold", participle: "sold", translation: "vendre" },
-            { infinitive: "send", preterit: "sent", participle: "sent", translation: "envoyer" },
-            { infinitive: "set", preterit: "set", participle: "set", translation: "fixer, mettre" },
-            { infinitive: "sew", preterit: "sewed", participle: "sewn/sewed", translation: "coudre" },
-            { infinitive: "shake", preterit: "shook", participle: "shaken", translation: "secouer" },
-            { infinitive: "shine", preterit: "shone", participle: "shone", translation: "briller" },
-            { infinitive: "shoot", preterit: "shot", participle: "shot", translation: "tirer" },
-            { infinitive: "show", preterit: "showed", participle: "shown/showed", translation: "montrer" },
-            { infinitive: "shrink", preterit: "shrank", participle: "shrunk", translation: "rétrécir" },
-            { infinitive: "shut", preterit: "shut", participle: "shut", translation: "fermer" },
-            { infinitive: "sing", preterit: "sang", participle: "sung", translation: "chanter" },
-            { infinitive: "sink", preterit: "sank", participle: "sunk", translation: "couler" },
-            { infinitive: "sit", preterit: "sat", participle: "sat", translation: "s'asseoir" },
-            { infinitive: "sleep", preterit: "slept", participle: "slept", translation: "dormir" },
-            { infinitive: "slide", preterit: "slid", participle: "slid", translation: "glisser" },
-            { infinitive: "smell", preterit: "smelt/smelled", participle: "smelt/smelled", translation: "sentir (odeur)" },
-            { infinitive: "sow", preterit: "sowed", participle: "sown/sowed", translation: "semer" },
-            { infinitive: "speak", preterit: "spoke", participle: "spoken", translation: "parler" },
-            { infinitive: "speed", preterit: "sped/speeded", participle: "sped/speeded", translation: "accélérer" },
-            { infinitive: "spell", preterit: "spelt/spelled", participle: "spelt/spelled", translation: "épeler" },
-            { infinitive: "spend", preterit: "spent", participle: "spent", translation: "dépenser, passer (du temps)" },
-            { infinitive: "spill", preterit: "spilt/spilled", participle: "spilt/spilled", translation: "renverser" },
-            { infinitive: "spin", preterit: "spun", participle: "spun", translation: "tourner, filer" },
-            { infinitive: "spit", preterit: "spat", participle: "spat", translation: "cracher" },
-            { infinitive: "split", preterit: "split", participle: "split", translation: "fendre, diviser" },
-            { infinitive: "spread", preterit: "spread", participle: "spread", translation: "étaler, répandre" },
-            { infinitive: "spring", preterit: "sprang", participle: "sprung", translation: "bondir, jaillir" },
-            { infinitive: "stand", preterit: "stood", participle: "stood", translation: "être debout" },
-            { infinitive: "steal", preterit: "stole", participle: "stolen", translation: "voler (dérober)" },
-            { infinitive: "stick", preterit: "stuck", participle: "stuck", translation: "coller" },
-            { infinitive: "sting", preterit: "stung", participle: "stung", translation: "piquer" },
-            { infinitive: "stink", preterit: "stank", participle: "stunk", translation: "puer" },
-            { infinitive: "strike", preterit: "struck", participle: "struck/stricken", translation: "frapper" },
-            { infinitive: "strive", preterit: "strove", participle: "striven", translation: "s'efforcer" },
-            { infinitive: "swear", preterit: "swore", participle: "sworn", translation: "jurer" },
-            { infinitive: "sweep", preterit: "swept", participle: "swept", translation: "balayer" },
-            { infinitive: "swim", preterit: "swam", participle: "swum", translation: "nager" },
-            { infinitive: "swing", preterit: "swung", participle: "swung", translation: "balancer" },
-            { infinitive: "take", preterit: "took", participle: "taken", translation: "prendre" },
-            { infinitive: "teach", preterit: "taught", participle: "taught", translation: "enseigner" },
-            { infinitive: "tear", preterit: "tore", participle: "torn", translation: "déchirer" },
-            { infinitive: "tell", preterit: "told", participle: "told", translation: "dire, raconter" },
-            { infinitive: "think", preterit: "thought", participle: "thought", translation: "penser" },
-            { infinitive: "throw", preterit: "threw", participle: "thrown", translation: "jeter, lancer" },
-            { infinitive: "understand", preterit: "understood", participle: "understood", translation: "comprendre" },
-            { infinitive: "undertake", preterit: "undertook", participle: "undertaken", translation: "entreprendre" },
-            { infinitive: "wake", preterit: "woke", participle: "woken", translation: "réveiller" },
-            { infinitive: "wear", preterit: "wore", participle: "worn", translation: "porter (vêtement)" },
-            { infinitive: "weave", preterit: "wove", participle: "woven", translation: "tisser" },
-            { infinitive: "weep", preterit: "wept", participle: "wept", translation: "pleurer" },
-            { infinitive: "win", preterit: "won", participle: "won", translation: "gagner" },
-            { infinitive: "wind", preterit: "wound", participle: "wound", translation: "enrouler" },
-            { infinitive: "withdraw", preterit: "withdrew", participle: "withdrawn", translation: "retirer" },
-            { infinitive: "wring", preterit: "wrung", participle: "wrung", translation: "tordre" },
-            { infinitive: "write", preterit: "wrote", participle: "written", translation: "écrire" }
-        ];
-
-        // Variables globales
-        let currentVerb = null;
-
-        // Fonction pour obtenir un verbe aléatoire
-        function getRandomVerb() {
-            const randomIndex = Math.floor(Math.random() * irregularVerbs.length);
-            return irregularVerbs[randomIndex];
-        }
-
-        // Fonction pour afficher un nouveau verbe
-        function displayNewVerb() {
-            currentVerb = getRandomVerb();
-            document.getElementById('infinitive').value = currentVerb.infinitive;
-            document.getElementById('translation').value = currentVerb.translation;
-            document.getElementById('preterit').value = '';
-            document.getElementById('participle').value = '';
-            document.getElementById('result').style.display = 'none';
-        }
-
-        // Fonction pour vérifier les réponses
-        function checkAnswers() {
-            const userPreterit = document.getElementById('preterit').value.trim().toLowerCase();
-            const userParticiple = document.getElementById('participle').value.trim().toLowerCase();
-            const resultDiv = document.getElementById('result');
-            const feedbackDiv = resultDiv.querySelector('.feedback');
-            const correctionDiv = resultDiv.querySelector('.correction');
-            
-            // Vérifier si les réponses sont correctes
-            const correctPreterit = currentVerb.preterit.split('/').some(form => form.trim().toLowerCase() === userPreterit);
-            const correctParticiple = currentVerb.participle.split('/').some(form => form.trim().toLowerCase() === userParticiple);
-            
-            resultDiv.style.display = 'block';
-            
-            if (correctPreterit && correctParticiple) {
-                resultDiv.className = 'result correct';
-                feedbackDiv.textContent = 'Bravo ! Vos réponses sont correctes.';
-                correctionDiv.textContent = '';
-            } else {
-                resultDiv.className = 'result incorrect';
-                feedbackDiv.textContent = 'Il y a des erreurs dans vos réponses.';
-                correctionDiv.innerHTML = `
-                    <p>Les formes correctes sont :</p>
-                    <p>Prétérit : ${currentVerb.preterit}</p>
-                    <p>Participe passé : ${currentVerb.participle}</p>
-                `;
-            }
-        }
-
-        // Fonction pour générer la liste de référence des verbes
-        function generateVerbList() {
-            const verbListContainer = document.getElementById('verb-list');
-            verbListContainer.innerHTML = '';
-            
-            irregularVerbs.forEach(verb => {
-                const verbCard = document.createElement('div');
-                verbCard.className = 'verb-card';
-                verbCard.innerHTML = `
-                    <p class="infinitive">${verb.infinitive}</p>
-                    <p>Prétérit: ${verb.preterit}</p>
-                    <p>Participe passé: ${verb.participle}</p>
-                    <p>Traduction: ${verb.translation}</p>
-                `;
-                verbListContainer.appendChild(verbCard);
-            });
-        }
-        
-        // Fonction de recherche de verbes
-        function searchVerbs() {
-            const searchTerm = document.getElementById('search-box').value.toLowerCase();
-            const verbListContainer = document.getElementById('verb-list');
-            verbListContainer.innerHTML = '';
-            
-            const filteredVerbs = irregularVerbs.filter(verb => 
-                verb.infinitive.toLowerCase().includes(searchTerm) || 
-                verb.translation.toLowerCase().includes(searchTerm) ||
-                verb.preterit.toLowerCase().includes(searchTerm) ||
-                verb.participle.toLowerCase().includes(searchTerm)
-            );
-            
-            if (filteredVerbs.length === 0) {
-                verbListContainer.innerHTML = '<div class="verb-card">Aucun verbe trouvé.</div>';
-                return;
-            }
-            
-            filteredVerbs.forEach(verb => {
-                const verbCard = document.createElement('div');
-                verbCard.className = 'verb-card';
-                verbCard.innerHTML = `
-                    <p class="infinitive">${verb.infinitive}</p>
-                    <p>Prétérit: ${verb.preterit}</p>
-                    <p>Participe passé: ${verb.participle}</p>
-                    <p>Traduction: ${verb.translation}</p>
-                `;
-                verbListContainer.appendChild(verbCard);
-            });
-        }
-
-        // Initialisation de la page
-        window.onload = function() {
-            document.getElementById('check-btn').addEventListener('click', checkAnswers);
-            document.getElementById('next-btn').addEventListener('click', displayNewVerb);
-            document.getElementById('search-box').addEventListener('input', searchVerbs);
-            document.getElementById('reset-search').addEventListener('click', function() {
-                document.getElementById('search-box').value = '';
-                generateVerbList();
-            });
-            generateVerbList();
-            displayNewVerb();
-        };
-    </script>
-</body>
-</html>
+        // Base de données des questions
+        const questionDatabase = {
+            eco: [
+                {
+                    question: "Quelle est la définition des facteurs de production ?",
+                    options: [
+                        "Ensemble des moyens de production durables qui contribuent à la production d'une entreprise",
+                        "Ensemble des outils marketing utilisés par l'entreprise",
+                        "Ensemble des techniques de production",
+                        "Ensemble des machines utilisées dans le processus de production"
+                    ],
+                    correct: 0,
+                    explanation: "Les facteurs de production représentent l'ensemble des moyens de production durables qui contribuent à la production d'une entreprise."
+                },
+                {
+                    question: "Quels sont les deux facteurs de production principaux ?",
+                    options: [
+                        "Le capital et la terre",
+                        "Le travail et le capital",
+                        "L'entrepreneur et le salarié",
+                        "La technologie et la matière première"
+                    ],
+                    correct: 1,
+                    explanation: "Les deux facteurs de production principaux sont le facteur travail (ensemble de ménages qui travaillent en échange d'un salaire) et le facteur capital (ensemble des moyens de production matériel et immatériel)."
+                },
+                {
+                    question: "Qu'est-ce que le capital fixe ?",
+                    options: [
+                        "L'ensemble des biens dont la durée d'utilisation est longue (sur plusieurs années)",
+                        "L'argent disponible dans l'entreprise",
+                        "Les machines qui ne peuvent pas être déplacées",
+                        "L'ensemble des biens qui ne servent qu'une seule fois"
+                    ],
+                    correct: 0,
+                    explanation: "Le capital fixe est l'ensemble des biens dont la durée d'utilisation est longue, c'est-à-dire qu'ils sont utilisés sur plusieurs années."
+                },
+                {
+                    question: "Qu'est-ce que le capital circulant ?",
+                    options: [
+                        "L'argent qui circule dans l'entreprise",
+                        "Les stocks de produits finis",
+                        "L'ensemble des biens qui ne servent qu'une seule fois car transformés ou consommés",
+                        "Les fonds propres de l'entreprise"
+                    ],
+                    correct: 2,
+                    explanation: "Le capital circulant est l'ensemble des biens qui ne servent qu'une seule fois parce qu'ils sont transformés ou consommés dans le processus de production."
+                },
+                {
+                    question: "Qu'est-ce que la combinaison productive ?",
+                    options: [
+                        "La manière dont sont associés les facteurs de production",
+                        "L'ensemble des méthodes de production utilisées",
+                        "La façon de produire avec le moins de ressources possible",
+                        "La technique de production la plus rentable"
+                    ],
+                    correct: 0,
+                    explanation: "La combinaison productive est la manière dont sont associés les facteurs de production (travail et capital) dans le processus de production."
+                },
+                {
+                    question: "On dit que l'intensité capitalistique est forte lorsque :",
+                    options: [
+                        "La combinaison productive comprend une forte proportion de travail",
+                        "Le coût du capital est élevé",
+                        "La combinaison productive comprend une forte proportion de capital",
+                        "Les investissements sont importants mais temporaires"
+                    ],
+                    correct: 2,
+                    explanation: "On parle d'intensité capitalistique forte lorsque la combinaison productive comprend une forte proportion de capital par rapport au facteur travail."
+                },
+                {
+                    question: "Qu'est-ce que la productivité ?",
+                    options: [
+                        "La capacité à produire rapidement",
+                        "Le rapport entre ce qui a été produit et les ressources mises en œuvre pour obtenir cette production",
+                        "La mesure du nombre d'unités produites par heure",
+                        "La quantité maximale qu'une entreprise peut produire"
+                    ],
+                    correct: 1,
+                    explanation: "La productivité est le rapport entre ce qui a été produit et les ressources mises en œuvre pour obtenir cette production. Elle se calcule par la formule : Quantité produite / quantité de facteur utilisée."
+                },
+                {
+                    question: "Comment définit-on les gains de productivité ?",
+                    options: [
+                        "L'augmentation des ventes de l'entreprise",
+                        "L'amélioration de la productivité entre 2 dates",
+                        "La diminution des coûts de production",
+                        "L'augmentation des profits"
+                    ],
+                    correct: 1,
+                    explanation: "Les gains de productivité sont définis comme l'amélioration de la productivité entre 2 dates, ce qui permet un accroissement des revenus de l'entreprise du fait d'une moindre utilisation des facteurs de production."
+                },
+                {
+                    question: "Quelles sont les principales sources des gains de productivité ?",
+                    options: [
+                        "L'augmentation des prix et la réduction des salaires",
+                        "Le progrès technique et une meilleure organisation du travail",
+                        "La délocalisation et l'externalisation",
+                        "L'augmentation du temps de travail et la réduction des pauses"
+                    ],
+                    correct: 1,
+                    explanation: "Les deux principales sources des gains de productivité sont le progrès technique et une meilleure organisation du travail."
+                },
+                {
+                    question: "Comment distingue-t-on les coûts de production ?",
+                    options: [
+                        "Coûts internes et coûts externes",
+                        "Coûts directs et coûts indirects",
+                        "Coûts fixes et coûts variables",
+                        "Coûts immédiats et coûts différés"
+                    ],
+                    correct: 2,
+                    explanation: "On distingue deux types de coûts de production : les coûts fixes (sans lien avec les volumes de production) et les coûts variables (en lien avec les volumes de production)."
+                },
+                {
+                    question: "Qu'est-ce que le développement durable ?",
+                    options: [
+                        "La croissance constante de l'entreprise",
+                        "Organisation économique permettant de satisfaire les besoins actuels sans compromettre les générations futures à satisfaire les leurs",
+                        "Le développement technologique permanent",
+                        "La politique de développement sur le long terme de l'entreprise"
+                    ],
+                    correct: 1,
+                    explanation: "Le développement durable est une organisation économique permettant de satisfaire les besoins actuels sans compromettre la capacité des générations futures à satisfaire les leurs."
+                },
+                {
+                    question: "Qu'est-ce que l'impartition selon le chapitre 9 ?",
+                    options: [
+                        "La répartition des tâches entre les salariés",
+                        "La division de l'entreprise en plusieurs départements",
+                        "Stratégie visant à confier à des prestataires extérieurs des biens ou des services au lieu de les produire soi-même",
+                        "La répartition des bénéfices entre les actionnaires"
+                    ],
+                    correct: 2,
+                    explanation: "L'impartition est une stratégie visant à confier à des prestataires extérieurs des biens ou des services au lieu de les produire soi-même, fondée sur la notion de chaîne de valeur."
+                },
+                {
+                    question: "Selon le concept de la chaîne de valeur de Michael Porter, quelles sont les activités qui devraient être maintenues au sein de l'entreprise ?",
+                    options: [
+                        "Les activités les moins coûteuses",
+                        "Les activités qui créent de la valeur pour le client",
+                        "Les activités traditionnelles",
+                        "Les activités les plus simples à réaliser"
+                    ],
+                    correct: 1,
+                    explanation: "Selon Porter, il faut identifier les activités qui créent de la valeur pour le client pour les maintenir au sein de l'entreprise, et externaliser celles qui créent peu ou détruisent de la valeur."
+                },
+                {
+                    question: "Quelles sont les fonctions régaliennes de l'État ?",
+                    options: [
+                        "La santé, l'éducation, la culture, les transports, le logement",
+                        "La diplomatie, l'armée, la police, la justice, la monnaie",
+                        "La redistribution, l'allocation et la stabilisation",
+                        "La régulation économique, l'aide sociale et l'emploi"
+                    ],
+                    correct: 1,
+                    explanation: "Les fonctions régaliennes de l'État sont les fonctions qui appartiennent à tout État du fait de sa nature juridique : la diplomatie, l'armée, la police, la justice et la monnaie."
+                },
+                {
+                    question: "Quelles sont les trois fonctions économiques de l'État ?",
+                    options: [
+                        "La production, la distribution et la consommation",
+                        "La régulation, la redistribution et l'allocation",
+                        "La fonction d'allocation, la fonction de redistribution et la fonction de stabilisation",
+                        "La planification, l'orientation et le contrôle"
+                    ],
+                    correct: 2,
+                    explanation: "Les trois fonctions économiques de l'État sont la fonction d'allocation, la fonction de redistribution et la fonction de stabilisation (ou régulation)."
+                },
+                {
+                    question: "Comment mesure-t-on la croissance économique ?",
+                    options: [
+                        "Par l'évolution du taux de chômage",
+                        "Par l'évolution du PIB",
+                        "Par l'évolution de la balance commerciale",
+                        "Par l'évolution du pouvoir d'achat"
+                    ],
+                    correct: 1,
+                    explanation: "La croissance économique se mesure par l'évolution du PIB (Produit Intérieur Brut), qui est la somme des valeurs ajoutées créées par toutes les entreprises sur le territoire."
+                },
+                {
+                    question: "Quels sont les 4 objectifs de la politique conjoncturelle ?",
+                    options: [
+                        "Croissance, plein emploi, stabilité des prix et équilibre du commerce extérieur",
+                        "Innovation, compétitivité, productivité et flexibilité",
+                        "Redistribution, régulation, allocation et imposition",
+                        "Développement durable, inclusion sociale, lutte contre les inégalités et transition énergétique"
+                    ],
+                    correct: 0,
+                    explanation: "Les 4 objectifs de la politique conjoncturelle sont la croissance économique (mesurée par le PIB), la stabilité des prix (taux d'inflation), l'équilibre du commerce extérieur (balance des transactions courantes) et le plein emploi (taux de chômage)."
+                },
+                {
+                    question: "Qu'est-ce qu'une politique de relance ?",
+                    options: [
+                        "Politique visant à freiner la croissance en cas de risque d'inflation importante",
+                        "Politique visant à stimuler l'activité économique en cas de chômage ou de faible croissance",
+                        "Politique alternant entre stimulation et freinage de l'économie",
+                        "Politique visant à équilibrer le budget de l'État"
+                    ],
+                    correct: 1,
+                    explanation: "Une politique de relance est une politique conjoncturelle visant à stimuler l'activité économique en cas de chômage ou de faible croissance."
+                },
+                {
+                    question: "Qu'est-ce qu'une politique de l'offre ?",
+                    options: [
+                        "Mesures visant à améliorer la compétitivité des entreprises pour relancer l'investissement privé et l'emploi",
+                        "Mesures visant à augmenter la demande globale et l'investissement public",
+                        "Politique monétaire menée par la banque centrale",
+                        "Politique de réduction des déficits publics"
+                    ],
+                    correct: 0,
+                    explanation: "Une politique de l'offre comprend des mesures visant à améliorer la compétitivité des entreprises pour relancer l'investissement privé et l'emploi, notamment par la baisse des prélèvements et la flexibilité du marché du travail."
+                },
+                {
+                    question: "Quelles sont les règles budgétaires liées au pacte de stabilité européen ?",
+                    options: [
+                        "Déficit public < 3% du PIB et endettement < 60% du PIB",
+                        "Inflation < 2% et croissance > 2%",
+                        "Chômage < 5% et balance commerciale équilibrée",
+                        "Dépenses publiques < 50% du PIB et impôts < 45% du PIB"
+                    ],
+                    correct: 0,
+                    explanation: "Les deux principes du pacte de stabilité sont : un déficit public inférieur à 3% du PIB et un endettement inférieur à 60% du PIB."
+                },
+                {
+                    question: "Comment est définie l'activité économique ?",
+                    options: [
+                        "Production des richesses uniquement matérielles",
+                        "Activité humaine visant à produire des ressources pour satisfaire des besoins",
+                        "Ensemble des échanges monétaires entre particuliers",
+                        "Système d'échanges organisé par l'État"
+                    ],
+                    correct: 1,
+                    explanation: "L'économie est définie comme une activité humaine visant à produire des ressources pour satisfaire des besoins, ce qui entraîne le développement des échanges entre les agents économiques selon un calcul économique."
+                },
+                {
+                    question: "Quelle est la différence entre une économie fermée et une économie ouverte ?",
+                    options: [
+                        "Une économie fermée est en récession, une économie ouverte est en croissance",
+                        "Une économie fermée a des échanges exclusivement entre les agents du pays, une économie ouverte développe le commerce international",
+                        "Une économie fermée est dirigée par l'État, une économie ouverte est libérale",
+                        "Une économie fermée utilise une monnaie unique, une économie ouverte accepte plusieurs devises"
+                    ],
+                    correct: 1,
+                    explanation: "Une économie fermée est un modèle dans lequel les échanges sont réalisés exclusivement entre les agents du pays, tandis qu'une économie ouverte repose sur le développement du commerce international en complément des échanges nationaux."
+                },
+                {
+                    question: "Quels sont les deux types de flux entre les agents économiques ?",
+                    options: [
+                        "Les flux publics et les flux privés",
+                        "Les flux nationaux et les flux internationaux",
+                        "Les flux monétaires et les flux réels",
+                        "Les flux directs et les flux indirects"
+                    ],
+                    correct: 2,
+                    explanation: "Les deux types de flux entre les agents économiques sont les flux monétaires (échanges de monnaie) et les flux réels (échanges de biens ou services)."
+                },
+                {
+                    question: "Qu'est-ce que la coopétition ?",
+                    options: [
+                        "La concurrence entre les entreprises d'un même secteur",
+                        "La coopération entre l'État et les entreprises",
+                        "Des entreprises concurrentes qui travaillent ensemble",
+                        "La compétition internationale entre les États"
+                    ],
+                    correct: 2,
+                    explanation: "La coopétition est une situation où des entreprises concurrentes travaillent ensemble. Elle est autorisée sauf si elle a pour effet de détourner le jeu de la concurrence et de manipuler les informations pour tronquer le choix des agents."
+                },
+                {
+                    question: "Qu'est-ce qu'un marché en économie ?",
+                    options: [
+                        "Un lieu physique où s'achètent et se vendent des produits",
+                        "Un ensemble de magasins dans une zone géographique",
+                        "Lieu réel ou virtuel où se rencontrent l'offre et la demande en vue d'un échange",
+                        "Un système de distribution organisé par l'État"
+                    ],
+                    correct: 2,
+                    explanation: "Un marché est un lieu réel ou virtuel où se rencontrent l'offre et la demande en vue d'un échange. Le type de marché est défini en fonction du bien ou du service échangé."
+                },
+                {
+                    question: "Qu'est-ce qu'un marché en situation de monopole ?",
+                    options: [
+                        "Marché sur lequel une multitude d'offreurs font face à une multitude de demandeurs",
+                        "Marché sur lequel quelques offreurs font face à une multitude de demandeurs",
+                        "Marché sur lequel un seul offreur fait face à une multitude de demandeurs",
+                        "Marché sur lequel un seul demandeur fait face à une multitude d'offreurs"
+                    ],
+                    correct: 2,
+                    explanation: "Un monopole est un marché sur lequel un seul offreur doit faire face à une multitude de demandeurs, ce qui peut entraîner un retard sur l'innovation et des prix élevés (notion de 'price maker')."
+                },
+                {
+                    question: "Quelles sont les caractéristiques d'un marché en concurrence pure et parfaite ?",
+                    options: [
+                        "Un seul vendeur, prix élevés, absence d'innovation",
+                        "Quelques vendeurs, ententes sur les prix, peu d'innovation",
+                        "Atomicité, homogénéité du produit, libre entrée/sortie, transparence de l'information, libre circulation des facteurs",
+                        "Contrôle de l'État, prix fixes, production planifiée"
+                    ],
+                    correct: 2,
+                    explanation: "Un marché en concurrence pure et parfaite présente 5 caractéristiques : atomicité du marché, homogénéité du produit, libre entrée et sortie du marché, transparence de l'information et libre circulation des facteurs de production."
+                },
+                {
+                    question: "Qu'est-ce qu'une externalité en économie ?",
+                    options: [
+                        "Un échange commercial avec un pays étranger",
+                        "Un coût supplémentaire lié à l'importation",
+                        "Effet de l'action d'un agent sur la situation d'un autre agent sans compensation",
+                        "Une taxe imposée par l'État sur certains produits"
+                    ],
+                    correct: 2,
+                    explanation: "Une externalité est l'effet de l'action d'un agent économique sur la situation d'un autre agent sans que ce dernier ne paie ou ne reçoive une compensation."
+                }
+            ],
+            jur: [
+                {
+                    question: "Qu'est-ce qu'une situation précontractuelle ?",
+                    options: [
+                        "Une phase où les parties préparent les documents nécessaires au contrat",
+                        "Une période durant laquelle les parties négocient afin d'aboutir à un accord",
+                        "Un engagement légal précédant la signature officielle",
+                        "Une phase d'étude de marché avant de proposer un contrat"
+                    ],
+                    correct: 1,
+                    explanation: "Une situation précontractuelle est une période durant laquelle les
