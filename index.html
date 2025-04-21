@@ -819,3 +819,47 @@
                     <div class="option"><input type="radio" name="q55" value="c"> Technique de motivation des salariés</div>
                 </div>
                 <button onclick="checkAnswer('q55', 'a', 'La démarche managériale est la capacité à gérer les ressources de l\'entreprise (humaines, financières, matérielles) de manière optimale pour développer et assurer sa pérennité.')">Vérifier</
+<script>
+    function checkAnswer(questionId, correctAnswer, explanation) {
+        const selectedOption = document.querySelector(`input[name="${questionId}"]:checked`);
+        const resultDiv = document.getElementById(`result-${questionId}`);
+        
+        if (!selectedOption) {
+            resultDiv.textContent = "Veuillez sélectionner une réponse.";
+            resultDiv.className = "result incorrect";
+            resultDiv.style.display = "block";
+            return;
+        }
+
+        const userAnswer = selectedOption.value;
+        
+        if (userAnswer === correctAnswer) {
+            resultDiv.innerHTML = `<span class="correct">Correct!</span> <div class="explanation">${explanation}</div>`;
+            resultDiv.className = "result correct";
+        } else {
+            resultDiv.innerHTML = `<span class="incorrect">Incorrect. La bonne réponse était ${correctAnswer.toUpperCase()}.</span> <div class="explanation">${explanation}</div>`;
+            resultDiv.className = "result incorrect";
+        }
+        
+        resultDiv.style.display = "block";
+    }
+
+    function openTab(tabName) {
+        // Cache tous les contenus d'onglets
+        const tabContents = document.getElementsByClassName("tab-content");
+        for (let i = 0; i < tabContents.length; i++) {
+            tabContents[i].classList.remove("active");
+        }
+
+        // Désactive tous les onglets
+        const tabs = document.getElementsByClassName("tab");
+        for (let i = 0; i < tabs.length; i++) {
+            tabs[i].classList.remove("active");
+        }
+
+        // Active l'onglet sélectionné
+        document.getElementById(tabName).classList.add("active");
+        event.currentTarget.classList.add("active");
+    }
+</script>
+</body>
