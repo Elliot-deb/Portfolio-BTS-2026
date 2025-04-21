@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz de révision CEJM - BTS</title>
+    <title>Révisions CEJM BTS - Quiz Interactifs</title>
     <style>
         :root {
             --primary: #3498db;
-            --secondary: #2980b9;
+            --secondary: #2c3e50;
             --success: #2ecc71;
             --danger: #e74c3c;
             --warning: #f39c12;
@@ -19,269 +19,295 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            background-color: #f0f2f5;
             color: #333;
-            background-color: #f4f7f9;
-            padding-bottom: 50px;
+            line-height: 1.6;
         }
         
         header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 20px 0;
+            padding: 1.5rem;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
         }
         
         header p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             opacity: 0.9;
         }
         
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
         }
         
-        .btn {
-            display: inline-block;
-            background-color: var(--primary);
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            margin: 5px;
-        }
-        
-        .btn:hover {
-            background-color: var(--secondary);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        
-        .btn-success {
-            background-color: var(--success);
-        }
-        
-        .btn-success:hover {
-            background-color: #27ae60;
-        }
-        
-        .btn-danger {
-            background-color: var(--danger);
-        }
-        
-        .btn-danger:hover {
-            background-color: #c0392b;
-        }
-        
-        .btn-warning {
-            background-color: var(--warning);
-        }
-        
-        .btn-warning:hover {
-            background-color: #e67e22;
-        }
-        
-        #menu {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin: 30px 0;
-            text-align: center;
-        }
-        
-        .menu-btn {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        
-        .menu-btn:hover {
-            background-color: var(--light);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .menu-btn-eco {
-            border-left: 5px solid #3498db;
-        }
-        
-        .menu-btn-jur {
-            border-left: 5px solid #e74c3c;
-        }
-        
-        .menu-btn-man {
-            border-left: 5px solid #2ecc71;
-        }
-        
-        .menu-btn-all {
-            border-left: 5px solid #f39c12;
-        }
-        
-        section {
+        nav {
             background-color: white;
             border-radius: 10px;
-            padding: 30px;
-            margin: 30px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
         
-        h2 {
-            color: var(--dark);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #eee;
+        .themes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+        
+        .theme-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .theme-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
         }
         
         .quiz-container {
-            display: none;
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
         }
         
         .quiz-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
         }
         
-        .quiz-header .progress {
+        .question-counter {
             font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--dark);
-        }
-        
-        .quiz-header .score {
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-weight: 500;
             color: var(--primary);
         }
         
-        .question-container {
-            margin-bottom: 25px;
+        .score-container {
+            font-size: 1.1rem;
+            font-weight: 500;
         }
         
         .question {
             font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
         }
         
         .options {
-            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
         
         .option {
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
+            background-color: var(--light);
+            padding: 1rem;
             border-radius: 5px;
-            padding: 12px 15px;
-            margin-bottom: 10px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
+            border: 2px solid transparent;
         }
         
         .option:hover {
-            background-color: #e9ecef;
+            background-color: #e9f5fe;
+            border-color: #a7d2f3;
         }
         
         .option.selected {
-            background-color: rgba(52, 152, 219, 0.2);
+            background-color: #d6ebff;
             border-color: var(--primary);
         }
         
         .option.correct {
-            background-color: rgba(46, 204, 113, 0.2);
+            background-color: #d4edda;
             border-color: var(--success);
         }
         
         .option.incorrect {
-            background-color: rgba(231, 76, 60, 0.2);
+            background-color: #f8d7da;
             border-color: var(--danger);
         }
         
+        .feedback {
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+        
+        .feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
         .explanation {
-            background-color: #f8f9fa;
-            border-left: 4px solid var(--primary);
-            padding: 10px 15px;
-            margin-top: 15px;
-            font-size: 0.95rem;
+            background-color: #e9f5fe;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
             display: none;
         }
         
         .controls {
             display: flex;
             justify-content: space-between;
-            margin-top: 30px;
+            margin-top: 2rem;
         }
         
-        .results-container {
+        button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .check-btn {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .check-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .next-btn {
+            background-color: var(--secondary);
+            color: white;
+            display: none;
+        }
+        
+        .next-btn:hover {
+            background-color: #1a252f;
+        }
+        
+        .progress-container {
+            height: 10px;
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .results {
             text-align: center;
             display: none;
         }
         
-        .results-container h3 {
+        .results h2 {
             font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .results p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
         }
         
         .results-score {
             font-size: 3rem;
-            font-weight: 700;
+            font-weight: bold;
             color: var(--primary);
-            margin: 20px 0;
+            margin: 1rem 0;
         }
         
-        .score-message {
-            font-size: 1.2rem;
-            margin-bottom: 25px;
+        .restart-btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
         }
         
-        .results-actions {
-            margin-top: 25px;
+        .restart-btn:hover {
+            background-color: #2980b9;
         }
-        
-        footer {
+
+        .start-screen {
             text-align: center;
-            padding: 20px 0;
-            margin-top: 50px;
-            color: #777;
-            font-size: 0.9rem;
+            padding: 2rem;
+        }
+
+        .start-screen h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .start-screen p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .start-btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            border-radius: 30px;
+        }
+
+        .start-btn:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
         }
         
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 2rem;
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 0.5rem;
+            }
+            
+            .quiz-container {
+                padding: 1.5rem 1rem;
             }
             
             .controls {
                 flex-direction: column;
-                gap: 10px;
+                gap: 1rem;
             }
             
-            .btn {
+            button {
                 width: 100%;
             }
         }
@@ -289,378 +315,354 @@
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1>Quiz de révision CEJM</h1>
-            <p>Testez vos connaissances en Culture Économique, Juridique et Managériale</p>
-        </div>
+        <h1>Révisions CEJM BTS</h1>
+        <p>Culture Économique, Juridique et Managériale</p>
     </header>
     
     <div class="container">
-        <section id="menu">
-            <h2>Choisissez votre thème de révision</h2>
-            <button class="menu-btn menu-btn-eco" onclick="startQuiz('eco')">Approche Économique</button>
-            <button class="menu-btn menu-btn-jur" onclick="startQuiz('jur')">Approche Juridique</button>
-            <button class="menu-btn menu-btn-man" onclick="startQuiz('man')">Approche Managériale</button>
-            <button class="menu-btn menu-btn-all" onclick="startQuiz('all')">Mode Examen (Tous les thèmes)</button>
-        </section>
-        
-        <section class="quiz-container" id="quiz-container">
-            <div class="quiz-header">
-                <div class="progress">Question <span id="current-question">1</span>/<span id="total-questions">10</span></div>
-                <div class="score">Score: <span id="score">0</span></div>
+        <nav>
+            <h3>Sélectionnez un thème :</h3>
+            <div class="themes">
+                <button class="theme-btn" data-theme="economie">Économie</button>
+                <button class="theme-btn" data-theme="juridique">Juridique</button>
+                <button class="theme-btn" data-theme="management">Management</button>
+                <button class="theme-btn" data-theme="all">Tous les thèmes</button>
             </div>
-            
-            <div class="question-container">
-                <div class="question" id="question-text">Chargement de la question...</div>
-                <ul class="options" id="options-list"></ul>
+        </nav>
+        
+        <div class="quiz-container">
+            <div class="start-screen">
+                <h2>Bienvenue dans votre outil de révision CEJM</h2>
+                <p>Ce quiz interactif vous permettra de tester vos connaissances sur les différents concepts de Culture Économique, Juridique et Managériale du BTS. Sélectionnez un thème ci-dessus ou commencez par un quiz général.</p>
+                <button class="start-btn">Commencer</button>
+            </div>
+
+            <div id="quiz" style="display: none;">
+                <div class="quiz-header">
+                    <div class="question-counter">Question <span id="current-question">1</span>/<span id="total-questions">10</span></div>
+                    <div class="score-container">Score: <span id="score">0</span></div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
+                </div>
+                
+                <div class="question-container">
+                    <div class="question" id="question-text">Question will appear here</div>
+                    <div class="options" id="options-container">
+                        <!-- Options will be inserted here by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="feedback" id="feedback"></div>
                 <div class="explanation" id="explanation"></div>
+                
+                <div class="controls">
+                    <button class="check-btn" id="check-btn">Vérifier</button>
+                    <button class="next-btn" id="next-btn">Question suivante</button>
+                </div>
             </div>
             
-            <div class="controls">
-                <button class="btn btn-warning" id="hint-btn" onclick="showExplanation()">Indice</button>
-                <button class="btn" id="next-btn" onclick="nextQuestion()" disabled>Question suivante</button>
+            <div class="results" id="results">
+                <h2>Quiz terminé !</h2>
+                <p>Votre score final est :</p>
+                <div class="results-score"><span id="final-score">0</span>/<span id="final-total">0</span></div>
+                <p id="performance-text">Performance text will appear here</p>
+                <button class="restart-btn" id="restart-btn">Recommencer</button>
             </div>
-        </section>
-        
-        <section class="results-container" id="results-container">
-            <h3>Résultats du quiz</h3>
-            <div class="results-score"><span id="final-score">0</span>/<span id="max-score">10</span></div>
-            <div class="score-message" id="score-message">Chargement de votre évaluation...</div>
-            
-            <div class="results-actions">
-                <button class="btn btn-success" onclick="retryQuiz()">Recommencer ce quiz</button>
-                <button class="btn" onclick="backToMenu()">Retour au menu</button>
-            </div>
-        </section>
+        </div>
     </div>
     
-    <footer>
-        <div class="container">
-            <p>Quiz de révision CEJM pour BTS - Développé pour faciliter vos révisions</p>
-        </div>
-    </footer>
-
     <script>
-        // Base de données des questions
-        const questionDatabase = {
-            eco: [
+        // Quiz data
+        const quizData = {
+            economie: [
                 {
-                    question: "Quelle est la définition des facteurs de production ?",
+                    question: "Qu'est-ce que la politique conjoncturelle ?",
                     options: [
-                        "Ensemble des moyens de production durables qui contribuent à la production d'une entreprise",
-                        "Ensemble des outils marketing utilisés par l'entreprise",
-                        "Ensemble des techniques de production",
-                        "Ensemble des machines utilisées dans le processus de production"
+                        "Une politique visant à transformer le système économique",
+                        "Une politique visant à réguler l'économie à court terme",
+                        "Une politique visant à améliorer la compétitivité des entreprises",
+                        "Une politique visant à augmenter la demande globale"
                     ],
-                    correct: 0,
-                    explanation: "Les facteurs de production représentent l'ensemble des moyens de production durables qui contribuent à la production d'une entreprise."
+                    correctIndex: 1,
+                    explanation: "Les politiques conjoncturelles sont des politiques visant à réguler l'économie à court terme, par opposition aux politiques structurelles qui visent à transformer le système économique."
                 },
                 {
-                    question: "Quels sont les deux facteurs de production principaux ?",
+                    question: "Quels sont les quatre objectifs de la politique conjoncturelle selon le 'carré magique' ?",
                     options: [
-                        "Le capital et la terre",
-                        "Le travail et le capital",
-                        "L'entrepreneur et le salarié",
-                        "La technologie et la matière première"
+                        "Croissance économique, plein emploi, stabilité des prix, équilibre du commerce extérieur",
+                        "Innovation, compétitivité, productivité, rentabilité",
+                        "Redistribution, allocation, stabilisation, régulation",
+                        "Offre, demande, prix, quantité"
                     ],
-                    correct: 1,
-                    explanation: "Les deux facteurs de production principaux sont le facteur travail (ensemble de ménages qui travaillent en échange d'un salaire) et le facteur capital (ensemble des moyens de production matériel et immatériel)."
+                    correctIndex: 0,
+                    explanation: "Le 'carré magique' représente graphiquement les quatre objectifs de la politique conjoncturelle: la croissance économique (mesurée par le PIB), le plein emploi (taux de chômage), la stabilité des prix (taux d'inflation) et l'équilibre du commerce extérieur."
                 },
                 {
-                    question: "Qu'est-ce que le capital fixe ?",
+                    question: "Comment est mesurée la croissance économique nationale ?",
                     options: [
-                        "L'ensemble des biens dont la durée d'utilisation est longue (sur plusieurs années)",
-                        "L'argent disponible dans l'entreprise",
-                        "Les machines qui ne peuvent pas être déplacées",
-                        "L'ensemble des biens qui ne servent qu'une seule fois"
+                        "Par le taux d'inflation",
+                        "Par l'IDH (Indice de Développement Humain)",
+                        "Par le PIB (Produit Intérieur Brut)",
+                        "Par la balance commerciale"
                     ],
-                    correct: 0,
-                    explanation: "Le capital fixe est l'ensemble des biens dont la durée d'utilisation est longue, c'est-à-dire qu'ils sont utilisés sur plusieurs années."
+                    correctIndex: 2,
+                    explanation: "La croissance économique nationale est mesurée par le PIB (Produit Intérieur Brut), qui est la somme des valeurs ajoutées créées par toutes les entreprises sur le territoire."
                 },
                 {
-                    question: "Qu'est-ce que le capital circulant ?",
+                    question: "Qu'est-ce que la politique de l'offre ?",
                     options: [
-                        "L'argent qui circule dans l'entreprise",
-                        "Les stocks de produits finis",
-                        "L'ensemble des biens qui ne servent qu'une seule fois car transformés ou consommés",
-                        "Les fonds propres de l'entreprise"
-                    ],
-                    correct: 2,
-                    explanation: "Le capital circulant est l'ensemble des biens qui ne servent qu'une seule fois parce qu'ils sont transformés ou consommés dans le processus de production."
-                },
-                {
-                    question: "Qu'est-ce que la combinaison productive ?",
-                    options: [
-                        "La manière dont sont associés les facteurs de production",
-                        "L'ensemble des méthodes de production utilisées",
-                        "La façon de produire avec le moins de ressources possible",
-                        "La technique de production la plus rentable"
-                    ],
-                    correct: 0,
-                    explanation: "La combinaison productive est la manière dont sont associés les facteurs de production (travail et capital) dans le processus de production."
-                },
-                {
-                    question: "On dit que l'intensité capitalistique est forte lorsque :",
-                    options: [
-                        "La combinaison productive comprend une forte proportion de travail",
-                        "Le coût du capital est élevé",
-                        "La combinaison productive comprend une forte proportion de capital",
-                        "Les investissements sont importants mais temporaires"
-                    ],
-                    correct: 2,
-                    explanation: "On parle d'intensité capitalistique forte lorsque la combinaison productive comprend une forte proportion de capital par rapport au facteur travail."
-                },
-                {
-                    question: "Qu'est-ce que la productivité ?",
-                    options: [
-                        "La capacité à produire rapidement",
-                        "Le rapport entre ce qui a été produit et les ressources mises en œuvre pour obtenir cette production",
-                        "La mesure du nombre d'unités produites par heure",
-                        "La quantité maximale qu'une entreprise peut produire"
-                    ],
-                    correct: 1,
-                    explanation: "La productivité est le rapport entre ce qui a été produit et les ressources mises en œuvre pour obtenir cette production. Elle se calcule par la formule : Quantité produite / quantité de facteur utilisée."
-                },
-                {
-                    question: "Comment définit-on les gains de productivité ?",
-                    options: [
-                        "L'augmentation des ventes de l'entreprise",
-                        "L'amélioration de la productivité entre 2 dates",
-                        "La diminution des coûts de production",
-                        "L'augmentation des profits"
-                    ],
-                    correct: 1,
-                    explanation: "Les gains de productivité sont définis comme l'amélioration de la productivité entre 2 dates, ce qui permet un accroissement des revenus de l'entreprise du fait d'une moindre utilisation des facteurs de production."
-                },
-                {
-                    question: "Quelles sont les principales sources des gains de productivité ?",
-                    options: [
-                        "L'augmentation des prix et la réduction des salaires",
-                        "Le progrès technique et une meilleure organisation du travail",
-                        "La délocalisation et l'externalisation",
-                        "L'augmentation du temps de travail et la réduction des pauses"
-                    ],
-                    correct: 1,
-                    explanation: "Les deux principales sources des gains de productivité sont le progrès technique et une meilleure organisation du travail."
-                },
-                {
-                    question: "Comment distingue-t-on les coûts de production ?",
-                    options: [
-                        "Coûts internes et coûts externes",
-                        "Coûts directs et coûts indirects",
-                        "Coûts fixes et coûts variables",
-                        "Coûts immédiats et coûts différés"
-                    ],
-                    correct: 2,
-                    explanation: "On distingue deux types de coûts de production : les coûts fixes (sans lien avec les volumes de production) et les coûts variables (en lien avec les volumes de production)."
-                },
-                {
-                    question: "Qu'est-ce que le développement durable ?",
-                    options: [
-                        "La croissance constante de l'entreprise",
-                        "Organisation économique permettant de satisfaire les besoins actuels sans compromettre les générations futures à satisfaire les leurs",
-                        "Le développement technologique permanent",
-                        "La politique de développement sur le long terme de l'entreprise"
-                    ],
-                    correct: 1,
-                    explanation: "Le développement durable est une organisation économique permettant de satisfaire les besoins actuels sans compromettre la capacité des générations futures à satisfaire les leurs."
-                },
-                {
-                    question: "Qu'est-ce que l'impartition selon le chapitre 9 ?",
-                    options: [
-                        "La répartition des tâches entre les salariés",
-                        "La division de l'entreprise en plusieurs départements",
-                        "Stratégie visant à confier à des prestataires extérieurs des biens ou des services au lieu de les produire soi-même",
-                        "La répartition des bénéfices entre les actionnaires"
-                    ],
-                    correct: 2,
-                    explanation: "L'impartition est une stratégie visant à confier à des prestataires extérieurs des biens ou des services au lieu de les produire soi-même, fondée sur la notion de chaîne de valeur."
-                },
-                {
-                    question: "Selon le concept de la chaîne de valeur de Michael Porter, quelles sont les activités qui devraient être maintenues au sein de l'entreprise ?",
-                    options: [
-                        "Les activités les moins coûteuses",
-                        "Les activités qui créent de la valeur pour le client",
-                        "Les activités traditionnelles",
-                        "Les activités les plus simples à réaliser"
-                    ],
-                    correct: 1,
-                    explanation: "Selon Porter, il faut identifier les activités qui créent de la valeur pour le client pour les maintenir au sein de l'entreprise, et externaliser celles qui créent peu ou détruisent de la valeur."
-                },
-                {
-                    question: "Quelles sont les fonctions régaliennes de l'État ?",
-                    options: [
-                        "La santé, l'éducation, la culture, les transports, le logement",
-                        "La diplomatie, l'armée, la police, la justice, la monnaie",
-                        "La redistribution, l'allocation et la stabilisation",
-                        "La régulation économique, l'aide sociale et l'emploi"
-                    ],
-                    correct: 1,
-                    explanation: "Les fonctions régaliennes de l'État sont les fonctions qui appartiennent à tout État du fait de sa nature juridique : la diplomatie, l'armée, la police, la justice et la monnaie."
-                },
-                {
-                    question: "Quelles sont les trois fonctions économiques de l'État ?",
-                    options: [
-                        "La production, la distribution et la consommation",
-                        "La régulation, la redistribution et l'allocation",
-                        "La fonction d'allocation, la fonction de redistribution et la fonction de stabilisation",
-                        "La planification, l'orientation et le contrôle"
-                    ],
-                    correct: 2,
-                    explanation: "Les trois fonctions économiques de l'État sont la fonction d'allocation, la fonction de redistribution et la fonction de stabilisation (ou régulation)."
-                },
-                {
-                    question: "Comment mesure-t-on la croissance économique ?",
-                    options: [
-                        "Par l'évolution du taux de chômage",
-                        "Par l'évolution du PIB",
-                        "Par l'évolution de la balance commerciale",
-                        "Par l'évolution du pouvoir d'achat"
-                    ],
-                    correct: 1,
-                    explanation: "La croissance économique se mesure par l'évolution du PIB (Produit Intérieur Brut), qui est la somme des valeurs ajoutées créées par toutes les entreprises sur le territoire."
-                },
-                {
-                    question: "Quels sont les 4 objectifs de la politique conjoncturelle ?",
-                    options: [
-                        "Croissance, plein emploi, stabilité des prix et équilibre du commerce extérieur",
-                        "Innovation, compétitivité, productivité et flexibilité",
-                        "Redistribution, régulation, allocation et imposition",
-                        "Développement durable, inclusion sociale, lutte contre les inégalités et transition énergétique"
-                    ],
-                    correct: 0,
-                    explanation: "Les 4 objectifs de la politique conjoncturelle sont la croissance économique (mesurée par le PIB), la stabilité des prix (taux d'inflation), l'équilibre du commerce extérieur (balance des transactions courantes) et le plein emploi (taux de chômage)."
-                },
-                {
-                    question: "Qu'est-ce qu'une politique de relance ?",
-                    options: [
-                        "Politique visant à freiner la croissance en cas de risque d'inflation importante",
-                        "Politique visant à stimuler l'activité économique en cas de chômage ou de faible croissance",
-                        "Politique alternant entre stimulation et freinage de l'économie",
-                        "Politique visant à équilibrer le budget de l'État"
-                    ],
-                    correct: 1,
-                    explanation: "Une politique de relance est une politique conjoncturelle visant à stimuler l'activité économique en cas de chômage ou de faible croissance."
-                },
-                {
-                    question: "Qu'est-ce qu'une politique de l'offre ?",
-                    options: [
+                        "Mesures visant à augmenter la consommation des ménages",
                         "Mesures visant à améliorer la compétitivité des entreprises pour relancer l'investissement privé et l'emploi",
-                        "Mesures visant à augmenter la demande globale et l'investissement public",
-                        "Politique monétaire menée par la banque centrale",
-                        "Politique de réduction des déficits publics"
+                        "Mesures visant à réduire les importations",
+                        "Mesures visant à augmenter les dépenses publiques"
                     ],
-                    correct: 0,
-                    explanation: "Une politique de l'offre comprend des mesures visant à améliorer la compétitivité des entreprises pour relancer l'investissement privé et l'emploi, notamment par la baisse des prélèvements et la flexibilité du marché du travail."
+                    correctIndex: 1,
+                    explanation: "La politique de l'offre comprend des mesures visant à améliorer la compétitivité des entreprises pour relancer l'investissement privé et l'emploi, notamment par la baisse des prélèvements et la flexibilité du marché du travail."
                 },
                 {
-                    question: "Quelles sont les règles budgétaires liées au pacte de stabilité européen ?",
+                    question: "Quelles sont les fonctions économiques de l'État ?",
                     options: [
-                        "Déficit public < 3% du PIB et endettement < 60% du PIB",
-                        "Inflation < 2% et croissance > 2%",
-                        "Chômage < 5% et balance commerciale équilibrée",
-                        "Dépenses publiques < 50% du PIB et impôts < 45% du PIB"
+                        "Diplomatie, armée, police, justice, monnaie",
+                        "Législative, exécutive, judiciaire",
+                        "Allocation, redistribution, stabilisation (ou régulation)",
+                        "Production, consommation, épargne, investissement"
                     ],
-                    correct: 0,
-                    explanation: "Les deux principes du pacte de stabilité sont : un déficit public inférieur à 3% du PIB et un endettement inférieur à 60% du PIB."
-                },
-                {
-                    question: "Comment est définie l'activité économique ?",
-                    options: [
-                        "Production des richesses uniquement matérielles",
-                        "Activité humaine visant à produire des ressources pour satisfaire des besoins",
-                        "Ensemble des échanges monétaires entre particuliers",
-                        "Système d'échanges organisé par l'État"
-                    ],
-                    correct: 1,
-                    explanation: "L'économie est définie comme une activité humaine visant à produire des ressources pour satisfaire des besoins, ce qui entraîne le développement des échanges entre les agents économiques selon un calcul économique."
-                },
-                {
-                    question: "Quelle est la différence entre une économie fermée et une économie ouverte ?",
-                    options: [
-                        "Une économie fermée est en récession, une économie ouverte est en croissance",
-                        "Une économie fermée a des échanges exclusivement entre les agents du pays, une économie ouverte développe le commerce international",
-                        "Une économie fermée est dirigée par l'État, une économie ouverte est libérale",
-                        "Une économie fermée utilise une monnaie unique, une économie ouverte accepte plusieurs devises"
-                    ],
-                    correct: 1,
-                    explanation: "Une économie fermée est un modèle dans lequel les échanges sont réalisés exclusivement entre les agents du pays, tandis qu'une économie ouverte repose sur le développement du commerce international en complément des échanges nationaux."
-                },
-                {
-                    question: "Quels sont les deux types de flux entre les agents économiques ?",
-                    options: [
-                        "Les flux publics et les flux privés",
-                        "Les flux nationaux et les flux internationaux",
-                        "Les flux monétaires et les flux réels",
-                        "Les flux directs et les flux indirects"
-                    ],
-                    correct: 2,
-                    explanation: "Les deux types de flux entre les agents économiques sont les flux monétaires (échanges de monnaie) et les flux réels (échanges de biens ou services)."
-                },
-                {
-                    question: "Qu'est-ce que la coopétition ?",
-                    options: [
-                        "La concurrence entre les entreprises d'un même secteur",
-                        "La coopération entre l'État et les entreprises",
-                        "Des entreprises concurrentes qui travaillent ensemble",
-                        "La compétition internationale entre les États"
-                    ],
-                    correct: 2,
-                    explanation: "La coopétition est une situation où des entreprises concurrentes travaillent ensemble. Elle est autorisée sauf si elle a pour effet de détourner le jeu de la concurrence et de manipuler les informations pour tronquer le choix des agents."
-                },
-                {
-                    question: "Qu'est-ce qu'un marché en économie ?",
-                    options: [
-                        "Un lieu physique où s'achètent et se vendent des produits",
-                        "Un ensemble de magasins dans une zone géographique",
-                        "Lieu réel ou virtuel où se rencontrent l'offre et la demande en vue d'un échange",
-                        "Un système de distribution organisé par l'État"
-                    ],
-                    correct: 2,
-                    explanation: "Un marché est un lieu réel ou virtuel où se rencontrent l'offre et la demande en vue d'un échange. Le type de marché est défini en fonction du bien ou du service échangé."
-                },
-                {
-                    question: "Qu'est-ce qu'un marché en situation de monopole ?",
-                    options: [
-                        "Marché sur lequel une multitude d'offreurs font face à une multitude de demandeurs",
-                        "Marché sur lequel quelques offreurs font face à une multitude de demandeurs",
-                        "Marché sur lequel un seul offreur fait face à une multitude de demandeurs",
-                        "Marché sur lequel un seul demandeur fait face à une multitude d'offreurs"
-                    ],
-                    correct: 2,
-                    explanation: "Un monopole est un marché sur lequel un seul offreur doit faire face à une multitude de demandeurs, ce qui peut entraîner un retard sur l'innovation et des prix élevés (notion de 'price maker')."
-                },
-                {
-                    question: "Quelles sont les caractéristiques d'un marché en concurrence pure et parfaite ?",
-                    options: [
-                        "Un seul vendeur, prix élevés, absence d'innovation",
-                        "Quelques vendeurs, ententes sur les prix, peu d'innovation",
-                        "Atomicité, homogénéité du produit, libre entrée/sortie, transparence de l'information, libre circulation des facteurs",
-                        "Contrôle de l'État, prix fixes, production planifiée"
-                    ],
-                    correct: 2,
-                    explanation: "Un marché en concurrence pure et parfaite présente 5 caractéristiques : atomicité du marché, homogénéité du produit, libre entrée et sortie du marché, transparence de l'information et libre circulation des facteurs de production."
+                    correctIndex: 2,
+                    explanation: "Les trois fonctions économiques de l'État sont la fonction d'allocation, la fonction de redistribution et la fonction de stabilisation (ou régulation)."
                 },
                 {
                     question: "Qu'est-ce qu'une externalité en économie ?",
                     options: [
+                        "Un effet de l'action d'un agent sur la situation d'un autre agent sans compensation",
                         "Un échange commercial avec un pays étranger",
-                        "Un coût supplémentaire lié à l'importation",
-                        "Effet de l'action d'un agent sur la situation d'un autre agent sans compensation",
-                        "Une taxe imposée par l'État sur certains produits"
+                        "Une taxe sur les importations",
+                        "Une subvention à l'exportation"
                     ],
-                    correct: 2,
-                    explanation: "Une externalité est l'effet de l'action d'un agent économique sur la situation d'un autre agent sans que ce dernier ne paie ou ne reçoive une compensation."
+                    correctIndex: 0,
+                    explanation: "Une externalité est un effet de l'action d'un agent économique sur la situation d'un autre agent sans que ce dernier ne paie ou ne reçoive une compensation."
+                },
+                {
+                    question: "Quels sont les facteurs de production mobilisés par une entreprise ?",
+                    options: [
+                        "Le facteur travail et le facteur capital",
+                        "L'offre et la demande",
+                        "Les inputs et les outputs",
+                        "Les coûts fixes et les coûts variables"
+                    ],
+                    correctIndex: 0,
+                    explanation: "Les deux facteurs de production principaux mobilisés par une entreprise sont le facteur travail (ensemble des ménages qui travaillent en échange d'un salaire) et le facteur capital (ensemble des moyens de production matériels et immatériels)."
+                },
+                {
+                    question: "Qu'est-ce que la productivité ?",
+                    options: [
+                        "La quantité produite dans un temps donné",
+                        "Le rapport entre ce qui a été produit et les ressources mises en œuvre pour obtenir cette production",
+                        "La différence entre les coûts et les recettes",
+                        "La capacité à produire des biens à des prix inférieurs à ceux des concurrents"
+                    ],
+                    correctIndex: 1,
+                    explanation: "La productivité est le rapport entre ce qui a été produit et les ressources mises en œuvre pour obtenir cette production. Elle se calcule par la formule: Quantité produite / quantité de facteur utilisée."
+                },
+                {
+                    question: "Quelles sont les limites de la politique budgétaire expansionniste ?",
+                    options: [
+                        "L'inflation galopante et la dévaluation monétaire",
+                        "La hausse des taux d'intérêt et la stagflation",
+                        "L'effet boule de neige, l'effet d'éviction par le taux d'intérêt, l'effet d'éviction par l'extérieur et l'effet du fardeau de la dette",
+                        "La baisse de la compétitivité et l'augmentation du chômage"
+                    ],
+                    correctIndex: 2,
+                    explanation: "Les quatre effets pervers liés aux politiques budgétaires expansionnistes sont: l'effet boule de neige (endettement croissant), l'effet d'éviction par le taux d'intérêt, l'effet d'éviction par l'extérieur (importations) et l'effet du fardeau de la dette."
+                },
+                {
+                    question: "Qu'est-ce que les coûts de production ?",
+                    options: [
+                        "Le prix de vente d'un produit",
+                        "Les bénéfices réalisés par l'entreprise",
+                        "Ensemble des coûts et charges qui ont permis la réalisation du produit mis sur le marché",
+                        "Les investissements réalisés par l'entreprise"
+                    ],
+                    correctIndex: 2,
+                    explanation: "Les coûts de production représentent l'ensemble des coûts et charges qui ont permis la réalisation du produit mis sur le marché. On distingue les coûts fixes (sans lien avec les volumes de production) et les coûts variables (en lien avec les volumes de production)."
                 }
             ],
-            jur: [
+            juridique: [
                 {
-                    question: "Qu'est-ce qu'une situation précontractuelle ?",
+                    question: "Qu'est-ce qu'un contrat en droit ?",
                     options: [
-                        "Une phase où les parties préparent les documents nécessaires au contrat",
-                        "Une période durant laquelle les parties négocient afin d'aboutir à un accord",
-                        "Un engagement légal précédant la signature officielle",
-                        "Une phase d'étude de marché avant de proposer un contrat"
+                        "Un document officiel délivré par l'administration",
+                        "Un accord de volonté entre deux ou plusieurs personnes destiné à créer des obligations de droit",
+                        "Une loi votée par le Parlement",
+                        "Un jugement rendu par un tribunal"
                     ],
-                    correct: 1,
-                    explanation: "Une situation précontractuelle est une période durant laquelle les
+                    correctIndex: 1,
+                    explanation: "Un contrat est un accord de volonté entre deux ou plusieurs personnes destiné à créer des obligations de droit. Il est formé par la rencontre de l'offre et de l'acceptation."
+                },
+                {
+                    question: "Quelles sont les 3 conditions de validité d'un contrat ?",
+                    options: [
+                        "Consentement, capacité juridique, objet du contrat",
+                        "Signature, témoins, enregistrement officiel",
+                        "Écrit, paiement, livraison",
+                        "Publicité, enregistrement, notification"
+                    ],
+                    correctIndex: 0,
+                    explanation: "Les trois conditions cumulatives de validité d'un contrat sont: le consentement (libre et sain d'esprit), la capacité juridique des parties et l'objet du contrat (licite, possible, déterminé)."
+                },
+                {
+                    question: "Qu'est-ce qu'une clause abusive ?",
+                    options: [
+                        "Une clause illégale dans un contrat",
+                        "Une clause qui crée un déséquilibre significatif entre les droits et obligations des parties au détriment du consommateur",
+                        "Une clause qui favorise le professionnel",
+                        "Une clause imposée par le législateur"
+                    ],
+                    correctIndex: 1,
+                    explanation: "Une clause abusive est une clause qui crée, au détriment du consommateur (ou du non-professionnel), un déséquilibre significatif entre les droits et obligations des parties au contrat. Elle est réputée non écrite."
+                },
+                {
+                    question: "Quels sont les vices du consentement qui peuvent rendre un contrat nul ?",
+                    options: [
+                        "Erreur, dol, violence",
+                        "Mensonge, tromperie, intimidation",
+                        "Fraude, abus, contrainte",
+                        "Préjudice, dommage, faute"
+                    ],
+                    correctIndex: 0,
+                    explanation: "Les trois vices du consentement qui peuvent rendre un contrat nul sont: l'erreur (fausse représentation involontaire de la réalité), le dol (manœuvres frauduleuses) et la violence (pression physique, morale ou économique)."
+                },
+                {
+                    question: "Qu'est-ce que la force obligatoire du contrat ?",
+                    options: [
+                        "L'obligation de rédiger un contrat par écrit",
+                        "Le fait que le contrat s'impose au juge",
+                        "Le principe selon lequel le contrat ne peut être modifié ou révoqué sans le consentement mutuel des parties",
+                        "L'obligation d'exécuter le contrat sous contrôle judiciaire"
+                    ],
+                    correctIndex: 2,
+                    explanation: "La force obligatoire du contrat est le principe selon lequel le contrat ne peut être modifié ou révoqué sans le consentement mutuel des parties, sauf exceptions légales."
+                },
+                {
+                    question: "Qu'est-ce qu'un brevet d'invention ?",
+                    options: [
+                        "Une certification de qualité",
+                        "Un titre de monopole temporaire d'exploitation pour protéger les innovations",
+                        "Une autorisation administrative d'exercer une activité",
+                        "Un label écologique"
+                    ],
+                    correctIndex: 1,
+                    explanation: "Un brevet d'invention est un titre de monopole temporaire d'exploitation délivré pour protéger les innovations techniques. Sa durée est de 20 ans sous condition de paiement d'annuités."
+                },
+                {
+                    question: "Quelles sont les conditions pour qu'une innovation soit protégée par un brevet ?",
+                    options: [
+                        "Être rentable, être commercialisable, avoir un marché",
+                        "Être une solution technique à un problème technique, être nouvelle, impliquer une activité inventive, être susceptible d'une application industrielle",
+                        "Être inscrite au registre du commerce, être déclarée aux impôts, avoir un financement",
+                        "Être approuvée par l'État, respecter les normes, avoir un prix compétitif"
+                    ],
+                    correctIndex: 1,
+                    explanation: "Pour être protégée par un brevet, une innovation doit: être une solution technique à un problème technique, être nouvelle, impliquer une activité inventive et être susceptible d'une application industrielle."
+                },
+                {
+                    question: "Qu'est-ce qu'une marque en droit de la propriété industrielle ?",
+                    options: [
+                        "Un logo d'entreprise",
+                        "Un signe distinctif permettant de distinguer les produits d'une entreprise par rapport à ceux de ses concurrents",
+                        "Un nom commercial",
+                        "Une certification de qualité"
+                    ],
+                    correctIndex: 1,
+                    explanation: "Une marque est un signe distinctif permettant de distinguer les produits d'une entreprise par rapport à ceux de ses concurrents. Elle confère un monopole d'exploitation pour 10 ans dans chaque domaine déposé, renouvelable."
+                },
+                {
+                    question: "Qu'est-ce que l'entente illicite en droit de la concurrence ?",
+                    options: [
+                        "Un accord commercial légal entre entreprises",
+                        "Une alliance stratégique",
+                        "Accords entre entreprises et pratiques concertées susceptibles de porter atteinte au libre jeu de la concurrence",
+                        "Une fusion-acquisition"
+                    ],
+                    correctIndex: 2,
+                    explanation: "L'entente illicite est un accord entre entreprises ou des pratiques concertées susceptibles de porter atteinte au libre jeu de la concurrence. Elle peut être verticale (entre acteurs de différents niveaux) ou horizontale (entre concurrents)."
+                },
+                {
+                    question: "Quelle est la différence entre une obligation de moyens et une obligation de résultat ?",
+                    options: [
+                        "L'obligation de moyens concerne le paiement, l'obligation de résultat concerne la livraison",
+                        "L'obligation de moyens s'applique aux contrats écrits, l'obligation de résultat aux contrats verbaux",
+                        "Pour l'obligation de résultat, le débiteur s'engage à réaliser ce qui a été promis; pour l'obligation de moyens, il s'engage à tout mettre en œuvre sans garantie de résultat",
+                        "L'obligation de moyens est plus contraignante que l'obligation de résultat"
+                    ],
+                    correctIndex: 2,
+                    explanation: "Pour l'obligation de résultat, le débiteur s'engage à réaliser ce qui a été promis quels que soient les aléas. Pour l'obligation de moyens, il s'engage à tout mettre en œuvre au risque de ne pas atteindre ce qui a été promis."
+                }
+            ],
+            management: [
+                {
+                    question: "Que signifie le concept de 'destruction créatrice' selon Schumpeter ?",
+                    options: [
+                        "La destruction de l'environnement pour créer des richesses",
+                        "Le processus par lequel l'entrepreneur recourt aux innovations pour briser la routine des structures traditionnelles et favoriser des transformations structurelles",
+                        "La fermeture d'entreprises non rentables pour en créer de nouvelles",
+                        "La suppression d'emplois pour en créer de nouveaux plus productifs"
+                    ],
+                    correctIndex: 1,
+                    explanation: "La théorie de la destruction créatrice de Schumpeter explique que l'entrepreneur recourt aux innovations pour briser la routine des structures traditionnelles (destruction) et favorise ainsi les transformations structurelles importantes de la société (création)."
+                },
+                {
+                    question: "Qu'est-ce que la RSE (Responsabilité Sociétale des Entreprises) ?",
+                    options: [
+                        "Une obligation légale pour toutes les entreprises",
+                        "Un concept désignant l'intégration, par l'entreprise, des préoccupations sociales/sociétales, environnementales et économiques dans ses activités",
+                        "Une certification ISO obligatoire",
+                        "Un label écologique européen"
+                    ],
+                    correctIndex: 1,
+                    explanation: "La RSE est un concept désignant l'intégration, par l'entreprise, des préoccupations sociales/sociétales, environnementales et économiques dans ses activités et ses relations avec les parties prenantes."
+                },
+                {
+                    question: "Quelles sont les 5 fonctions du management ?",
+                    options: [
+                        "Production, finance, marketing, ressources humaines, logistique",
+                        "Planification, organisation, direction, coordination, contrôle",
+                        "Fixer les objectifs, définir les moyens, gérer les ressources humaines, contrôler les résultats, apporter les corrections",
+                        "Acheter, produire, vendre, embaucher, licencier"
+                    ],
+                    correctIndex: 2,
+                    explanation: "Les cinq fonctions du management sont: fixer les objectifs, définir les moyens, gérer les ressources humaines, contrôler les résultats par rapport aux objectifs fixés, et apporter les corrections si besoin."
+                },
+                {
+                    question: "Qu'est-ce que la performance globale d'une entreprise ?",
+                    options: [
+                        "La maximisation du profit",
+                        "L'atteinte des objectifs fixés en termes d'efficacité et d'efficience",
+                        "Être performant au niveau économique, social et environnemental en même temps",
+                        "La capacité à surpasser la concurrence"
+                    ],
+                    correctIndex: 2,
+                    explanation: "La performance globale consiste à être performant au niveau économique, social et environnemental en même temps, plutôt que de se concentrer uniquement sur la performance financière."
+                },
+                {
+                    question: "Qu'est-ce que la chaîne de valeur selon Michael Porter ?",
+                    options: [
+                        "L'ensemble des fournisseurs et distributeurs d'une entreprise",
+                        "Le processus de création de valeur pour les actionnaires",
+                        "Analyse, en termes de coûts et de qualité, des activités de l'entreprise pouvant constituer un avantage concurrentiel",
+                        "La valorisation boursière d'une entreprise"
+                    ],
+                    correctIndex: 2,
+                    explanation: "La chaîne de valeur selon Porter est une analyse, en termes de coûts et de qualité, des activités de l'entreprise pouvant constituer un avantage concurrentiel. Elle distingue les activités principales et les activités de soutien."
+                },
+                {
+                    question: "Qu'est-ce que l'impartition ?",
+                    options: [
+                        "La répartition des bénéfices entre les actionnaires",
+                        "L'affectation des ressources entre différents services de l'entreprise",
+                        "Stratégie visant à confier à des prestataires extérieurs des biens ou des services au lieu de les produire soi-même",
+                        "Le partage des responsabilités entre les dirigeants"
+                    ],
+                    correctIndex: 2,
+                    explanation: "L'impartition est une stratégie visant à confier à des prestataires extérieurs des biens ou des services au lieu de les produire
