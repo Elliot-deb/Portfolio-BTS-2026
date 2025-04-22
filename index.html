@@ -1,300 +1,515 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Révision CEJM BTS - QCM Interactif</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        
-        header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border-radius: 5px;
-            margin-bottom: 30px;
-        }
-        
-        h1 {
-            margin: 0;
-            font-size: 28px;
-        }
-        
-        h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 5px;
-            margin-top: 30px;
-        }
-        
-        h3 {
-            color: #2980b9;
-            margin-top: 25px;
-        }
-        
-        .chapter {
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-        
-        .question {
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #f9f9f9;
-            border-left: 4px solid #3498db;
-            border-radius: 3px;
-        }
-        
-        .options {
-            margin-left: 20px;
-        }
-        
-        .option {
-            margin: 8px 0;
-            padding: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .option:hover {
-            background-color: #e8f4fc;
-        }
-        
-        .option input {
-            margin-right: 10px;
-        }
-        
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-        
-        button:hover {
-            background-color: #2980b9;
-        }
-        
-        .result {
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 4px;
-            display: none;
-        }
-        
-        .correct {
-            background-color: #d4edda;
-            color: #155724;
-            border-left: 4px solid #28a745;
-        }
-        
-        .incorrect {
-            background-color: #f8d7da;
-            color: #721c24;
-            border-left: 4px solid #dc3545;
-        }
-        
-        .explanation {
-            margin-top: 10px;
-            font-style: italic;
-            color: #6c757d;
-        }
-        
-        .score-display {
-            text-align: center;
-            font-size: 18px;
-            margin: 20px 0;
-            padding: 10px;
-            background-color: #e2e3e5;
-            border-radius: 5px;
-        }
-        
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            margin: 20px 0;
-        }
-        
-        .tabs {
-            display: flex;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .tab {
-            padding: 10px 20px;
-            cursor: pointer;
-            background-color: #f1f1f1;
-            margin-right: 5px;
-            border-radius: 5px 5px 0 0;
-        }
-        
-        .tab.active {
-            background-color: #3498db;
-            color: white;
-        }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            .chapter {
-                padding: 15px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Révisions CEJM BTS - QCM Interactif</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 2em;
+    }
+    .question-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 1.5em;
+      margin-bottom: 1.5em;
+    }
+    .question-card h3 {
+      margin-top: 0;
+    }
+    .choices label {
+      display: block;
+      margin: 0.5em 0;
+    }
+    .btn {
+      background: #007bff;
+      color: white;
+      padding: 0.5em 1em;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 1em;
+    }
+    .btn:hover {
+      background: #0056b3;
+    }
+    .result {
+      font-weight: bold;
+      margin-top: 1em;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Révision CEJM BTS - QCM Interactif</h1>
-        <p>Testez vos connaissances avec plus de 80 questions couvrant tous les chapitres</p>
-    </header>
+<header>
+  <h1>Révisions CEJM BTS - QCM Interactif</h1>
+</header>
+<div class="container">
+  <div id="quiz"></div>
+  <button id="nextBtn" class="btn hidden">Question suivante</button>
+  <p id="scoreDisplay" class="result"></p>
+</div>
 
-    <div class="tabs">
-        <div class="tab active" onclick="openTab('approche-economique')">Approche Économique</div>
-        <div class="tab" onclick="openTab('approche-juridique')">Approche Juridique</div>
-        <div class="tab" onclick="openTab('approche-manageriale')">Approche Managériale</div>
+<script>
+const questions = [
+  {
+    question: "Quel est le rôle principal de l'économie selon le CEJM ?",
+    options: [
+      "Créer de la monnaie",
+      "Satisfaire les besoins grâce à la production",
+      "Fixer les salaires",
+      "Réguler le marché du travail"
+    ],
+    answer: 1
+  },
+  {
+    question: "Qu’est-ce qu’une économie ouverte ?",
+    options: [
+      "Une économie qui limite les échanges avec l’étranger",
+      "Une économie sans gouvernement",
+      "Une économie favorisant le commerce international",
+      "Une économie entièrement automatisée"
+    ],
+    answer: 2
+  },
+  {
+    question: "Quels sont les deux types de flux économiques ?",
+    options: [
+      "Privés et publics",
+      "Internes et externes",
+      "Réels et monétaires",
+      "Financiers et commerciaux"
+    ],
+    answer: 2
+  },
+  {
+    question: "Quelle structure de marché comporte une multitude d’offreurs et de demandeurs ?",
+    options: [
+      "Monopole",
+      "Oligopole",
+      "Concurrence pure et parfaite",
+      "Duopole"
+    ],
+    answer: 2
+  },
+  {
+    question: "Qu’est-ce qu’une externalité ?",
+    options: [
+      "Un prix imposé par le gouvernement",
+      "Une barrière à l’entrée du marché",
+      "Un effet d’une activité économique sur un agent sans transaction",
+      "Une mesure de performance économique"
+    ],
+    answer: 2
+  },
+  {
+    question: "Quel organisme délivre les brevets en France ?",
+    options: [
+      "CNIL",
+      "INPI",
+      "EUIPO",
+      "URSSAF"
+    ],
+    answer: 1
+  },
+  {
+    question: "Qu'est-ce qu'une entente horizontale ?",
+    options: [
+      "Un accord entre entreprises situées à des niveaux différents",
+      "Un accord entre concurrents sur un même marché",
+      "Un regroupement d’intérêts",
+      "Une mesure européenne de libre-échange"
+    ],
+    answer: 1
+  },
+  {
+    question: "Qu’est-ce que la RSE ?",
+    options: [
+      "Une taxe sur les entreprises polluantes",
+      "Une stratégie de croissance",
+      "Une intégration des préoccupations sociales, environnementales et économiques",
+      "Une nouvelle forme de marketing"
+    ],
+    answer: 2
+  },
+  {
+    question: "Quel est l’objectif de la politique de relance ?",
+    options: [
+      "Réduire la demande globale",
+      "Augmenter le déficit public",
+      "Stimuler l’activité économique",
+      "Limiter l’inflation"
+    ],
+    answer: 2
+  },
+  {
+    question: "Quelle est la conséquence de la baisse des taux d’intérêt par la BCE ?",
+    options: [
+      "Réduction de la masse monétaire",
+      "Hausse des exportations",
+      "Baisse de la demande de crédit",
+      "Augmentation de la demande globale"
+    ],
+    answer: 3
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function showQuestion() {
+  const quiz = document.getElementById('quiz');
+  const question = questions[currentQuestion];
+  quiz.innerHTML = `
+    <div class="question-card">
+      <h3>Question ${currentQuestion + 1} :</h3>
+      <p>${question.question}</p>
+      <div class="choices">
+        ${question.options.map((opt, i) => `
+          <label><input type="radio" name="q" value="${i}"> ${opt}</label>
+        `).join("")}
+      </div>
+      <button class="btn" onclick="checkAnswer()">Valider</button>
+      <p id="result" class="result"></p>
     </div>
+  `;
+  document.getElementById('nextBtn').classList.add('hidden');
+}
 
-    <div id="approche-economique" class="tab-content active">
-        <!-- Contenu de l'approche économique -->
-        <div class="chapter">
-            <h2>Chapitre 1 - Les fondements de l'économie</h2>
-            
-            <div class="question" id="q1">
-                <p>1. Quelle est la définition correcte de l'économie ?</p>
-                <div class="options">
-                    <div class="option"><input type="radio" name="q1" value="a"> Activité humaine visant à produire des ressources pour satisfaire des besoins</div>
-                    <div class="option"><input type="radio" name="q1" value="b"> Science qui étudie uniquement les échanges monétaires</div>
-                    <div class="option"><input type="radio" name="q1" value="c"> Méthode de gestion des entreprises privées</div>
-                </div>
-                <button onclick="checkAnswer('q1', 'a', 'L\'économie est définie comme une activité humaine visant à produire des ressources pour satisfaire des besoins, ce qui conduit au développement des échanges entre les agents économiques.')">Vérifier</button>
-                <div class="result" id="result-q1"></div>
-            </div>
-            
-            <!-- Ajouter les autres questions ici -->
-            
-        </div>
-        
-        <!-- Ajouter les autres chapitres ici -->
-        
-    </div>
+function checkAnswer() {
+  const selected = document.querySelector('input[name="q"]:checked');
+  if (!selected) return;
+  const result = document.getElementById('result');
+  const isCorrect = parseInt(selected.value) === questions[currentQuestion].answer;
+  result.textContent = isCorrect ? "Bonne réponse !" : "Mauvaise réponse.";
+  result.style.color = isCorrect ? "green" : "red";
+  if (isCorrect) score++;
+  document.getElementById('nextBtn').classList.remove('hidden');
+}
 
-    <div id="approche-juridique" class="tab-content">
-        <!-- Contenu de l'approche juridique -->
-        <div class="chapter">
-            <h2>Chapitre 3 - La formation du contrat</h2>
-            
-            <div class="question" id="q24">
-                <p>24. Qu'est-ce qu'une situation précontractuelle ?</p>
-                <div class="options">
-                    <div class="option"><input type="radio" name="q24" value="a"> Période durant laquelle les parties négocient avant de conclure un contrat</div>
-                    <div class="option"><input type="radio" name="q24" value="b"> Situation où un contrat est annulé avant son exécution</div>
-                    <div class="option"><input type="radio" name="q24" value="c"> Phase de réflexion avant de décider de contracter</div>
-                </div>
-                <button onclick="checkAnswer('q24', 'a', 'Une situation précontractuelle est la période durant laquelle les parties vont négocier afin d\'aboutir à un accord permettant de satisfaire au mieux leurs intérêts respectifs. Elle inclut les pourparlers et les avant-contrats.')">Vérifier</button>
-                <div class="result" id="result-q24"></div>
-            </div>
-            
-            <!-- Ajouter les autres questions ici -->
-            
-        </div>
-        
-        <!-- Ajouter les autres chapitres ici -->
-        
-    </div>
+document.getElementById('nextBtn').addEventListener('click', () => {
+  currentQuestion++;
+  if (currentQuestion < questions.length) {
+    showQuestion();
+  } else {
+    document.getElementById('quiz').innerHTML = "<h2>Quiz terminé !</h2>";
+    document.getElementById('scoreDisplay').textContent = `Votre score : ${score} / ${questions.length}`;
+    document.getElementById('nextBtn').style.display = 'none';
+  }
+  
+  {
+    question: "Quel est le rôle principal de l'économie selon le CEJM ?",
+    options: [
+      "Créer de la monnaie",
+      "Satisfaire les besoins grâce à la production",
+      "Fixer les salaires",
+      "Réguler le marché du travail"
+    ],
+    answer: 1
+  },
+  {
+    question: "Qu’est-ce qu’une économie ouverte ?",
+    options: [
+      "Une économie qui limite les échanges avec l’étranger",
+      "Une économie sans gouvernement",
+      "Une économie favorisant le commerce international",
+      "Une économie entièrement automatisée"
+    ],
+    answer: 2
+  },
+  {
+    question: "Quels sont les deux types de flux économiques ?",
+    options: [
+      "Privés et publics",
+      "Internes et externes",
+      "Réels et monétaires",
+      "Financiers et commerciaux"
+    ],
+    answer: 2
+  },
+  {
+    question: "Quelle structure de marché comporte une multitude d’offreurs et de demandeurs ?",
+    options: [
+      "Monopole",
+      "Oligopole",
+      "Concurrence pure et parfaite",
+      "Duopole"
+    ],
+    answer: 2
+  },
+  {
+    question: "Qu’est-ce qu’une externalité ?",
+    options: [
+      "Un prix imposé par le gouvernement",
+      "Une barrière à l’entrée du marché",
+      "Un effet d’une activité économique sur un agent sans transaction",
+      "Une mesure de performance économique"
+    ],
+    answer: 2
+  },
+  {
+    question: "Quel organisme délivre les brevets en France ?",
+    options: ["CNIL", "INPI", "EUIPO", "URSSAF"],
+    answer: 1
+  },
+  {
+    question: "Qu'est-ce qu'une entente horizontale ?",
+    options: [
+      "Un accord entre entreprises situées à des niveaux différents",
+      "Un accord entre concurrents sur un même marché",
+      "Un regroupement d’intérêts",
+      "Une mesure européenne de libre-échange"
+    ],
+    answer: 1
+  },
+  {
+    question: "Qu’est-ce que la RSE ?",
+    options: [
+      "Une taxe sur les entreprises polluantes",
+      "Une stratégie de croissance",
+      "Une intégration des préoccupations sociales, environnementales et économiques",
+      "Une nouvelle forme de marketing"
+    ],
+    answer: 2
+  },
+  {
+    question: "Quel est l’objectif de la politique de relance ?",
+    options: [
+      "Réduire la demande globale",
+      "Augmenter le déficit public",
+      "Stimuler l’activité économique",
+      "Limiter l’inflation"
+    ],
+    answer: 2
+  },
+  {
+    question: "Quelle est la conséquence de la baisse des taux d’intérêt par la BCE ?",
+    options: [
+      "Réduction de la masse monétaire",
+      "Hausse des exportations",
+      "Baisse de la demande de crédit",
+      "Augmentation de la demande globale"
+    ],
+    answer: 3
+  },
+  {
+    question: "Quelle est la fonction de l’INPI ?",
+    options: [
+      "Contrôler les impôts",
+      "Protéger la propriété intellectuelle",
+      "Gérer les brevets européens",
+      "Déterminer les taux d’intérêt"
+    ],
+    answer: 1
+  },
+  {
+    question: "Quel est l’outil d’analyse du macro-environnement ?",
+    options: ["SWOT", "PESTEL", "Porter", "SMART"],
+    answer: 1
+  },
+  {
+    question: "Quel est le rôle principal d’un brevet ?",
+    options: [
+      "Rémunérer un inventeur",
+      "Protéger une marque",
+      "Protéger une innovation technique",
+      "Créer un monopole de marché"
+    ],
+    answer: 2
+  },
+  {
+    question: "Que signifie ESS dans le cadre juridique ?",
+    options: [
+      "Économie solidaire et sociale",
+      "Entreprise sous statut spécial",
+      "Entreprise sociale structurée",
+      "Économie structurelle simple"
+    ],
+    answer: 0
+  },
+  {
+    question: "Qu'est-ce qu'une franchise ?",
+    options: [
+      "Une obligation de résultat",
+      "Une licence de marque contre redevance",
+      "Un GIE",
+      "Un type d'action en justice"
+    ],
+    answer: 1
+  },
+  {
+    question: "Quelle est la définition d’un contrat selon le Code civil ?",
+    options: [
+      "Un document signé par deux avocats",
+      "Une convention d’investissement",
+      "Un accord de volontés destiné à créer des obligations",
+      "Une promesse unilatérale de vente"
+    ],
+    answer: 2
+  },
+  {
+    question: "Que mesure le PIB ?",
+    options: [
+      "Le niveau de vie des ménages",
+      "L’inflation",
+      "La production de richesses d’un pays",
+      "Les revenus disponibles"
+    ],
+    answer: 2
+  },
+  {
+    question: "Quel type de clause prévoit une renégociation si des éléments changent ?",
+    options: [
+      "Clause pénale",
+      "Clause de dédit",
+      "Clause de renégociation",
+      "Clause résolutoire"
+    ],
+    answer: 2
+  },
+  {
+    question: "Quelle est la principale limite du multiplicateur budgétaire ?",
+    options: [
+      "Effet boule de neige",
+      "Chômage",
+      "Taux d’intérêt bas",
+      "Croissance trop forte"
+    ],
+    answer: 0
+  },
+  {
+    question: "Quel type d’innovation consiste à améliorer un processus de production ?",
+    options: [
+      "Innovation d’organisation",
+      "Innovation de procédé",
+      "Innovation de produit",
+      "Innovation sociale"
+    ],
+    answer: 1
+  },
 
-    <div id="approche-manageriale" class="tab-content">
-        <!-- Contenu de l'approche managériale -->
-        <div class="chapter">
-            <h2>Chapitre 5 - L'environnement de l'entreprise</h2>
-            
-            <div class="question" id="q50">
-                <p>50. Comment Schumpeter définit-il l'entrepreneur ?</p>
-                <div class="options">
-                    <div class="option"><input type="radio" name="q50" value="a"> Personne qui gère une entreprise familiale</div>
-                    <div class="option"><input type="radio" name="q50" value="b"> Personne qui prend des risques en investissant des capitaux pour développer une innovation</div>
-                    <div class="option"><input type="radio" name="q50" value="c"> Dirigeant salarié d'une grande entreprise</div>
-                </div>
-                <button onclick="checkAnswer('q50', 'b', 'Selon Schumpeter, l\'entrepreneur est une personne qui prend des risques en investissant des capitaux pour développer une innovation afin de profiter des opportunités du marché.')">Vérifier</button>
-                <div class="result" id="result-q50"></div>
-            </div>
-            
-            <!-- Ajouter les autres questions ici -->
-            
-        </div>
-        
-        <!-- Ajouter les autres chapitres ici -->
-        
-    </div>
+ {
+    question: "Quelle est la différence principale entre une économie fermée et une économie ouverte ?",
+    options: [
+    "L’économie ouverte échange avec l’étranger, la fermée non",
+    "L’économie fermée repose sur le numérique",
+    "L’économie ouverte ne contient pas de marché",
+    "L’économie fermée favorise la compétitivité"
+    ],
+    answer: 0
+  },
+  {
+    question: "Quels sont les deux types de barrières à l'entrée d’un marché ?",
+    options: [
+    "Naturelles et artificielles",
+    "Publiques et privées",
+    "Légales et illégales",
+    "Internes et externes"
+    ],
+    answer: 0
+  },
+  {
+    question: "Quel est le rôle principal de la Banque centrale européenne (BCE) ?",
+    options: [
+    "Distribuer des crédits aux ménages",
+    "Réguler les taux d’intérêt et la masse monétaire",
+    "Créer de l’emploi",
+    "Financer directement les entreprises"
+    ],
+    answer: 1
+  },
+  {
+    question: "Quelle est la principale caractéristique d’un contrat synallagmatique ?",
+    options: [
+    "Il est signé uniquement par une partie",
+    "Il engage les deux parties à exécuter des obligations",
+    "Il est verbal et non écrit",
+    "Il est limité à une durée courte"
+    ],
+    answer: 1
+  },
+  {
+    question: "Qu'est-ce qu'une clause abusive dans un contrat ?",
+    options: [
+    "Une clause favorable au consommateur",
+    "Une clause déséquilibrée au détriment du consommateur",
+    "Une clause obligatoire imposée par la loi",
+    "Une clause entre deux entreprises"
+    ],
+    answer: 1
+  },
+  {
+    question: "Quel outil permet d’analyser l’environnement macroéconomique ?",
+    options: [
+    "La matrice SWOT",
+    "Le modèle de Porter",
+    "La méthode PESTEL",
+    "Le tableau de bord prospectif"
+    ],
+    answer: 2
+  },
+  {
+    question: "Selon Schumpeter, quelle est la conséquence des grappes d'innovation ?",
+    options: [
+    "Stagnation de l’économie",
+    "Répétition des crises économiques",
+    "Succession de phases de croissance et de crise",
+    "Blocage des investissements publics"
+    ],
+    answer: 2
+  },
+  {
+    question: "Quel est l’objectif principal de la RSE ?",
+    options: [
+    "Réduire les coûts de production",
+    "Développer l’image de marque",
+    "Intégrer des préoccupations sociales et environnementales",
+    "Améliorer les dividendes des actionnaires"
+    ],
+    answer: 2
+  },
+  {
+    question: "Dans un marché en concurrence pure et parfaite, quelle est la caractéristique des produits ?",
+    options: [
+    "Ils sont différenciés par l’image de marque",
+    "Ils sont homogènes",
+    "Ils sont soumis à des prix fixes",
+    "Ils sont réglementés par l'État"
+    ],
+    answer: 1
+  },
+  {
+    question: "Quel indicateur mesure l’efficacité d’une politique conjoncturelle sur l’emploi ?",
+    options: [
+    "Le taux d’emploi",
+    "Le PIB",
+    "Le taux d’inflation",
+    "Le taux de chômage"
+    ],
+    answer: 3
+  },
+];
+  
+});
 
-    <script>
-        function checkAnswer(questionId, correctAnswer, explanation) {
-            const selectedOption = document.querySelector(`input[name="${questionId}"]:checked`);
-            const resultDiv = document.getElementById(`result-${questionId}`);
-            
-            if (!selectedOption) {
-                resultDiv.textContent = "Veuillez sélectionner une réponse.";
-                resultDiv.className = "result incorrect";
-                resultDiv.style.display = "block";
-                return;
-            }
-
-            const userAnswer = selectedOption.value;
-            
-            if (userAnswer === correctAnswer) {
-                resultDiv.innerHTML = `<span class="correct">Correct!</span> <div class="explanation">${explanation}</div>`;
-                resultDiv.className = "result correct";
-            } else {
-                resultDiv.innerHTML = `<span class="incorrect">Incorrect. La bonne réponse était ${correctAnswer.toUpperCase()}.</span> <div class="explanation">${explanation}</div>`;
-                resultDiv.className = "result incorrect";
-            }
-            
-            resultDiv.style.display = "block";
-        }
-
-        function openTab(tabName) {
-            // Cache tous les contenus d'onglets
-            const tabContents = document.getElementsByClassName("tab-content");
-            for (let i = 0; i < tabContents.length; i++) {
-                tabContents[i].classList.remove("active");
-            }
-
-            // Désactive tous les onglets
-            const tabs = document.getElementsByClassName("tab");
-            for (let i = 0; i < tabs.length; i++) {
-                tabs[i].classList.remove("active");
-            }
-
-            // Active l'onglet sélectionné
-            document.getElementById(tabName).classList.add("active");
-            event.currentTarget.classList.add("active");
-        }
-    </script>
+showQuestion();
+</script>
 </body>
 </html>
