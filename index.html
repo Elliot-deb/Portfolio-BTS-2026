@@ -1,515 +1,164 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Révisions CEJM BTS - QCM Interactif</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f8f9fa;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #007bff;
-      color: white;
-      padding: 1em;
-      text-align: center;
-    }
-    .container {
-      max-width: 800px;
-      margin: auto;
-      padding: 2em;
-    }
-    .question-card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      padding: 1.5em;
-      margin-bottom: 1.5em;
-    }
-    .question-card h3 {
-      margin-top: 0;
-    }
-    .choices label {
-      display: block;
-      margin: 0.5em 0;
-    }
-    .btn {
-      background: #007bff;
-      color: white;
-      padding: 0.5em 1em;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-      margin-top: 1em;
-    }
-    .btn:hover {
-      background: #0056b3;
-    }
-    .result {
-      font-weight: bold;
-      margin-top: 1em;
-    }
-    .hidden {
-      display: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio BTS SIO SISR</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background: #f6f8fc;
+            color: #222;
+        }
+        header {
+            background: #2d3e50;
+            color: #fff;
+            padding: 30px 0 20px 0;
+            text-align: center;
+        }
+        nav {
+            background: #203040;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px 0;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        nav a:hover, nav a.active {
+            background: #5673a6;
+        }
+        main {
+            max-width: 900px;
+            margin: 30px auto 0 auto;
+            background: #fff;
+            padding: 40px 32px;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(80,100,140,0.07);
+        }
+        section {
+            margin-bottom: 40px;
+        }
+        h2 {
+            color: #2d3e50;
+            margin-top: 0;
+        }
+        ul {
+            margin: 0 0 0 20px;
+            padding: 0;
+        }
+        .contact-list li {
+            margin-bottom: 6px;
+        }
+        @media (max-width: 650px) {
+            main {
+                padding: 20px 6px;
+            }
+        }
+    </style>
+    <script>
+        // Simple SPA-style navigation
+        function showSection(id) {
+            document.querySelectorAll('main section').forEach(
+                section => section.style.display = 'none'
+            );
+            document.getElementById(id).style.display = 'block';
+            document.querySelectorAll('nav a').forEach(
+                a => a.classList.remove('active')
+            );
+            document.getElementById('nav-' + id).classList.add('active');
+        }
+        window.onload = function() {
+            showSection('accueil');
+        }
+    </script>
 </head>
 <body>
-<header>
-  <h1>Révisions CEJM BTS - QCM Interactif</h1>
-</header>
-<div class="container">
-  <div id="quiz"></div>
-  <button id="nextBtn" class="btn hidden">Question suivante</button>
-  <p id="scoreDisplay" class="result"></p>
-</div>
-
-<script>
-const questions = [
-  {
-    question: "Quel est le rôle principal de l'économie selon le CEJM ?",
-    options: [
-      "Créer de la monnaie",
-      "Satisfaire les besoins grâce à la production",
-      "Fixer les salaires",
-      "Réguler le marché du travail"
-    ],
-    answer: 1
-  },
-  {
-    question: "Qu’est-ce qu’une économie ouverte ?",
-    options: [
-      "Une économie qui limite les échanges avec l’étranger",
-      "Une économie sans gouvernement",
-      "Une économie favorisant le commerce international",
-      "Une économie entièrement automatisée"
-    ],
-    answer: 2
-  },
-  {
-    question: "Quels sont les deux types de flux économiques ?",
-    options: [
-      "Privés et publics",
-      "Internes et externes",
-      "Réels et monétaires",
-      "Financiers et commerciaux"
-    ],
-    answer: 2
-  },
-  {
-    question: "Quelle structure de marché comporte une multitude d’offreurs et de demandeurs ?",
-    options: [
-      "Monopole",
-      "Oligopole",
-      "Concurrence pure et parfaite",
-      "Duopole"
-    ],
-    answer: 2
-  },
-  {
-    question: "Qu’est-ce qu’une externalité ?",
-    options: [
-      "Un prix imposé par le gouvernement",
-      "Une barrière à l’entrée du marché",
-      "Un effet d’une activité économique sur un agent sans transaction",
-      "Une mesure de performance économique"
-    ],
-    answer: 2
-  },
-  {
-    question: "Quel organisme délivre les brevets en France ?",
-    options: [
-      "CNIL",
-      "INPI",
-      "EUIPO",
-      "URSSAF"
-    ],
-    answer: 1
-  },
-  {
-    question: "Qu'est-ce qu'une entente horizontale ?",
-    options: [
-      "Un accord entre entreprises situées à des niveaux différents",
-      "Un accord entre concurrents sur un même marché",
-      "Un regroupement d’intérêts",
-      "Une mesure européenne de libre-échange"
-    ],
-    answer: 1
-  },
-  {
-    question: "Qu’est-ce que la RSE ?",
-    options: [
-      "Une taxe sur les entreprises polluantes",
-      "Une stratégie de croissance",
-      "Une intégration des préoccupations sociales, environnementales et économiques",
-      "Une nouvelle forme de marketing"
-    ],
-    answer: 2
-  },
-  {
-    question: "Quel est l’objectif de la politique de relance ?",
-    options: [
-      "Réduire la demande globale",
-      "Augmenter le déficit public",
-      "Stimuler l’activité économique",
-      "Limiter l’inflation"
-    ],
-    answer: 2
-  },
-  {
-    question: "Quelle est la conséquence de la baisse des taux d’intérêt par la BCE ?",
-    options: [
-      "Réduction de la masse monétaire",
-      "Hausse des exportations",
-      "Baisse de la demande de crédit",
-      "Augmentation de la demande globale"
-    ],
-    answer: 3
-  }
-];
-
-let currentQuestion = 0;
-let score = 0;
-
-function showQuestion() {
-  const quiz = document.getElementById('quiz');
-  const question = questions[currentQuestion];
-  quiz.innerHTML = `
-    <div class="question-card">
-      <h3>Question ${currentQuestion + 1} :</h3>
-      <p>${question.question}</p>
-      <div class="choices">
-        ${question.options.map((opt, i) => `
-          <label><input type="radio" name="q" value="${i}"> ${opt}</label>
-        `).join("")}
-      </div>
-      <button class="btn" onclick="checkAnswer()">Valider</button>
-      <p id="result" class="result"></p>
-    </div>
-  `;
-  document.getElementById('nextBtn').classList.add('hidden');
-}
-
-function checkAnswer() {
-  const selected = document.querySelector('input[name="q"]:checked');
-  if (!selected) return;
-  const result = document.getElementById('result');
-  const isCorrect = parseInt(selected.value) === questions[currentQuestion].answer;
-  result.textContent = isCorrect ? "Bonne réponse !" : "Mauvaise réponse.";
-  result.style.color = isCorrect ? "green" : "red";
-  if (isCorrect) score++;
-  document.getElementById('nextBtn').classList.remove('hidden');
-}
-
-document.getElementById('nextBtn').addEventListener('click', () => {
-  currentQuestion++;
-  if (currentQuestion < questions.length) {
-    showQuestion();
-  } else {
-    document.getElementById('quiz').innerHTML = "<h2>Quiz terminé !</h2>";
-    document.getElementById('scoreDisplay').textContent = `Votre score : ${score} / ${questions.length}`;
-    document.getElementById('nextBtn').style.display = 'none';
-  }
-  
-  {
-    question: "Quel est le rôle principal de l'économie selon le CEJM ?",
-    options: [
-      "Créer de la monnaie",
-      "Satisfaire les besoins grâce à la production",
-      "Fixer les salaires",
-      "Réguler le marché du travail"
-    ],
-    answer: 1
-  },
-  {
-    question: "Qu’est-ce qu’une économie ouverte ?",
-    options: [
-      "Une économie qui limite les échanges avec l’étranger",
-      "Une économie sans gouvernement",
-      "Une économie favorisant le commerce international",
-      "Une économie entièrement automatisée"
-    ],
-    answer: 2
-  },
-  {
-    question: "Quels sont les deux types de flux économiques ?",
-    options: [
-      "Privés et publics",
-      "Internes et externes",
-      "Réels et monétaires",
-      "Financiers et commerciaux"
-    ],
-    answer: 2
-  },
-  {
-    question: "Quelle structure de marché comporte une multitude d’offreurs et de demandeurs ?",
-    options: [
-      "Monopole",
-      "Oligopole",
-      "Concurrence pure et parfaite",
-      "Duopole"
-    ],
-    answer: 2
-  },
-  {
-    question: "Qu’est-ce qu’une externalité ?",
-    options: [
-      "Un prix imposé par le gouvernement",
-      "Une barrière à l’entrée du marché",
-      "Un effet d’une activité économique sur un agent sans transaction",
-      "Une mesure de performance économique"
-    ],
-    answer: 2
-  },
-  {
-    question: "Quel organisme délivre les brevets en France ?",
-    options: ["CNIL", "INPI", "EUIPO", "URSSAF"],
-    answer: 1
-  },
-  {
-    question: "Qu'est-ce qu'une entente horizontale ?",
-    options: [
-      "Un accord entre entreprises situées à des niveaux différents",
-      "Un accord entre concurrents sur un même marché",
-      "Un regroupement d’intérêts",
-      "Une mesure européenne de libre-échange"
-    ],
-    answer: 1
-  },
-  {
-    question: "Qu’est-ce que la RSE ?",
-    options: [
-      "Une taxe sur les entreprises polluantes",
-      "Une stratégie de croissance",
-      "Une intégration des préoccupations sociales, environnementales et économiques",
-      "Une nouvelle forme de marketing"
-    ],
-    answer: 2
-  },
-  {
-    question: "Quel est l’objectif de la politique de relance ?",
-    options: [
-      "Réduire la demande globale",
-      "Augmenter le déficit public",
-      "Stimuler l’activité économique",
-      "Limiter l’inflation"
-    ],
-    answer: 2
-  },
-  {
-    question: "Quelle est la conséquence de la baisse des taux d’intérêt par la BCE ?",
-    options: [
-      "Réduction de la masse monétaire",
-      "Hausse des exportations",
-      "Baisse de la demande de crédit",
-      "Augmentation de la demande globale"
-    ],
-    answer: 3
-  },
-  {
-    question: "Quelle est la fonction de l’INPI ?",
-    options: [
-      "Contrôler les impôts",
-      "Protéger la propriété intellectuelle",
-      "Gérer les brevets européens",
-      "Déterminer les taux d’intérêt"
-    ],
-    answer: 1
-  },
-  {
-    question: "Quel est l’outil d’analyse du macro-environnement ?",
-    options: ["SWOT", "PESTEL", "Porter", "SMART"],
-    answer: 1
-  },
-  {
-    question: "Quel est le rôle principal d’un brevet ?",
-    options: [
-      "Rémunérer un inventeur",
-      "Protéger une marque",
-      "Protéger une innovation technique",
-      "Créer un monopole de marché"
-    ],
-    answer: 2
-  },
-  {
-    question: "Que signifie ESS dans le cadre juridique ?",
-    options: [
-      "Économie solidaire et sociale",
-      "Entreprise sous statut spécial",
-      "Entreprise sociale structurée",
-      "Économie structurelle simple"
-    ],
-    answer: 0
-  },
-  {
-    question: "Qu'est-ce qu'une franchise ?",
-    options: [
-      "Une obligation de résultat",
-      "Une licence de marque contre redevance",
-      "Un GIE",
-      "Un type d'action en justice"
-    ],
-    answer: 1
-  },
-  {
-    question: "Quelle est la définition d’un contrat selon le Code civil ?",
-    options: [
-      "Un document signé par deux avocats",
-      "Une convention d’investissement",
-      "Un accord de volontés destiné à créer des obligations",
-      "Une promesse unilatérale de vente"
-    ],
-    answer: 2
-  },
-  {
-    question: "Que mesure le PIB ?",
-    options: [
-      "Le niveau de vie des ménages",
-      "L’inflation",
-      "La production de richesses d’un pays",
-      "Les revenus disponibles"
-    ],
-    answer: 2
-  },
-  {
-    question: "Quel type de clause prévoit une renégociation si des éléments changent ?",
-    options: [
-      "Clause pénale",
-      "Clause de dédit",
-      "Clause de renégociation",
-      "Clause résolutoire"
-    ],
-    answer: 2
-  },
-  {
-    question: "Quelle est la principale limite du multiplicateur budgétaire ?",
-    options: [
-      "Effet boule de neige",
-      "Chômage",
-      "Taux d’intérêt bas",
-      "Croissance trop forte"
-    ],
-    answer: 0
-  },
-  {
-    question: "Quel type d’innovation consiste à améliorer un processus de production ?",
-    options: [
-      "Innovation d’organisation",
-      "Innovation de procédé",
-      "Innovation de produit",
-      "Innovation sociale"
-    ],
-    answer: 1
-  },
-
- {
-    question: "Quelle est la différence principale entre une économie fermée et une économie ouverte ?",
-    options: [
-    "L’économie ouverte échange avec l’étranger, la fermée non",
-    "L’économie fermée repose sur le numérique",
-    "L’économie ouverte ne contient pas de marché",
-    "L’économie fermée favorise la compétitivité"
-    ],
-    answer: 0
-  },
-  {
-    question: "Quels sont les deux types de barrières à l'entrée d’un marché ?",
-    options: [
-    "Naturelles et artificielles",
-    "Publiques et privées",
-    "Légales et illégales",
-    "Internes et externes"
-    ],
-    answer: 0
-  },
-  {
-    question: "Quel est le rôle principal de la Banque centrale européenne (BCE) ?",
-    options: [
-    "Distribuer des crédits aux ménages",
-    "Réguler les taux d’intérêt et la masse monétaire",
-    "Créer de l’emploi",
-    "Financer directement les entreprises"
-    ],
-    answer: 1
-  },
-  {
-    question: "Quelle est la principale caractéristique d’un contrat synallagmatique ?",
-    options: [
-    "Il est signé uniquement par une partie",
-    "Il engage les deux parties à exécuter des obligations",
-    "Il est verbal et non écrit",
-    "Il est limité à une durée courte"
-    ],
-    answer: 1
-  },
-  {
-    question: "Qu'est-ce qu'une clause abusive dans un contrat ?",
-    options: [
-    "Une clause favorable au consommateur",
-    "Une clause déséquilibrée au détriment du consommateur",
-    "Une clause obligatoire imposée par la loi",
-    "Une clause entre deux entreprises"
-    ],
-    answer: 1
-  },
-  {
-    question: "Quel outil permet d’analyser l’environnement macroéconomique ?",
-    options: [
-    "La matrice SWOT",
-    "Le modèle de Porter",
-    "La méthode PESTEL",
-    "Le tableau de bord prospectif"
-    ],
-    answer: 2
-  },
-  {
-    question: "Selon Schumpeter, quelle est la conséquence des grappes d'innovation ?",
-    options: [
-    "Stagnation de l’économie",
-    "Répétition des crises économiques",
-    "Succession de phases de croissance et de crise",
-    "Blocage des investissements publics"
-    ],
-    answer: 2
-  },
-  {
-    question: "Quel est l’objectif principal de la RSE ?",
-    options: [
-    "Réduire les coûts de production",
-    "Développer l’image de marque",
-    "Intégrer des préoccupations sociales et environnementales",
-    "Améliorer les dividendes des actionnaires"
-    ],
-    answer: 2
-  },
-  {
-    question: "Dans un marché en concurrence pure et parfaite, quelle est la caractéristique des produits ?",
-    options: [
-    "Ils sont différenciés par l’image de marque",
-    "Ils sont homogènes",
-    "Ils sont soumis à des prix fixes",
-    "Ils sont réglementés par l'État"
-    ],
-    answer: 1
-  },
-  {
-    question: "Quel indicateur mesure l’efficacité d’une politique conjoncturelle sur l’emploi ?",
-    options: [
-    "Le taux d’emploi",
-    "Le PIB",
-    "Le taux d’inflation",
-    "Le taux de chômage"
-    ],
-    answer: 3
-  },
-];
-  
-});
-
-showQuestion();
-</script>
+    <header>
+        <h1>Portfolio BTS SIO SISR</h1>
+        <p>Bienvenue sur mon portfolio · Découvrez mon parcours et mes réalisations</p>
+    </header>
+    <nav>
+        <a id="nav-accueil" href="#accueil" onclick="showSection('accueil');return false;">Accueil</a>
+        <a id="nav-bts" href="#bts" onclick="showSection('bts');return false;">BTS SIO SISR</a>
+        <a id="nav-realisations" href="#realisations" onclick="showSection('realisations');return false;">Réalisations</a>
+        <a id="nav-competences" href="#competences" onclick="showSection('competences');return false;">Compétences</a>
+        <a id="nav-parcours" href="#parcours" onclick="showSection('parcours');return false;">Parcours</a>
+        <a id="nav-contact" href="#contact" onclick="showSection('contact');return false;">Contact</a>
+    </nav>
+    <main>
+        <section id="accueil">
+            <h2>Accueil</h2>
+            <p>
+                J’ai conçu ce portfolio pour mettre en valeur mes compétences acquises en entreprise et en formation, ainsi que pour regrouper l’ensemble de mes connaissances obtenues durant ces deux années.
+            </p>
+        </section>
+        <section id="bts" style="display:none">
+            <h2>BTS SIO SISR</h2>
+            <p>
+                Le BTS SIO SISR en alternance forme des professionnels capables de gérer les infrastructures systèmes et réseaux dans les organisations. Ce cursus permet d’acquérir des compétences pour concevoir, déployer et maintenir des solutions informatiques, avec une immersion professionnelle grâce à l’alternance.
+            </p>
+            <ul>
+                <li>Gestion des serveurs et réseaux</li>
+                <li>Mise en place de solutions sécurisées</li>
+                <li>Maintenance et supervision des systèmes</li>
+                <li>Cybersécurité et gestion des incidents</li>
+            </ul>
+        </section>
+        <section id="realisations" style="display:none">
+            <h2>Réalisations</h2>
+            <ul>
+                <li>
+                    <strong>Projet 1 – Titre de ton projet</strong>
+                    <br>
+                    Description : Brève description du projet, technologies utilisées, objectifs.
+                </li>
+                <li>
+                    <strong>Projet 2 – Titre de ton projet</strong>
+                    <br>
+                    Description : Brève description du projet, technologies utilisées, objectifs.
+                </li>
+                <li>
+                    <strong>Projet 3 – Titre de ton projet</strong>
+                    <br>
+                    Description : Brève description du projet, technologies utilisées, objectifs.
+                </li>
+            </ul>
+        </section>
+        <section id="competences" style="display:none">
+            <h2>Compétences</h2>
+            <ul>
+                <li>Administration systèmes (Windows, Linux)</li>
+                <li>Gestion de réseaux informatiques</li>
+                <li>Sécurité et sauvegarde des données</li>
+                <li>Virtualisation</li>
+                <li>Scripting (PowerShell, Bash)</li>
+                <li>Développement web (HTML, CSS, PHP…)</li>
+            </ul>
+        </section>
+        <section id="parcours" style="display:none">
+            <h2>Parcours</h2>
+            <ul>
+                <li>2023–2025 : BTS SIO SISR – [Nom de l’établissement]</li>
+                <li>2024 – Stage en entreprise – [Nom de l’entreprise]</li>
+                <li>Autres expériences – [Détail à personnaliser]</li>
+            </ul>
+        </section>
+        <section id="contact" style="display:none">
+            <h2>Contact</h2>
+            <ul class="contact-list">
+                <li>Email : <a href="mailto:ton.email@example.com">ton.email@example.com</a></li>
+                <li>LinkedIn : <a href="https://linkedin.com/in/ton-profil" target="_blank">ton-profil</a></li>
+                <li>GitHub : <a href="https://github.com/ton-profil" target="_blank">ton-profil</a></li>
+            </ul>
+        </section>
+    </main>
 </body>
 </html>
+
