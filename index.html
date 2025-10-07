@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Portfolio</title>
+    <title>Mon Portfolio - Design Transparent</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Variables et reset */
         :root {
-            --primary-color: #333;
-            --secondary-color: #666;
-            --accent-color: #007bff;
-            --light-color: #f8f9fa;
-            --dark-color: #212529;
+            --primary-color: #2c3e50;
+            --secondary-color: #7f8c8d;
+            --accent-color: rgba(255, 255, 255, 0.2);
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --text-color: #2c3e50;
             --transition: all 0.3s ease;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
         }
 
         * {
@@ -29,8 +33,9 @@
 
         body {
             line-height: 1.6;
-            color: var(--primary-color);
-            background-color: var(--light-color);
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
         }
 
         /* Navigation */
@@ -39,8 +44,11 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
             z-index: 1000;
             padding: 1rem 0;
         }
@@ -76,27 +84,17 @@
             color: var(--primary-color);
             font-weight: 500;
             transition: var(--transition);
-            padding: 0.5rem 0;
-            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid var(--glass-border);
         }
 
         .nav-links a:hover {
-            color: var(--accent-color);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent-color);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
         }
 
         .search-container {
@@ -107,36 +105,48 @@
 
         .search-container input {
             padding: 0.5rem 1rem;
-            border: 1px solid #ddd;
-            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
             font-size: 0.9rem;
             width: 180px;
             transition: var(--transition);
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
 
         .search-container input:focus {
             outline: none;
-            border-color: var(--accent-color);
+            border-color: rgba(255, 255, 255, 0.5);
             width: 220px;
         }
 
         .search-container button {
-            background: none;
-            border: none;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
             margin-left: 0.5rem;
             color: var(--primary-color);
             cursor: pointer;
             transition: var(--transition);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
 
         .search-container button:hover {
-            color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.3);
         }
 
         .hamburger {
             display: none;
             cursor: pointer;
             font-size: 1.5rem;
+            color: var(--primary-color);
         }
 
         /* Hero Section */
@@ -148,8 +158,33 @@
             align-items: center;
             text-align: center;
             padding: 0 2rem;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1920x1080/?technology') no-repeat center center/cover;
-            color: white;
+            color: var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: -1;
+        }
+
+        .hero-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--glass-shadow);
+            max-width: 800px;
         }
 
         .hero h1 {
@@ -159,26 +194,28 @@
 
         .hero p {
             font-size: 1.5rem;
-            max-width: 700px;
             margin-bottom: 2rem;
         }
 
         .btn {
             display: inline-block;
             padding: 0.8rem 2rem;
-            background-color: var(--accent-color);
-            color: white;
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid var(--glass-border);
+            color: var(--primary-color);
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 30px;
             transition: var(--transition);
             font-weight: 500;
-            border: none;
             cursor: pointer;
         }
 
         .btn:hover {
-            background-color: #0056b3;
+            background: rgba(255, 255, 255, 0.3);
             transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
         /* Sections communes */
@@ -206,12 +243,29 @@
             transform: translateX(-50%);
             width: 80px;
             height: 3px;
-            background-color: var(--accent-color);
+            background: var(--primary-color);
+            border-radius: 2px;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            box-shadow: var(--glass-shadow);
+            padding: 2rem;
+            transition: var(--transition);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(31, 38, 135, 0.3);
         }
 
         /* Profil */
@@ -223,9 +277,9 @@
         }
 
         .about-image {
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--glass-shadow);
         }
 
         .about-image img {
@@ -258,9 +312,9 @@
         }
 
         .company-image {
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--glass-shadow);
         }
 
         .company-image img {
@@ -287,16 +341,19 @@
         }
 
         .project-card {
-            background-color: white;
-            border-radius: 10px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--glass-shadow);
             transition: var(--transition);
         }
 
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 30px rgba(31, 38, 135, 0.3);
         }
 
         .project-image {
@@ -336,11 +393,13 @@
         }
 
         .project-tags span {
-            background-color: #f1f1f1;
+            background: rgba(255, 255, 255, 0.3);
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.8rem;
             color: var(--secondary-color);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
 
         /* Veille */
@@ -357,15 +416,18 @@
         }
 
         .veille-article {
-            background-color: white;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--glass-shadow);
         }
 
         .veille-article h3 {
             margin-bottom: 1rem;
-            color: var(--accent-color);
+            color: var(--primary-color);
         }
 
         .veille-article .meta {
@@ -377,17 +439,20 @@
         }
 
         .veille-sidebar {
-            background-color: white;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--glass-shadow);
             height: fit-content;
         }
 
         .veille-sidebar h3 {
             margin-bottom: 1.5rem;
             padding-bottom: 0.5rem;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--glass-border);
         }
 
         .sidebar-links {
@@ -404,15 +469,17 @@
             transition: var(--transition);
             display: flex;
             align-items: center;
+            padding: 0.5rem;
+            border-radius: 8px;
         }
 
         .sidebar-links a:hover {
-            color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .sidebar-links i {
             margin-right: 0.5rem;
-            color: var(--accent-color);
+            color: var(--primary-color);
         }
 
         /* Contact */
@@ -432,19 +499,29 @@
             display: flex;
             align-items: flex-start;
             gap: 1rem;
+            padding: 1.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            box-shadow: var(--glass-shadow);
         }
 
         .contact-item i {
             font-size: 1.5rem;
-            color: var(--accent-color);
+            color: var(--primary-color);
             margin-top: 0.3rem;
         }
 
         .contact-form {
-            background-color: white;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--glass-shadow);
         }
 
         .form-group {
@@ -461,22 +538,29 @@
         .form-group textarea {
             width: 100%;
             padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
             font-size: 1rem;
             transition: var(--transition);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
-            border-color: var(--accent-color);
+            border-color: rgba(255, 255, 255, 0.5);
             outline: none;
+            background: rgba(255, 255, 255, 0.3);
         }
 
         /* Footer */
         footer {
-            background-color: var(--dark-color);
-            color: white;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-top: 1px solid var(--glass-border);
+            color: var(--primary-color);
             padding: 3rem 2rem;
             text-align: center;
         }
@@ -494,18 +578,29 @@
         }
 
         .social-links a {
-            color: white;
+            color: var(--primary-color);
             font-size: 1.5rem;
             transition: var(--transition);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
         }
 
         .social-links a:hover {
-            color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
         }
 
         .copyright {
             margin-top: 2rem;
-            color: rgba(255, 255, 255, 0.7);
+            color: var(--secondary-color);
             font-size: 0.9rem;
         }
 
@@ -538,12 +633,15 @@
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 70px);
-                background-color: white;
+                background: var(--glass-bg);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
                 flex-direction: column;
                 align-items: center;
                 justify-content: flex-start;
                 padding-top: 2rem;
                 transition: var(--transition);
+                border-right: 1px solid var(--glass-border);
             }
 
             .nav-links.active {
@@ -571,12 +669,12 @@
         <nav>
             <a href="#" class="logo">MonPortfolio</a>
             <ul class="nav-links">
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#profil">Profil</a></li>
-                <li><a href="#entreprise">Entreprise</a></li>
-                <li><a href="#epreuves">Epreuves</a></li>
-                <li><a href="#veille">Veille</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="accueil.html" target="_blank">Accueil</a></li>
+                <li><a href="profil.html" target="_blank">Profil</a></li>
+                <li><a href="entreprise.html" target="_blank">Entreprise</a></li>
+                <li><a href="epreuves.html" target="_blank">Epreuves</a></li>
+                <li><a href="veille.html" target="_blank">Veille</a></li>
+                <li><a href="contact.html" target="_blank">Contact</a></li>
                 <li>
                     <div class="search-container">
                         <input type="text" placeholder="Rechercher...">
@@ -592,9 +690,11 @@
 
     <!-- Section Hero -->
     <section id="accueil" class="hero">
-        <h1>Bienvenue sur mon portfolio</h1>
-        <p>Découvrez mon parcours, mes compétences et mes réalisations</p>
-        <a href="#profil" class="btn">En savoir plus</a>
+        <div class="hero-content">
+            <h1>Bienvenue sur mon portfolio</h1>
+            <p>Découvrez mon parcours, mes compétences et mes réalisations</p>
+            <a href="#profil" class="btn">En savoir plus</a>
+        </div>
     </section>
 
     <!-- Section Profil -->
@@ -607,12 +707,12 @@
                 <div class="about-image">
                     <img src="https://source.unsplash.com/random/600x600/?portrait" alt="Photo de profil">
                 </div>
-                <div class="about-text">
+                <div class="about-text glass-card">
                     <h3>Qui suis-je ?</h3>
                     <p>Je suis un(e) [votre métier] passionné(e) avec [X] années d'expérience dans [votre domaine]. J'aime créer des solutions innovantes et élégantes qui répondent aux besoins des utilisateurs.</p>
                     <p>Mon approche combine créativité, expertise technique et attention aux détails pour livrer des projets de qualité qui dépassent les attentes.</p>
                     <p>En dehors du travail, j'aime [vos hobbies/passions] qui m'aident à maintenir un équilibre et une perspective fraîche sur les défis créatifs.</p>
-                    <a href="#contact" class="btn">Me contacter</a>
+                    <a href="profil.html" target="_blank" class="btn">Voir mon profil complet</a>
                 </div>
             </div>
         </div>
@@ -625,12 +725,12 @@
                 <h2>Entreprise</h2>
             </div>
             <div class="company-info">
-                <div class="company-text">
+                <div class="company-text glass-card">
                     <h3>Mon entreprise / Stage</h3>
                     <p>Présentation de l'entreprise où j'ai effectué mon stage ou dans laquelle je travaille. Description des activités principales, de la culture d'entreprise et de mon rôle au sein de l'organisation.</p>
                     <p>Durant mon expérience, j'ai pu [décrire vos principales réalisations et responsabilités]. Cette immersion m'a permis de développer [compétences acquises].</p>
                     <p>L'environnement de travail était [décrire l'ambiance, les valeurs, etc.] ce qui a grandement contribué à mon épanouissement professionnel.</p>
-                    <a href="#epreuves" class="btn">Voir mes réalisations</a>
+                    <a href="entreprise.html" target="_blank" class="btn">En savoir plus sur l'entreprise</a>
                 </div>
                 <div class="company-image">
                     <img src="https://source.unsplash.com/random/600x400/?office" alt="Entreprise">
@@ -658,7 +758,7 @@
                             <span>JavaScript</span>
                             <span>React</span>
                         </div>
-                        <a href="#" class="btn">Voir le projet</a>
+                        <a href="projet1.html" target="_blank" class="btn">Voir le projet</a>
                     </div>
                 </div>
                 <div class="project-card">
@@ -673,7 +773,7 @@
                             <span>Firebase</span>
                             <span>API REST</span>
                         </div>
-                        <a href="#" class="btn">Voir le projet</a>
+                        <a href="projet2.html" target="_blank" class="btn">Voir le projet</a>
                     </div>
                 </div>
                 <div class="project-card">
@@ -688,7 +788,7 @@
                             <span>Node.js</span>
                             <span>MongoDB</span>
                         </div>
-                        <a href="#" class="btn">Voir le projet</a>
+                        <a href="projet3.html" target="_blank" class="btn">Voir le projet</a>
                     </div>
                 </div>
             </div>
@@ -710,7 +810,7 @@
                             <span><i class="far fa-folder"></i> Développement</span>
                         </div>
                         <p>Analyse des dernières tendances en matière de frameworks JavaScript, outils de développement et méthodologies de travail dans le domaine du développement web.</p>
-                        <a href="#" class="btn">Lire la suite</a>
+                        <a href="article1.html" target="_blank" class="btn">Lire la suite</a>
                     </div>
                     <div class="veille-article">
                         <h3>L'impact de l'IA sur le métier de développeur</h3>
@@ -719,17 +819,17 @@
                             <span><i class="far fa-folder"></i> Intelligence Artificielle</span>
                         </div>
                         <p>Exploration des outils d'IA qui transforment la façon dont les développeurs travaillent, des assistants de code aux générateurs automatiques.</p>
-                        <a href="#" class="btn">Lire la suite</a>
+                        <a href="article2.html" target="_blank" class="btn">Lire la suite</a>
                     </div>
                 </div>
                 <div class="veille-sidebar">
                     <h3>Ressources</h3>
                     <ul class="sidebar-links">
-                        <li><a href="#"><i class="fas fa-external-link-alt"></i> Blog technique</a></li>
-                        <li><a href="#"><i class="fas fa-external-link-alt"></i> Documentation</a></li>
-                        <li><a href="#"><i class="fas fa-external-link-alt"></i> Forum communautaire</a></li>
-                        <li><a href="#"><i class="fas fa-external-link-alt"></i> Tutoriels</a></li>
-                        <li><a href="#"><i class="fas fa-external-link-alt"></i> Outils en ligne</a></li>
+                        <li><a href="blog.html" target="_blank"><i class="fas fa-external-link-alt"></i> Blog technique</a></li>
+                        <li><a href="docs.html" target="_blank"><i class="fas fa-external-link-alt"></i> Documentation</a></li>
+                        <li><a href="forum.html" target="_blank"><i class="fas fa-external-link-alt"></i> Forum communautaire</a></li>
+                        <li><a href="tutoriels.html" target="_blank"><i class="fas fa-external-link-alt"></i> Tutoriels</a></li>
+                        <li><a href="outils.html" target="_blank"><i class="fas fa-external-link-alt"></i> Outils en ligne</a></li>
                     </ul>
                 </div>
             </div>
@@ -832,9 +932,9 @@
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             if (window.scrollY > 100) {
-                header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
             } else {
-                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
             }
         });
 
