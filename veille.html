@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veille Technologique - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #7f8c8d;
+            --accent-color: rgba(255, 255, 255, 0.2);
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --text-color: #2c3e50;
+            --transition: all 0.3s ease;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 2rem 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+        }
+
+        .veille-intro {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--glass-shadow);
+            text-align: center;
+        }
+
+        .veille-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .articles-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .article-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--glass-shadow);
+            transition: var(--transition);
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .article-header {
+            display: flex;
+            justify-content: between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .article-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .veille-sidebar {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--glass-shadow);
+            height: fit-content;
+        }
+
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-section h3 {
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .resources-list {
+            list-style: none;
+        }
+
+        .resources-list li {
+            margin-bottom: 0.8rem;
+            padding: 0.8rem;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .resources-list li:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .resources-list a {
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .tool-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .tool-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .tool-item i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--glass-border);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 30px;
+            transition: var(--transition);
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--glass-border);
+            color: var(--primary-color);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--glass-bg);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 2rem;
+                transition: var(--transition);
+                border-right: 1px solid var(--glass-border);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+
+            .veille-content {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">MonPortfolio</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="profil.html">Profil</a></li>
+                <li><a href="entreprise.html">Entreprise</a></li>
+                <li><a href="epreuves.html">Epreuves</a></li>
+                <li><a href="veille.html">Veille</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Veille Technologique</h1>
+            <p>Restez informé des dernières tendances et innovations technologiques</p>
+        </div>
+
+        <div class="veille-intro">
+            <h2>Ma Veille Technologique</h2>
+            <p>Je me tiens constamment informé des évolutions dans le domaine du développement web, des nouvelles technologies et des meilleures pratiques. Voici mes principales sources et découvertes récentes.</p>
+        </div>
+
+        <div class="veille-content">
+            <div class="articles-grid">
+                <div class="article-card">
+                    <div class="article-header">
+                        <h3>L'avenir du développement front-end en 2024</h3>
+                    </div>
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i> 15 Janvier 2024</span>
+                        <span><i class="far fa-clock"></i> 5 min de lecture</span>
+                    </div>
+                    <div class="article-tags">
+                        <span class="tag">Front-end</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Trends</span>
+                    </div>
+                    <p>Analyse des nouvelles tendances en développement front-end : frameworks émergents, outils de build, et méthodologies de travail. Focus sur l'évolution de React, Vue.js et Svelte.</p>
+                    <a href="#" class="btn">Lire l'article complet</a>
+                </div>
+
+                <div class="article-card">
+                    <div class="article-header">
+                        <h3>IA et développement : révolution ou évolution ?</h3>
+                    </div>
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i> 8 Janvier 2024</span>
+                        <span><i class="far fa-clock"></i> 8 min de lecture</span>
+                    </div>
+                    <div class="article-tags">
+                        <span class="tag">IA</span>
+                        <span class="tag">Productivité</span>
+                        <span class="tag">Outils</span>
+                    </div>
+                    <p>Exploration de l'impact des outils d'IA comme GitHub Copilot, ChatGPT et autres assistants de code sur le métier de développeur. Analyse des opportunités et des limites.</p>
+                    <a href="#" class="btn">Lire l'article complet</a>
+                </div>
+
+                <div class="article-card">
+                    <div class="article-header">
+                        <h3>Les bonnes pratiques SEO en 2024</h3>
+                    </div>
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i> 2 Janvier 2024</span>
+                        <span><i class="far fa-clock"></i> 6 min de lecture</span>
+                    </div>
+                    <div class="article-tags">
+                        <span class="tag">SEO</span>
+                        <span class="tag">Performance</span>
+                        <span class="tag">Web</span>
+                    </div>
+                    <p>Mise à jour des meilleures pratiques SEO pour les applications web modernes. Focus sur Core Web Vitals, l'optimisation mobile et les nouvelles directives Google.</p>
+                    <a href="#" class="btn">Lire l'article complet</a>
+                </div>
+            </div>
+
+            <div class="veille-sidebar">
+                <div class="sidebar-section">
+                    <h3>Mes Sources</h3>
+                    <ul class="resources-list">
+                        <li><a href="#"><i class="fab fa-medium"></i> Medium</a></li>
+                        <li><a href="#"><i class="fab fa-dev"></i> Dev.to</a></li>
+                        <li><a href="#"><i class="fab fa-github"></i> GitHub</a></li>
+                        <li><a href="#"><i class="fab fa-stack-overflow"></i> Stack Overflow</a></li>
+                        <li><a href="#"><i class="fas fa-rss"></i> RSS Feeds</a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter Tech</a></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Outils de Veille</h3>
+                    <div class="tools-grid">
+                        <div class="tool-item">
+                            <i class="fas fa-newspaper"></i>
+                            <div>Feedly</div>
+                        </div>
+                        <div class="tool-item">
+                            <i class="fas fa-bookmark"></i>
+                            <div>Pocket</div>
+                        </div>
+                        <div class="tool-item">
+                            <i class="fas fa-share-alt"></i>
+                            <div>Notion</div>
+                        </div>
+                        <div class="tool-item">
+                            <i class="fas fa-chart-line"></i>
+                            <div>Trends</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Thèmes Suivis</h3>
+                    <div class="article-tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">React</span>
+                        <span class="tag">IA</span>
+                        <span class="tag">SEO</span>
+                        <span class="tag">Performance</span>
+                        <span class="tag">Accessibilité</span>
+                        <span class="tag">Security</span>
+                        <span class="tag">DevOps</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Mon Portfolio. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
