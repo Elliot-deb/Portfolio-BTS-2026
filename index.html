@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio BTS SIO - Elliot SIMONET /title>
+    <title>Mon Portfolio - Accueil</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Variables et reset */
         :root {
             --primary-color: #2c3e50;
             --secondary-color: #7f8c8d;
@@ -38,7 +37,6 @@
             min-height: 100vh;
         }
 
-        /* Navigation */
         header {
             position: fixed;
             top: 0;
@@ -46,7 +44,6 @@
             width: 100%;
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--glass-border);
             box-shadow: var(--glass-shadow);
             z-index: 1000;
@@ -88,58 +85,12 @@
             border-radius: 30px;
             background: var(--glass-bg);
             backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
             border: 1px solid var(--glass-border);
         }
 
         .nav-links a:hover {
             background: rgba(255, 255, 255, 0.3);
             transform: translateY(-2px);
-        }
-
-        .search-container {
-            display: flex;
-            align-items: center;
-            margin-left: 1.5rem;
-        }
-
-        .search-container input {
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            font-size: 0.9rem;
-            width: 180px;
-            transition: var(--transition);
-            background: var(--glass-bg);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-        }
-
-        .search-container input:focus {
-            outline: none;
-            border-color: rgba(255, 255, 255, 0.5);
-            width: 220px;
-        }
-
-        .search-container button {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 50%;
-            margin-left: 0.5rem;
-            color: var(--primary-color);
-            cursor: pointer;
-            transition: var(--transition);
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-        }
-
-        .search-container button:hover {
-            background: rgba(255, 255, 255, 0.3);
         }
 
         .hamburger {
@@ -149,7 +100,6 @@
             color: var(--primary-color);
         }
 
-        /* Hero Section */
         .hero {
             height: 100vh;
             display: flex;
@@ -172,14 +122,12 @@
             height: 100%;
             background: var(--glass-bg);
             backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
             z-index: -1;
         }
 
         .hero-content {
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
             padding: 3rem;
@@ -202,7 +150,6 @@
             padding: 0.8rem 2rem;
             background: var(--glass-bg);
             backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
             border: 1px solid var(--glass-border);
             color: var(--primary-color);
             text-decoration: none;
@@ -218,408 +165,55 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
-        /* Sections communes */
-        section {
-            padding: 5rem 2rem;
+        .quick-links {
+            padding: 4rem 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--glass-border);
         }
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: var(--primary-color);
-            border-radius: 2px;
-        }
-
-        .container {
+        .links-grid {
             max-width: 1200px;
             margin: 0 auto;
-        }
-
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            box-shadow: var(--glass-shadow);
-            padding: 2rem;
-            transition: var(--transition);
-        }
-
-        .glass-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(31, 38, 135, 0.3);
-        }
-
-        /* Profil */
-        .about-content {
             display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-image {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--glass-shadow);
-        }
-
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: var(--transition);
-        }
-
-        .about-image:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-            color: var(--secondary-color);
-        }
-
-        /* Entreprise */
-        .company-info {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .company-image {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--glass-shadow);
-        }
-
-        .company-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .company-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .company-text p {
-            margin-bottom: 1.5rem;
-            color: var(--secondary-color);
-        }
-
-        /* Epreuves */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
 
-        .project-card {
+        .link-card {
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--glass-shadow);
-            transition: var(--transition);
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(31, 38, 135, 0.3);
-        }
-
-        .project-image {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .project-card:hover .project-image img {
-            transform: scale(1.1);
-        }
-
-        .project-info {
-            padding: 1.5rem;
-        }
-
-        .project-info h3 {
-            margin-bottom: 0.5rem;
-        }
-
-        .project-info p {
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-tags span {
-            background: rgba(255, 255, 255, 0.3);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: var(--secondary-color);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-        }
-
-        /* Veille */
-        .veille-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 3rem;
-        }
-
-        .veille-articles {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .veille-article {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
             border-radius: 15px;
             padding: 2rem;
-            box-shadow: var(--glass-shadow);
-        }
-
-        .veille-article h3 {
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .veille-article .meta {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: var(--secondary-color);
-        }
-
-        .veille-sidebar {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: var(--glass-shadow);
-            height: fit-content;
-        }
-
-        .veille-sidebar h3 {
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .sidebar-links {
-            list-style: none;
-        }
-
-        .sidebar-links li {
-            margin-bottom: 1rem;
-        }
-
-        .sidebar-links a {
+            text-align: center;
+            transition: var(--transition);
             text-decoration: none;
             color: var(--primary-color);
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            padding: 0.5rem;
-            border-radius: 8px;
         }
 
-        .sidebar-links a:hover {
+        .link-card:hover {
+            transform: translateY(-10px);
             background: rgba(255, 255, 255, 0.2);
         }
 
-        .sidebar-links i {
-            margin-right: 0.5rem;
+        .link-card i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
             color: var(--primary-color);
         }
 
-        /* Contact */
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+        .link-card h3 {
+            margin-bottom: 1rem;
         }
 
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            padding: 1.5rem;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            box-shadow: var(--glass-shadow);
-        }
-
-        .contact-item i {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            margin-top: 0.3rem;
-        }
-
-        .contact-form {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: var(--glass-shadow);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid var(--glass-border);
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: var(--transition);
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: rgba(255, 255, 255, 0.5);
-            outline: none;
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Footer */
         footer {
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             border-top: 1px solid var(--glass-border);
             color: var(--primary-color);
-            padding: 3rem 2rem;
+            padding: 2rem;
             text-align: center;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .social-links a {
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            transition: var(--transition);
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--glass-bg);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            border: 1px solid var(--glass-border);
-            border-radius: 50%;
-        }
-
-        .social-links a:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            margin-top: 2rem;
-            color: var(--secondary-color);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 992px) {
-            .about-content,
-            .company-info,
-            .contact-content,
-            .veille-content {
-                grid-template-columns: 1fr;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
         }
 
         @media (max-width: 768px) {
@@ -635,7 +229,6 @@
                 height: calc(100vh - 70px);
                 background: var(--glass-bg);
                 backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
                 flex-direction: column;
                 align-items: center;
                 justify-content: flex-start;
@@ -652,35 +245,27 @@
                 margin: 1.5rem 0;
             }
 
-            .search-container {
-                margin-left: 0;
-                margin-top: 1rem;
+            .hero h1 {
+                font-size: 2.5rem;
             }
 
-            .projects-grid {
-                grid-template-columns: 1fr;
+            .hero p {
+                font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <header>
         <nav>
-            <a href="#" class="logo">Portfolio BTS SIO SISR</a>
+            <a href="index.html" class="logo">MonPortfolio</a>
             <ul class="nav-links">
-                <li><a href="accueil.html" target="_blank">Accueil</a></li>
-                <li><a href="profil.html" target="_blank">Profil</a></li>
-                <li><a href="entreprise.html" target="_blank">Entreprise</a></li>
-                <li><a href="epreuves.html" target="_blank">Epreuves</a></li>
-                <li><a href="veille.html" target="_blank">Veille</a></li>
-                <li><a href="contact.html" target="_blank">Contact</a></li>
-                <li>
-                    <div class="search-container">
-                        <input type="text" placeholder="Rechercher...">
-                        <button type="submit"><i class="fas fa-search"></i></button>
-                    </div>
-                </li>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="profil.html">Profil</a></li>
+                <li><a href="entreprise.html">Entreprise</a></li>
+                <li><a href="epreuves.html">Epreuves</a></li>
+                <li><a href="veille.html">Veille</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
             <div class="hamburger">
                 <i class="fas fa-bars"></i>
@@ -688,232 +273,44 @@
         </nav>
     </header>
 
-    <!-- Section Hero -->
-    <section id="accueil" class="hero">
+    <section class="hero">
         <div class="hero-content">
-            <h1>PAR ELLIOT SIMONET</h1>
-            <p>Découvrez à propos de moi, mon entreprise et mes veilles technologiques</p>
-            <a href="#profil" class="btn">En savoir plus</a>
+            <h1>Bienvenue sur mon Portfolio</h1>
+            <p>Développeur passionné créant des expériences digitales exceptionnelles</p>
+            <a href="#quick-links" class="btn">Découvrir mon travail</a>
         </div>
     </section>
 
-    <!-- Section Profil -->
-    <section id="profil" class="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>Mon Profil</h2>
-            </div>
-            <div class="about-content">
-                <div class="about-image">
-                    <img src="https://source.unsplash.com/random/600x600/?portrait" alt="Photo de profil">
-                </div>
-                <div class="about-text glass-card">
-                    <h3>Qui suis-je ?</h3>
-                    <p>Je suis un(e) [votre métier] passionné(e) avec [X] années d'expérience dans [votre domaine]. J'aime créer des solutions innovantes et élégantes qui répondent aux besoins des utilisateurs.</p>
-                    <p>Mon approche combine créativité, expertise technique et attention aux détails pour livrer des projets de qualité qui dépassent les attentes.</p>
-                    <p>En dehors du travail, j'aime [vos hobbies/passions] qui m'aident à maintenir un équilibre et une perspective fraîche sur les défis créatifs.</p>
-                    <a href="profil.html" target="_blank" class="btn">Voir mon profil complet</a>
-                </div>
-            </div>
+    <section id="quick-links" class="quick-links">
+        <div class="links-grid">
+            <a href="profil.html" class="link-card">
+                <i class="fas fa-user"></i>
+                <h3>Mon Profil</h3>
+                <p>Découvrez mon parcours et mes compétences</p>
+            </a>
+            <a href="entreprise.html" class="link-card">
+                <i class="fas fa-building"></i>
+                <h3>Entreprise</h3>
+                <p>Mon expérience professionnelle</p>
+            </a>
+            <a href="epreuves.html" class="link-card">
+                <i class="fas fa-project-diagram"></i>
+                <h3>Épreuves</h3>
+                <p>Mes projets et réalisations</p>
+            </a>
+            <a href="veille.html" class="link-card">
+                <i class="fas fa-binoculars"></i>
+                <h3>Veille Techno</h3>
+                <p>Mes recherches et analyses</p>
+            </a>
         </div>
     </section>
 
-    <!-- Section Entreprise -->
-    <section id="entreprise" class="company">
-        <div class="container">
-            <div class="section-title">
-                <h2>Entreprise</h2>
-            </div>
-            <div class="company-info">
-                <div class="company-text glass-card">
-                    <h3>Mon entreprise / Stage</h3>
-                    <p>Présentation de l'entreprise où j'ai effectué mon stage ou dans laquelle je travaille. Description des activités principales, de la culture d'entreprise et de mon rôle au sein de l'organisation.</p>
-                    <p>Durant mon expérience, j'ai pu [décrire vos principales réalisations et responsabilités]. Cette immersion m'a permis de développer [compétences acquises].</p>
-                    <p>L'environnement de travail était [décrire l'ambiance, les valeurs, etc.] ce qui a grandement contribué à mon épanouissement professionnel.</p>
-                    <a href="entreprise.html" target="_blank" class="btn">En savoir plus sur l'entreprise</a>
-                </div>
-                <div class="company-image">
-                    <img src="https://source.unsplash.com/random/600x400/?office" alt="Entreprise">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Epreuves -->
-    <section id="epreuves" class="projects">
-        <div class="container">
-            <div class="section-title">
-                <h2>Mes Épreuves</h2>
-            </div>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://source.unsplash.com/random/600x400/?website" alt="Projet 1">
-                    </div>
-                    <div class="project-info">
-                        <h3>Site E-commerce</h3>
-                        <p>Plateforme de vente en ligne avec système de paiement sécurisé et gestion des stocks.</p>
-                        <div class="project-tags">
-                            <span>HTML/CSS</span>
-                            <span>JavaScript</span>
-                            <span>React</span>
-                        </div>
-                        <a href="projet1.html" target="_blank" class="btn">Voir le projet</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://source.unsplash.com/random/600x400/?app" alt="Projet 2">
-                    </div>
-                    <div class="project-info">
-                        <h3>Application Mobile</h3>
-                        <p>Application de suivi de fitness avec tableau de bord personnalisé et statistiques.</p>
-                        <div class="project-tags">
-                            <span>React Native</span>
-                            <span>Firebase</span>
-                            <span>API REST</span>
-                        </div>
-                        <a href="projet2.html" target="_blank" class="btn">Voir le projet</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://source.unsplash.com/random/600x400/?design" alt="Projet 3">
-                    </div>
-                    <div class="project-info">
-                        <h3>Plateforme SaaS</h3>
-                        <p>Solution de gestion de projet avec collaboration en temps réel et rapports avancés.</p>
-                        <div class="project-tags">
-                            <span>Vue.js</span>
-                            <span>Node.js</span>
-                            <span>MongoDB</span>
-                        </div>
-                        <a href="projet3.html" target="_blank" class="btn">Voir le projet</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Veille -->
-    <section id="veille" class="veille">
-        <div class="container">
-            <div class="section-title">
-                <h2>Veille Technologique</h2>
-            </div>
-            <div class="veille-content">
-                <div class="veille-articles">
-                    <div class="veille-article">
-                        <h3>Tendances actuelles en développement web</h3>
-                        <div class="meta">
-                            <span><i class="far fa-calendar"></i> 15 Octobre 2023</span>
-                            <span><i class="far fa-folder"></i> Développement</span>
-                        </div>
-                        <p>Analyse des dernières tendances en matière de frameworks JavaScript, outils de développement et méthodologies de travail dans le domaine du développement web.</p>
-                        <a href="article1.html" target="_blank" class="btn">Lire la suite</a>
-                    </div>
-                    <div class="veille-article">
-                        <h3>L'impact de l'IA sur le métier de développeur</h3>
-                        <div class="meta">
-                            <span><i class="far fa-calendar"></i> 5 Octobre 2023</span>
-                            <span><i class="far fa-folder"></i> Intelligence Artificielle</span>
-                        </div>
-                        <p>Exploration des outils d'IA qui transforment la façon dont les développeurs travaillent, des assistants de code aux générateurs automatiques.</p>
-                        <a href="article2.html" target="_blank" class="btn">Lire la suite</a>
-                    </div>
-                </div>
-                <div class="veille-sidebar">
-                    <h3>Ressources</h3>
-                    <ul class="sidebar-links">
-                        <li><a href="blog.html" target="_blank"><i class="fas fa-external-link-alt"></i> Blog technique</a></li>
-                        <li><a href="docs.html" target="_blank"><i class="fas fa-external-link-alt"></i> Documentation</a></li>
-                        <li><a href="forum.html" target="_blank"><i class="fas fa-external-link-alt"></i> Forum communautaire</a></li>
-                        <li><a href="tutoriels.html" target="_blank"><i class="fas fa-external-link-alt"></i> Tutoriels</a></li>
-                        <li><a href="outils.html" target="_blank"><i class="fas fa-external-link-alt"></i> Outils en ligne</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Contact -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Contactez-moi</h2>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h3>Adresse</h3>
-                            <p>[Votre ville], [Votre pays]</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <h3>Téléphone</h3>
-                            <p>[Votre numéro de téléphone]</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h3>Email</h3>
-                            <p>[votre.email@example.com]</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-clock"></i>
-                        <div>
-                            <h3>Disponibilité</h3>
-                            <p>Lun - Ven: 9h - 18h</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <label for="name">Nom</label>
-                            <input type="text" id="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Sujet</label>
-                            <input type="text" id="subject" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn">Envoyer le message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <a href="#" class="logo">MonPortfolio</a>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
-            <p class="copyright">&copy; 2023 [Votre Nom]. Tous droits réservés.</p>
-        </div>
+        <p>&copy; 2024 Mon Portfolio. Tous droits réservés.</p>
     </footer>
 
     <script>
-        // Menu mobile
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
 
@@ -921,43 +318,10 @@
             navLinks.classList.toggle('active');
         });
 
-        // Fermer le menu en cliquant sur un lien
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
             });
-        });
-
-        // Animation au défilement
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-            } else {
-                header.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-            }
-        });
-
-        // Recherche
-        const searchInput = document.querySelector('.search-container input');
-        const searchButton = document.querySelector('.search-container button');
-
-        searchButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (searchInput.value.trim() !== '') {
-                alert('Recherche pour: ' + searchInput.value);
-                // Ici vous pouvez ajouter la logique de recherche réelle
-            }
-        });
-
-        searchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                if (searchInput.value.trim() !== '') {
-                    alert('Recherche pour: ' + searchInput.value);
-                    // Ici vous pouvez ajouter la logique de recherche réelle
-                }
-            }
         });
     </script>
 </body>
