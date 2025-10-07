@@ -3,162 +3,670 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio BTS SIO SISR</title>
+    <title>Mon Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            margin: 0;
-            background: #f6f8fc;
-            color: #222;
+        /* Variables et reset */
+        :root {
+            --primary-color: #333;
+            --secondary-color: #666;
+            --accent-color: #007bff;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --transition: all 0.3s ease;
         }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--primary-color);
+            background-color: var(--light-color);
+        }
+
+        /* Navigation */
         header {
-            background: #2d3e50;
-            color: #fff;
-            padding: 30px 0 20px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1920x1080') no-repeat center center/cover;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+
+        /* Sections communes */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* À propos */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* Compétences */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-card i {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        /* Projets */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-info h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .project-info p {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tags span {
+            background-color: #f1f1f1;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+        }
+
+        /* Contact */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-top: 0.3rem;
+        }
+
+        .contact-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 2rem;
             text-align: center;
         }
-        nav {
-            background: #203040;
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            padding: 10px 0;
+            gap: 1.5rem;
+            margin: 2rem 0;
         }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            padding: 8px 18px;
-            border-radius: 6px;
-            transition: background 0.2s;
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
         }
-        nav a:hover, nav a.active {
-            background: #5673a6;
+
+        .social-links a:hover {
+            color: var(--accent-color);
         }
-        main {
-            max-width: 900px;
-            margin: 30px auto 0 auto;
-            background: #fff;
-            padding: 40px 32px;
-            border-radius: 10px;
-            box-shadow: 0 2px 12px rgba(80,100,140,0.07);
+
+        .copyright {
+            margin-top: 2rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
         }
-        section {
-            margin-bottom: 40px;
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
         }
-        h2 {
-            color: #2d3e50;
-            margin-top: 0;
-        }
-        ul {
-            margin: 0 0 0 20px;
-            padding: 0;
-        }
-        .contact-list li {
-            margin-bottom: 6px;
-        }
-        @media (max-width: 650px) {
-            main {
-                padding: 20px 6px;
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 2rem;
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
-    <script>
-        // Simple SPA-style navigation
-        function showSection(id) {
-            document.querySelectorAll('main section').forEach(
-                section => section.style.display = 'none'
-            );
-            document.getElementById(id).style.display = 'block';
-            document.querySelectorAll('nav a').forEach(
-                a => a.classList.remove('active')
-            );
-            document.getElementById('nav-' + id).classList.add('active');
-        }
-        window.onload = function() {
-            showSection('accueil');
-        }
-    </script>
 </head>
 <body>
+    <!-- Navigation -->
     <header>
-        <h1>Portfolio BTS SIO SISR</h1>
-        <p>Bienvenue sur mon portfolio · Découvrez mon parcours et mes réalisations</p>
+        <nav>
+            <a href="#" class="logo">MonPortfolio</a>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#apropos">À propos</a></li>
+                <li><a href="#competences">Compétences</a></li>
+                <li><a href="#projets">Projets</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
     </header>
-    <nav>
-        <a id="nav-accueil" href="#accueil" onclick="showSection('accueil');return false;">Accueil</a>
-        <a id="nav-bts" href="#bts" onclick="showSection('bts');return false;">BTS SIO SISR</a>
-        <a id="nav-realisations" href="#realisations" onclick="showSection('realisations');return false;">Réalisations</a>
-        <a id="nav-competences" href="#competences" onclick="showSection('competences');return false;">Compétences</a>
-        <a id="nav-parcours" href="#parcours" onclick="showSection('parcours');return false;">Parcours</a>
-        <a id="nav-contact" href="#contact" onclick="showSection('contact');return false;">Contact</a>
-    </nav>
-    <main>
-        <section id="accueil">
-            <h2>Accueil</h2>
-            <p>
-                J’ai conçu ce portfolio pour mettre en valeur mes compétences acquises en entreprise et en formation, ainsi que pour regrouper l’ensemble de mes connaissances obtenues durant ces deux années.
-            </p>
-        </section>
-        <section id="bts" style="display:none">
-            <h2>BTS SIO SISR</h2>
-            <p>
-                Le BTS SIO SISR en alternance forme des professionnels capables de gérer les infrastructures systèmes et réseaux dans les organisations. Ce cursus permet d’acquérir des compétences pour concevoir, déployer et maintenir des solutions informatiques, avec une immersion professionnelle grâce à l’alternance.
-            </p>
-            <ul>
-                <li>Gestion des serveurs et réseaux</li>
-                <li>Mise en place de solutions sécurisées</li>
-                <li>Maintenance et supervision des systèmes</li>
-                <li>Cybersécurité et gestion des incidents</li>
-            </ul>
-        </section>
-        <section id="realisations" style="display:none">
-            <h2>Réalisations</h2>
-            <ul>
-                <li>
-                    <strong>Projet 1 – Titre de ton projet</strong>
-                    <br>
-                    Description : Brève description du projet, technologies utilisées, objectifs.
-                </li>
-                <li>
-                    <strong>Projet 2 – Titre de ton projet</strong>
-                    <br>
-                    Description : Brève description du projet, technologies utilisées, objectifs.
-                </li>
-                <li>
-                    <strong>Projet 3 – Titre de ton projet</strong>
-                    <br>
-                    Description : Brève description du projet, technologies utilisées, objectifs.
-                </li>
-            </ul>
-        </section>
-        <section id="competences" style="display:none">
-            <h2>Compétences</h2>
-            <ul>
-                <li>Administration systèmes (Windows, Linux)</li>
-                <li>Gestion de réseaux informatiques</li>
-                <li>Sécurité et sauvegarde des données</li>
-                <li>Virtualisation</li>
-                <li>Scripting (PowerShell, Bash)</li>
-                <li>Développement web (HTML, CSS, PHP…)</li>
-            </ul>
-        </section>
-        <section id="parcours" style="display:none">
-            <h2>Parcours</h2>
-            <ul>
-                <li>2023–2025 : BTS SIO SISR – [Nom de l’établissement]</li>
-                <li>2024 – Stage en entreprise – [Nom de l’entreprise]</li>
-                <li>Autres expériences – [Détail à personnaliser]</li>
-            </ul>
-        </section>
-        <section id="contact" style="display:none">
-            <h2>Contact</h2>
-            <ul class="contact-list">
-                <li>Email : <a href="mailto:ton.email@example.com">ton.email@example.com</a></li>
-                <li>LinkedIn : <a href="https://linkedin.com/in/ton-profil" target="_blank">ton-profil</a></li>
-                <li>GitHub : <a href="https://github.com/ton-profil" target="_blank">ton-profil</a></li>
-            </ul>
-        </section>
-    </main>
+
+    <!-- Section Hero -->
+    <section id="accueil" class="hero">
+        <h1>Bonjour, je suis [Votre Nom]</h1>
+        <p>[Votre métier/titre professionnel] passionné(e) par [vos domaines d'intérêt]</p>
+        <a href="#projets" class="btn">Voir mes projets</a>
+    </section>
+
+    <!-- Section À propos -->
+    <section id="apropos" class="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>À propos de moi</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://source.unsplash.com/random/600x600/?portrait" alt="Photo de profil">
+                </div>
+                <div class="about-text">
+                    <h3>Qui suis-je ?</h3>
+                    <p>Je suis un(e) [votre métier] passionné(e) avec [X] années d'expérience dans [votre domaine]. J'aime créer des solutions innovantes et élégantes qui répondent aux besoins des utilisateurs.</p>
+                    <p>Mon approche combine créativité, expertise technique et attention aux détails pour livrer des projets de qualité qui dépassent les attentes.</p>
+                    <p>En dehors du travail, j'aime [vos hobbies/passions] qui m'aident à maintenir un équilibre et une perspective fraîche sur les défis créatifs.</p>
+                    <a href="#contact" class="btn">Me contacter</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Compétences -->
+    <section id="competences" class="skills">
+        <div class="container">
+            <div class="section-title">
+                <h2>Mes compétences</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Développement Web</h3>
+                    <p>Création de sites web responsives et applications web modernes avec les dernières technologies.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>Design UI/UX</h3>
+                    <p>Conception d'interfaces utilisateur intuitives et d'expériences utilisateur engageantes.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Développement Mobile</h3>
+                    <p>Création d'applications mobiles performantes pour iOS et Android.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-database"></i>
+                    <h3>Bases de données</h3>
+                    <p>Conception et gestion de bases de données relationnelles et non-relationnelles.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Projets -->
+    <section id="projets" class="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>Mes projets</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://source.unsplash.com/random/600x400/?website" alt="Projet 1">
+                    </div>
+                    <div class="project-info">
+                        <h3>Site E-commerce</h3>
+                        <p>Plateforme de vente en ligne avec système de paiement sécurisé et gestion des stocks.</p>
+                        <div class="project-tags">
+                            <span>HTML/CSS</span>
+                            <span>JavaScript</span>
+                            <span>React</span>
+                        </div>
+                        <a href="#" class="btn">Voir le projet</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://source.unsplash.com/random/600x400/?app" alt="Projet 2">
+                    </div>
+                    <div class="project-info">
+                        <h3>Application Mobile</h3>
+                        <p>Application de suivi de fitness avec tableau de bord personnalisé et statistiques.</p>
+                        <div class="project-tags">
+                            <span>React Native</span>
+                            <span>Firebase</span>
+                            <span>API REST</span>
+                        </div>
+                        <a href="#" class="btn">Voir le projet</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://source.unsplash.com/random/600x400/?design" alt="Projet 3">
+                    </div>
+                    <div class="project-info">
+                        <h3>Plateforme SaaS</h3>
+                        <p>Solution de gestion de projet avec collaboration en temps réel et rapports avancés.</p>
+                        <div class="project-tags">
+                            <span>Vue.js</span>
+                            <span>Node.js</span>
+                            <span>MongoDB</span>
+                        </div>
+                        <a href="#" class="btn">Voir le projet</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contactez-moi</h2>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Adresse</h3>
+                            <p>[Votre ville], [Votre pays]</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Téléphone</h3>
+                            <p>[Votre numéro de téléphone]</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p>[votre.email@example.com]</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h3>Disponibilité</h3>
+                            <p>Lun - Ven: 9h - 18h</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Nom</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Sujet</label>
+                            <input type="text" id="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Envoyer le message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <a href="#" class="logo">MonPortfolio</a>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="copyright">&copy; 2023 [Votre Nom]. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Fermer le menu en cliquant sur un lien
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Animation au défilement
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
 </body>
 </html>
-
