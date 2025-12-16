@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Elliot Simonet - Accueil</title>
+    <title>Mon Portfolio - Accueil</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -28,110 +28,15 @@
 
         html {
             scroll-behavior: smooth;
+        }
+
         body {
-    background: #1a1a2e;
-}
-
-.hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-    background: 
-        linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-    overflow: hidden;
-}
-
-.code-animation {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.3;
-}
-
-.code-line {
-    position: absolute;
-    font-family: 'Courier New', monospace;
-    font-size: 18px;
-    color: rgba(0, 255, 255, 0.7);
-    white-space: nowrap;
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-    animation: scrollCode 20s linear infinite;
-}
-
-@keyframes scrollCode {
-    0% {
-        transform: translateY(100vh);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-100px);
-        opacity: 0;
-    }
-}
-</style>
-
-<script>
-// Ajoutez ce script pour générer les lignes de code
-function createCodeLines() {
-    const codeLines = [
-        "const app = new Vue({ el: '#app' });",
-        "function calculateTotal(items) { return items.reduce((a, b) => a + b, 0); }",
-        "import React from 'react';",
-        "export default function Component() { return <div>Hello</div>; }",
-        "const response = await fetch('/api/data');",
-        "console.log('Debug:', variable);",
-        "try { await connectDB(); } catch (error) { console.error(error); }",
-        "const user = { name: 'John', age: 30 };",
-        "for (let i = 0; i < array.length; i++) { process(array[i]); }",
-        "if (user && user.isActive) { sendNotification(); }",
-        "class User { constructor(name) { this.name = name; } }",
-        "const sorted = array.sort((a, b) => a - b);",
-        "const promise = new Promise((resolve, reject) => { ... });",
-        "document.addEventListener('click', handleClick);",
-        "const regex = /^[a-zA-Z0-9]+$/;",
-        "localStorage.setItem('key', JSON.stringify(data));",
-        "const [state, setState] = useState(initialState);",
-        "useEffect(() => { fetchData(); }, []);",
-        "router.get('/api/users', getUsers);",
-        "const result = await axios.get('/api/data');"
-    ];
-
-    const container = document.querySelector('.code-animation');
-    
-    codeLines.forEach((line, index) => {
-        const codeLine = document.createElement('div');
-        codeLine.className = 'code-line';
-        codeLine.textContent = line;
-        
-        // Position aléatoire
-        const left = Math.random() * 90;
-        const delay = Math.random() * 15;
-        const duration = 20 + Math.random() * 10;
-        
-        codeLine.style.left = `${left}%`;
-        codeLine.style.animationDelay = `${delay}s`;
-        codeLine.style.animationDuration = `${duration}s`;
-        
-        container.appendChild(codeLine);
-    });
-}
-
-document.addEventListener('DOMContentLoaded', createCodeLines);
-</script>
-
-      
-        
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
         header {
             position: fixed;
@@ -210,7 +115,14 @@ document.addEventListener('DOMContentLoaded', createCodeLines);
             overflow: hidden;
         }
 
- 
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
 
         .animated-shapes {
             position: absolute;
@@ -577,7 +489,7 @@ document.addEventListener('DOMContentLoaded', createCodeLines);
 <body>
     <header>
         <nav>
-            <a href="index.html" class="logo">Portfolio - Elliot Simonet</a>
+            <a href="index.html" class="logo">MonPortfolio</a>
             <ul class="nav-links">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="profil.html">Profil</a></li>
@@ -594,12 +506,7 @@ document.addEventListener('DOMContentLoaded', createCodeLines);
 
     <section class="hero">
         <!-- Arrière-plan animé -->
-<!--  <div class="hero-background"></div> -->
-        <div class="hero-background">
-    <div class="code-animation">
-        <!-- Lignes de code animées -->
-    </div>
-</div>
+        <div class="hero-background"></div>
         
         <!-- Formes flottantes -->
         <div class="animated-shapes">
@@ -611,13 +518,13 @@ document.addEventListener('DOMContentLoaded', createCodeLines);
         </div>
 
         <!-- Particules -->
-        <div class="particles" id="particles"></div> 
+        <div class="particles" id="particles"></div>
 
         <!-- Contenu principal -->
         <div class="hero-content">
             <h1>Bienvenue sur mon Portfolio</h1>
-            <p>Je suis apprenti en BTS SIO SISR et je travail au service informatique du HPL à Saint-Etienne</p>
-            <a href="#quick-links" class="btn">Découvrez mon Portfolio</a>
+            <p>Développeur passionné créant des expériences digitales exceptionnelles</p>
+            <a href="#quick-links" class="btn">Découvrir mon travail</a>
         </div>
     </section>
 
@@ -626,28 +533,28 @@ document.addEventListener('DOMContentLoaded', createCodeLines);
             <a href="profil.html" class="link-card">
                 <i class="fas fa-user"></i>
                 <h3>Mon Profil</h3>
-                <p>En savoir plus sur moi et découvrez mon parcours et mes compétences</p>
+                <p>Découvrez mon parcours et mes compétences</p>
             </a>
             <a href="entreprise.html" class="link-card">
                 <i class="fas fa-building"></i>
                 <h3>Entreprise</h3>
-                <p>Mon expérience professionnelle en alternance</p>
+                <p>Mon expérience professionnelle</p>
             </a>
             <a href="epreuves.html" class="link-card">
                 <i class="fas fa-project-diagram"></i>
-                <h3>Tableau de compétences</h3>
-                <p>Découvez mon tableau de compétences</p>
+                <h3>Épreuves</h3>
+                <p>Mes projets et réalisations</p>
             </a>
             <a href="veille.html" class="link-card">
                 <i class="fas fa-binoculars"></i>
                 <h3>Veille Techno</h3>
-                <p>Découvrir mes deux veilles technologiques</p>
+                <p>Mes recherches et analyses</p>
             </a>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 Portfolio Elliot Simonet. Tous droits réservés.</p>
+        <p>&copy; 2024 Mon Portfolio. Tous droits réservés.</p>
     </footer>
 
     <script>
