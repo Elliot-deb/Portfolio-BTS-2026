@@ -28,15 +28,110 @@
 
         html {
             scroll-behavior: smooth;
-        }
-
         body {
-            line-height: 1.6;
-            color: var(--text-color);
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+    background: #1a1a2e;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background: 
+        linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    overflow: hidden;
+}
+
+.code-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+}
+
+.code-line {
+    position: absolute;
+    font-family: 'Courier New', monospace;
+    font-size: 18px;
+    color: rgba(0, 255, 255, 0.7);
+    white-space: nowrap;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    animation: scrollCode 20s linear infinite;
+}
+
+@keyframes scrollCode {
+    0% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+}
+</style>
+
+<script>
+// Ajoutez ce script pour générer les lignes de code
+function createCodeLines() {
+    const codeLines = [
+        "const app = new Vue({ el: '#app' });",
+        "function calculateTotal(items) { return items.reduce((a, b) => a + b, 0); }",
+        "import React from 'react';",
+        "export default function Component() { return <div>Hello</div>; }",
+        "const response = await fetch('/api/data');",
+        "console.log('Debug:', variable);",
+        "try { await connectDB(); } catch (error) { console.error(error); }",
+        "const user = { name: 'John', age: 30 };",
+        "for (let i = 0; i < array.length; i++) { process(array[i]); }",
+        "if (user && user.isActive) { sendNotification(); }",
+        "class User { constructor(name) { this.name = name; } }",
+        "const sorted = array.sort((a, b) => a - b);",
+        "const promise = new Promise((resolve, reject) => { ... });",
+        "document.addEventListener('click', handleClick);",
+        "const regex = /^[a-zA-Z0-9]+$/;",
+        "localStorage.setItem('key', JSON.stringify(data));",
+        "const [state, setState] = useState(initialState);",
+        "useEffect(() => { fetchData(); }, []);",
+        "router.get('/api/users', getUsers);",
+        "const result = await axios.get('/api/data');"
+    ];
+
+    const container = document.querySelector('.code-animation');
+    
+    codeLines.forEach((line, index) => {
+        const codeLine = document.createElement('div');
+        codeLine.className = 'code-line';
+        codeLine.textContent = line;
+        
+        // Position aléatoire
+        const left = Math.random() * 90;
+        const delay = Math.random() * 15;
+        const duration = 20 + Math.random() * 10;
+        
+        codeLine.style.left = `${left}%`;
+        codeLine.style.animationDelay = `${delay}s`;
+        codeLine.style.animationDuration = `${duration}s`;
+        
+        container.appendChild(codeLine);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', createCodeLines);
+</script>
+
+      
+        
 
         header {
             position: fixed;
@@ -115,14 +210,7 @@
             overflow: hidden;
         }
 
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-        }
+ 
 
         .animated-shapes {
             position: absolute;
@@ -506,7 +594,12 @@
 
     <section class="hero">
         <!-- Arrière-plan animé -->
-        <div class="hero-background"></div>
+<!--  <div class="hero-background"></div> -->
+        <div class="hero-background">
+    <div class="code-animation">
+        <!-- Lignes de code animées -->
+    </div>
+</div>
         
         <!-- Formes flottantes -->
         <div class="animated-shapes">
@@ -518,7 +611,7 @@
         </div>
 
         <!-- Particules -->
-        <div class="particles" id="particles"></div>
+        <div class="particles" id="particles"></div> 
 
         <!-- Contenu principal -->
         <div class="hero-content">
