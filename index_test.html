@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Portfolio - Accueil</title>
+    <title>Portfolio - Accueil</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #2c3e50;
             --secondary-color: #7f8c8d;
             --accent-color: rgba(255, 255, 255, 0.2);
-            --light-color: #f8f9fa;
+            --light-color: #ecf0f1;
             --dark-color: #34495e;
             --text-color: #2c3e50;
             --transition: all 0.3s ease;
             --glass-bg: rgba(255, 255, 255, 0.1);
             --glass-border: rgba(255, 255, 255, 0.2);
-            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
         }
 
         * {
@@ -38,100 +38,15 @@
             overflow-x: hidden;
         }
 
-        /* Animation subtile en arrière-plan */
-        .animated-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .floating-shapes {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(5px);
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .shape-1 {
-            width: 300px;
-            height: 300px;
-            top: 10%;
-            left: 5%;
-            animation-delay: 0s;
-        }
-
-        .shape-2 {
-            width: 200px;
-            height: 200px;
-            top: 60%;
-            right: 10%;
-            animation-delay: 5s;
-        }
-
-        .shape-3 {
-            width: 150px;
-            height: 150px;
-            bottom: 20%;
-            left: 20%;
-            animation-delay: 10s;
-        }
-
-        .shape-4 {
-            width: 250px;
-            height: 250px;
-            top: 20%;
-            right: 20%;
-            animation-delay: 15s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(30px, -30px) rotate(120deg); }
-            66% { transform: translate(-20px, 20px) rotate(240deg); }
-        }
-
-        /* Points lumineux subtils */
-        .light-dots {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .dot {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: rgba(52, 152, 219, 0.3);
-            border-radius: 50%;
-            animation: twinkle 4s infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.2); }
-        }
-
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.9);
+            background: var(--glass-bg);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
             z-index: 1000;
             padding: 1rem 0;
         }
@@ -169,11 +84,13 @@
             transition: var(--transition);
             padding: 0.5rem 1rem;
             border-radius: 30px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--glass-border);
         }
 
         .nav-links a:hover {
-            background: rgba(52, 152, 219, 0.1);
-            color: #3498db;
+            background: rgba(255, 255, 255, 0.3);
             transform: translateY(-2px);
         }
 
@@ -184,6 +101,7 @@
             color: var(--primary-color);
         }
 
+        /* Section Hero avec animation */
         .hero {
             height: 100vh;
             display: flex;
@@ -192,188 +110,331 @@
             align-items: center;
             text-align: center;
             padding: 0 2rem;
+            color: var(--primary-color);
             position: relative;
             overflow: hidden;
         }
 
-        /* Image animée en arrière-plan du contenu */
         .hero-background {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80%;
-            height: 80%;
-            max-width: 800px;
-            z-index: 0;
-            opacity: 0.3;
-        }
-
-        .code-animation {
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                /* Grille subtile */
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 40px,
-                    rgba(52, 152, 219, 0.05) 40px,
-                    rgba(52, 152, 219, 0.05) 42px
-                ),
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 40px,
-                    rgba(52, 152, 219, 0.05) 40px,
-                    rgba(52, 152, 219, 0.05) 42px
-                );
-            border-radius: 20px;
-            animation: pulse 8s infinite alternate;
+            z-index: -2;
         }
 
-        @keyframes pulse {
-            0% { opacity: 0.2; }
-            100% { opacity: 0.4; }
+        .animated-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        .shape:nth-child(4) {
+            width: 250px;
+            height: 250px;
+            top: 30%;
+            right: 20%;
+            animation-delay: 1s;
+        }
+
+        .shape:nth-child(5) {
+            width: 180px;
+            height: 180px;
+            bottom: 10%;
+            right: 30%;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
         }
 
         .hero-content {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 20px;
-            padding: 3rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 4rem 3rem;
             box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.1),
-                0 1px 8px rgba(255, 255, 255, 0.5);
-            max-width: 800px;
+                0 25px 50px rgba(31, 38, 135, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            max-width: 900px;
             position: relative;
-            z-index: 1;
+            overflow: hidden;
+            transition: var(--transition);
         }
 
         .hero-content::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, rgba(52, 152, 219, 0.2), rgba(155, 89, 182, 0.2), rgba(52, 152, 219, 0.2));
-            border-radius: 22px;
-            z-index: -1;
-            animation: borderFlow 4s infinite linear;
-            opacity: 0.5;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transition: left 0.5s ease;
         }
 
-        @keyframes borderFlow {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
+        .hero-content:hover::before {
+            left: 100%;
+        }
+
+        .hero-content:hover {
+            transform: translateY(-10px);
+            box-shadow: 
+                0 35px 60px rgba(31, 38, 135, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-            background: linear-gradient(45deg, #3498db, #9b59b6);
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #2c3e50, #3498db);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.1;
         }
 
         .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
             color: var(--secondary-color);
-        }
-
-        .typing-text {
-            color: #3498db;
-            font-family: 'Courier New', monospace;
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            min-height: 30px;
-            font-weight: 500;
+            font-weight: 300;
+            line-height: 1.4;
         }
 
         .btn {
             display: inline-block;
-            padding: 0.8rem 2rem;
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid #3498db;
-            color: #3498db;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: var(--primary-color);
             text-decoration: none;
-            border-radius: 30px;
+            border-radius: 50px;
             transition: var(--transition);
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(5px);
+            font-size: 1.1rem;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.4),
+                transparent
+            );
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn:hover {
-            background: #3498db;
-            color: white;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.2));
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2);
+            box-shadow: 0 15px 30px rgba(31, 38, 135, 0.2);
         }
 
+        /* Particules animées */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: particle-float 8s linear infinite;
+        }
+
+        @keyframes particle-float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Quick Links Section */
         .quick-links {
-            padding: 4rem 2rem;
-            background: rgba(255, 255, 255, 0.8);
+            padding: 6rem 2rem;
+            background: var(--glass-bg);
             backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            border-top: 1px solid var(--glass-border);
+            position: relative;
+        }
+
+        .quick-links::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
         }
 
         .links-grid {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
         }
 
         .link-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 15px;
-            padding: 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
             text-align: center;
             transition: var(--transition);
             text-decoration: none;
             color: var(--primary-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .link-card:hover::before {
+            opacity: 1;
         }
 
         .link-card:hover {
-            transform: translateY(-10px);
-            border-color: #3498db;
-            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.1);
+            transform: translateY(-15px) scale(1.02);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(31, 38, 135, 0.3);
         }
 
         .link-card i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .link-card:hover i {
+            transform: scale(1.2);
             color: #3498db;
         }
 
         .link-card h3 {
             margin-bottom: 1rem;
-            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 600;
         }
 
         .link-card p {
             color: var(--secondary-color);
+            line-height: 1.5;
         }
 
         footer {
-            background: rgba(255, 255, 255, 0.9);
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
-            color: var(--secondary-color);
-            padding: 2rem;
-            text-align: center;
+            background: var(--glass-bg);
             backdrop-filter: blur(10px);
+            border-top: 1px solid var(--glass-border);
+            color: var(--primary-color);
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
         }
 
         @media (max-width: 768px) {
@@ -387,14 +448,14 @@
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 70px);
-                background: rgba(255, 255, 255, 0.95);
+                background: var(--glass-bg);
                 backdrop-filter: blur(10px);
                 flex-direction: column;
                 align-items: center;
                 justify-content: flex-start;
                 padding-top: 2rem;
                 transition: var(--transition);
-                border-right: 1px solid rgba(255, 255, 255, 0.3);
+                border-right: 1px solid var(--glass-border);
             }
 
             .nav-links.active {
@@ -406,40 +467,34 @@
             }
 
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
 
             .hero p {
-                font-size: 1.2rem;
+                font-size: 1.4rem;
             }
 
-            .hero-background {
-                width: 95%;
-                height: 70%;
+            .hero-content {
+                padding: 3rem 2rem;
+                margin: 0 1rem;
+            }
+
+            .links-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Animation subtile en arrière-plan -->
-    <div class="animated-background">
-        <div class="floating-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-            <div class="shape shape-4"></div>
-        </div>
-        <div class="light-dots" id="lightDots"></div>
-    </div>
-
     <header>
         <nav>
-            <a href="index.html" class="logo">MonPortfolio</a>
+            <a href="index.html" class="logo">Portfolio - Elliot Simonet</a>
             <ul class="nav-links">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="profil.html">Profil</a></li>
                 <li><a href="entreprise.html">Entreprise</a></li>
-                <li><a href="epreuves.html">Epreuves</a></li>
+                <li><a href="epreuves.html">Tableau de compétences</a></li>
                 <li><a href="veille.html">Veille</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -450,16 +505,25 @@
     </header>
 
     <section class="hero">
-        <!-- Image animée en arrière-plan (grille subtile) -->
-        <div class="hero-background">
-            <div class="code-animation"></div>
+        <!-- Arrière-plan animé -->
+        <div class="hero-background"></div>
+        
+        <!-- Formes flottantes -->
+        <div class="animated-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
         </div>
+
+        <!-- Particules -->
+        <div class="particles" id="particles"></div>
 
         <!-- Contenu principal -->
         <div class="hero-content">
-            <h1>Bienvenue sur mon Portfolio</h1>
-            <div class="typing-text" id="typingText"></div>
-            <p>Développeur passionné créant des expériences digitales exceptionnelles</p>
+            <h1>Bienvenue sur le Portfolio de Elliot</h1>
+            <p>Etudiant en 2ème années de BTS SIO (Services Informatiques aux Organisations) option SISR (Solutions d'Infrastructure, Systèmes et Réseaux)</p>
             <a href="#quick-links" class="btn">Découvrir mon travail</a>
         </div>
     </section>
@@ -474,27 +538,27 @@
             <a href="entreprise.html" class="link-card">
                 <i class="fas fa-building"></i>
                 <h3>Entreprise</h3>
-                <p>Mon expérience professionnelle</p>
+                <p>Mon expérience professionnelle durant mon alternance</p>
             </a>
             <a href="epreuves.html" class="link-card">
                 <i class="fas fa-project-diagram"></i>
-                <h3>Épreuves</h3>
-                <p>Mes projets et réalisations</p>
+                <h3>Tableau de compétences</h3>
+                <p>Découvrez mon tableau de compétences et d'autre information complémentaire</p>
             </a>
             <a href="veille.html" class="link-card">
                 <i class="fas fa-binoculars"></i>
                 <h3>Veille Techno</h3>
-                <p>Mes recherches et analyses</p>
+                <p>Découvez mes 2 veille Technologique</p>
             </a>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2024 Mon Portfolio. Tous droits réservés.</p>
+        <p>&copy; 2026  Portfolio de Elliot SIMONET . Tous droits réservés.</p>
     </footer>
 
     <script>
-        // Gestion du menu mobile
+        // Menu mobile
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
 
@@ -508,92 +572,84 @@
             });
         });
 
-        // Animation de texte machine à écrire
-        const typingText = document.getElementById('typingText');
-        const texts = [
-            "> Développeur Full Stack",
-            "> Passionné par l'innovation",
-            "> Créateur de solutions digitales",
-            "> Amoureux du code propre"
-        ];
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        let typingSpeed = 100;
+        // Génération des particules
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
 
-        function typeWriter() {
-            const currentText = texts[textIndex];
-            
-            if (!isDeleting && charIndex < currentText.length) {
-                typingText.textContent += currentText.charAt(charIndex);
-                charIndex++;
-                typingSpeed = 100;
-            } else if (isDeleting && charIndex > 0) {
-                typingText.textContent = currentText.substring(0, charIndex - 1);
-                charIndex--;
-                typingSpeed = 50;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Propriétés aléatoires
+                const size = Math.random() * 4 + 1;
+                const left = Math.random() * 100;
+                const animationDuration = Math.random() * 10 + 5;
+                const animationDelay = Math.random() * 5;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${left}%`;
+                particle.style.animationDuration = `${animationDuration}s`;
+                particle.style.animationDelay = `${animationDelay}s`;
+                
+                particlesContainer.appendChild(particle);
             }
-            
-            if (!isDeleting && charIndex === currentText.length) {
-                isDeleting = true;
-                typingSpeed = 1500; // Pause à la fin
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                textIndex = (textIndex + 1) % texts.length;
-                typingSpeed = 500; // Pause avant nouveau texte
-            }
-            
-            setTimeout(typeWriter, typingSpeed);
         }
 
-        // Démarrer l'animation après un délai
-        setTimeout(typeWriter, 1000);
-
-        // Créer des points lumineux
-        const lightDots = document.getElementById('lightDots');
-        for (let i = 0; i < 40; i++) {
-            const dot = document.createElement('div');
-            dot.className = 'dot';
-            dot.style.left = `${Math.random() * 100}%`;
-            dot.style.top = `${Math.random() * 100}%`;
-            dot.style.animationDelay = `${Math.random() * 4}s`;
-            dot.style.animationDuration = `${2 + Math.random() * 3}s`;
-            lightDots.appendChild(dot);
-        }
-
-        // Effet de parallaxe au scroll
+        // Animation au scroll
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
-            const heroBackground = document.querySelector('.hero-background');
-            const shapes = document.querySelectorAll('.shape');
+            const heroContent = document.querySelector('.hero-content');
+            const quickLinks = document.querySelector('.quick-links');
             
-            if (heroBackground) {
-                heroBackground.style.transform = `translate(-50%, calc(-50% + ${scrolled * 0.05}px))`;
-            }
+            // Effet parallaxe sur le contenu hero
+            heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
             
-            shapes.forEach(shape => {
-                const speed = 0.1 + Math.random() * 0.2;
-                shape.style.transform = `translateY(${scrolled * speed}px)`;
+            // Animation des cartes au scroll
+            const linkCards = document.querySelectorAll('.link-card');
+            linkCards.forEach((card, index) => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (cardTop < windowHeight - 100) {
+                    card.style.animationDelay = `${index * 0.1}s`;
+                    card.classList.add('animate-in');
+                }
             });
         });
 
-        // Effet d'interaction avec la souris
-        document.addEventListener('mousemove', (e) => {
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            
+            // Animation d'entrée des cartes
+            const linkCards = document.querySelectorAll('.link-card');
+            linkCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100 + 500);
+            });
+        });
+
+        // Effet de souris sur le hero
+        document.querySelector('.hero').addEventListener('mousemove', (e) => {
+            const shapes = document.querySelectorAll('.shape');
             const x = e.clientX / window.innerWidth;
             const y = e.clientY / window.innerHeight;
             
-            const heroContent = document.querySelector('.hero-content');
-            if (heroContent) {
-                heroContent.style.transform = `rotateY(${(x - 0.5) * 1}deg) rotateX(${(y - 0.5) * -1}deg)`;
-            }
-        });
-
-        // Réinitialiser la rotation quand la souris quitte
-        document.addEventListener('mouseleave', () => {
-            const heroContent = document.querySelector('.hero-content');
-            if (heroContent) {
-                heroContent.style.transform = 'rotateY(0deg) rotateX(0deg)';
-            }
+            shapes.forEach((shape, index) => {
+                const speed = (index + 1) * 0.5;
+                const xMove = (x - 0.5) * speed * 20;
+                const yMove = (y - 0.5) * speed * 20;
+                
+                shape.style.transform = `translate(${xMove}px, ${yMove}px)`;
+            });
         });
     </script>
 </body>
