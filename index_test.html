@@ -58,7 +58,8 @@
     display: inline-block;
     width: 3px;
     height: 1.5rem;
-    background-color: var(--accent-color);
+    background-color: #003063;
+    /*background-color: var(--accent-color);*/      /*#003063*/
     margin-left: 2px;
     animation: blink 1s infinite;
 }
@@ -609,7 +610,7 @@ const texts = [
 let textIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
-let typingSpeed = 100;
+let typingSpeed = 200;
 
 function typeWriter() {
     const currentText = texts[textIndex];
