@@ -38,6 +38,37 @@
             overflow-x: hidden;
         }
 
+/* Styles pour l'effet machine à écrire */
+.typing-container {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    min-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.typing-text {
+    color: var(--accent-color); /* ou votre couleur préférée */
+    font-family: 'Courier New', monospace;
+    font-weight: 500;
+}
+
+.typing-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1.5rem;
+    background-color: var(--accent-color);
+    margin-left: 2px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+        
         header {
             position: fixed;
             top: 0;
@@ -522,8 +553,14 @@
 
         <!-- Contenu principal -->
         <div class="hero-content">
+            
             <h1>Bienvenue sur le Portfolio de Elliot</h1>
             <p>Etudiant en 2ème années de BTS SIO (Services Informatiques aux Organisations) option SISR (Solutions d'Infrastructure, Systèmes et Réseaux)</p>
+            <!-- Remplacer ou ajouter dans votre hero section -->
+<div class="typing-container">
+    <span class="typing-text" id="typingElement"></span>
+    <span class="typing-cursor"></span>
+</div>
             <a href="#quick-links" class="btn">Découvrir mon travail</a>
         </div>
     </section>
@@ -558,6 +595,52 @@
     </footer>
 
     <script>
+// Effet machine à écrire
+const typingElement = document.getElementById('typingElement');
+const texts = [
+    "Développeur Full Stack",
+    "Passionné par l'innovation",
+    "Créateur de solutions digitales",
+    "Spécialiste Front-end & Back-end"
+];
+
+let textIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let typingSpeed = 100;
+
+function typeWriter() {
+    const currentText = texts[textIndex];
+    
+    if (!isDeleting && charIndex < currentText.length) {
+        // Ajouter un caractère
+        typingElement.textContent = currentText.substring(0, charIndex + 1);
+        charIndex++;
+        typingSpeed = 100; // Vitesse d'écriture
+    } else if (isDeleting && charIndex > 0) {
+        // Supprimer un caractère
+        typingElement.textContent = currentText.substring(0, charIndex - 1);
+        charIndex--;
+        typingSpeed = 50; // Vitesse de suppression
+    }
+    
+    // Gérer les transitions
+    if (!isDeleting && charIndex === currentText.length) {
+        // Pause à la fin
+        isDeleting = true;
+        typingSpeed = 1500; // Pause longue
+    } else if (isDeleting && charIndex === 0) {
+        // Passer au texte suivant
+        isDeleting = false;
+        textIndex = (textIndex + 1) % texts.length;
+        typingSpeed = 500; // Pause courte
+    }
+    
+    setTimeout(typeWriter, typingSpeed);
+}
+
+// Démarrer l'animation après 1 seconde
+setTimeout(typeWriter, 1000);        
         // Menu mobile
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
