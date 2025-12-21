@@ -170,7 +170,7 @@
             position: absolute;
             border-radius: 50%;
             background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(2px);
             border: 1px solid rgba(255,255,255,0.1);
             animation: float 6s ease-in-out infinite;
         }
@@ -611,7 +611,7 @@ const texts = [
 let textIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
-let typingSpeed = 300;
+let typingSpeed = 400;
 
 function typeWriter() {
     const currentText = texts[textIndex];
@@ -662,7 +662,7 @@ setTimeout(typeWriter, 1000);
         // Génération des particules
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
-            const particleCount = 80;
+            const particleCount = 100;
 
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
