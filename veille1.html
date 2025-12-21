@@ -33,7 +33,6 @@
             min-height: 100vh;
         }
 
-        /* NAVIGATION RÉDUITE */
         header {
             position: fixed;
             top: 0;
@@ -44,8 +43,7 @@
             border-bottom: 1px solid var(--glass-border);
             box-shadow: var(--glass-shadow);
             z-index: 1000;
-            padding: 0.5rem 0; /* Réduit de 1rem à 0.5rem */
-            height: 60px; /* Hauteur fixe réduite */
+            padding: 1rem 0;
         }
 
         nav {
@@ -55,11 +53,10 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 2rem;
-            height: 100%;
         }
 
         .logo {
-            font-size: 1.3rem; /* Réduit de 1.5rem */
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary-color);
             text-decoration: none;
@@ -69,12 +66,10 @@
             display: flex;
             list-style: none;
             align-items: center;
-            margin: 0;
-            padding: 0;
         }
 
         .nav-links li {
-            margin-left: 1rem; /* Réduit de 1.5rem */
+            margin-left: 1.5rem;
         }
 
         .nav-links a {
@@ -82,12 +77,11 @@
             color: var(--primary-color);
             font-weight: 500;
             transition: var(--transition);
-            padding: 0.4rem 0.8rem; /* Réduit de 0.5rem 1rem */
-            border-radius: 20px; /* Légèrement réduit */
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
             background: var(--glass-bg);
             backdrop-filter: blur(5px);
             border: 1px solid var(--glass-border);
-            font-size: 0.9rem; /* Texte plus petit */
         }
 
         .nav-links a:hover {
@@ -98,15 +92,14 @@
         .hamburger {
             display: none;
             cursor: pointer;
-            font-size: 1.3rem; /* Réduit de 1.5rem */
+            font-size: 1.5rem;
             color: var(--primary-color);
-            padding: 0.3rem;
         }
 
         .container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 90px 2rem 3rem; /* Réduit de 120px à 90px */
+            padding: 120px 2rem 3rem;
         }
 
         .article-header {
@@ -319,10 +312,10 @@
 
             .nav-links {
                 position: fixed;
-                top: 60px; /* Ajusté pour la nav réduite */
+                top: 70px;
                 left: -100%;
                 width: 100%;
-                height: calc(100vh - 60px);
+                height: calc(100vh - 70px);
                 background: var(--glass-bg);
                 backdrop-filter: blur(10px);
                 flex-direction: column;
@@ -338,12 +331,7 @@
             }
 
             .nav-links li {
-                margin: 1rem 0;
-            }
-
-            .nav-links a {
-                padding: 0.8rem 1.5rem;
-                font-size: 1rem;
+                margin: 1.5rem 0;
             }
 
             .article-header h1 {
@@ -364,28 +352,6 @@
                 flex-direction: column;
                 gap: 1rem;
                 text-align: center;
-            }
-
-            .container {
-                padding: 80px 1rem 2rem; /* Ajusté pour mobile */
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo {
-                font-size: 1.1rem;
-            }
-
-            .article-header h1 {
-                font-size: 1.8rem;
-            }
-
-            .article-header {
-                padding: 2rem 1rem;
-            }
-
-            .article-content {
-                padding: 1.5rem;
             }
         }
     </style>
@@ -519,11 +485,11 @@
                     <h4>IA et développement</h4>
                     <p>Révolution ou évolution du métier ?</p>
                 </a>
-                <a href="#" class="related-card">
+                <a href="seo-2024.html" class="related-card">
                     <h4>SEO en 2024</h4>
                     <p>Les nouvelles bonnes pratiques</p>
                 </a>
-                <a href="#" class="related-card">
+                <a href="performance-web.html" class="related-card">
                     <h4>Performance Web</h4>
                     <p>Optimiser l'expérience utilisateur</p>
                 </a>
