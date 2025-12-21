@@ -49,7 +49,7 @@
 }
 
 .typing-text {
-    color: var(--accent-color); /* ou votre couleur préférée */
+    color: #3395ff; /* ou votre couleur préférée */
     font-family: 'Courier New', monospace;
     font-weight: 500;
 }
@@ -333,8 +333,8 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 200%;
+            height: 200%;
             z-index: -1;
         }
 
@@ -598,16 +598,16 @@
 // Effet machine à écrire
 const typingElement = document.getElementById('typingElement');
 const texts = [
-    "Développeur Full Stack",
-    "Passionné par l'innovation",
-    "Créateur de solutions digitales",
-    "Spécialiste Front-end & Back-end"
+    "Technicien supérieur en informatique",
+    "CFAI",
+    "Portfolio pour le BTS 2026",
+    "Epreuve E5 : support et mise à disposition de services informatiques"
 ];
 
 let textIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
-let typingSpeed = 100;
+let typingSpeed = 70;
 
 function typeWriter() {
     const currentText = texts[textIndex];
