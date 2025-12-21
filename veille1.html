@@ -460,19 +460,19 @@
         });
 
         // Animation au défilement
-        window.addEventListener('scroll', () => {
-            const articleSections = document.querySelectorAll('.article-section');
-            const windowHeight = window.innerHeight;
+      //window.addEventListener('scroll', () => {
+           // const articleSections = document.querySelectorAll('.article-section');
+         //   const windowHeight = window.innerHeight;
             
-            articleSections.forEach(section => {
-                const sectionTop = section.getBoundingClientRect().top;
+         //   articleSections.forEach(section => {
+           //     const sectionTop = section.getBoundingClientRect().top;
                 
-                if (sectionTop < windowHeight - 100) {
-                    section.style.opacity = '1';
-                    section.style.transform = 'translateY(0)';
-                }
-            });
-        });
+            //    if (sectionTop < windowHeight - 100) {
+               //     section.style.opacity = '1';
+              //      section.style.transform = 'translateY(0)';
+             //   }
+          //  });
+     //   })
 
         // Initialisation des animations
         document.addEventListener('DOMContentLoaded', () => {
