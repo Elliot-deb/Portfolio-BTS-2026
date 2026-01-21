@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV & Compétences - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #7f8c8d;
+            --accent-color: rgba(255, 255, 255, 0.2);
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --text-color: #2c3e50;
+            --transition: all 0.3s ease;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 2rem 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+        }
+
+        .documents-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .document-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--glass-shadow);
+            transition: var(--transition);
+        }
+
+        .document-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(31, 38, 135, 0.3);
+        }
+
+        .document-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .document-header i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+
+        .document-header h3 {
+            font-size: 1.8rem;
+        }
+
+        .document-header .file-format {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-left: auto;
+        }
+
+        .document-preview {
+            border: 2px solid var(--glass-border);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            height: 400px;
+            background: white;
+            position: relative;
+        }
+
+        .pdf-preview {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .excel-preview {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+        }
+
+        /* Prévisualisation Excel améliorée */
+        .excel-preview-container {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            padding: 20px;
+            background: white;
+        }
+
+        .excel-table {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .excel-table th {
+            background: #3498db;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #2980b9;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+
+        .excel-table td {
+            padding: 10px 15px;
+            border: 1px solid #e0e0e0;
+            transition: var(--transition);
+        }
+
+        .excel-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .excel-table tr:hover td {
+            background: #e3f2fd;
+        }
+
+        .excel-table .skill-level {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .excel-table .level-expert { background: #2ecc71; color: white; }
+        .excel-table .level-advanced { background: #3498db; color: white; }
+        .excel-table .level-intermediate { background: #f39c12; color: white; }
+        .excel-table .level-beginner { background: #e74c3c; color: white; }
+
+        .document-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--glass-border);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 30px;
+            transition: var(--transition);
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: rgba(52, 152, 219, 0.2);
+            border-color: #3498db;
+            color: #3498db;
+        }
+
+        .btn-success {
+            background: rgba(46, 204, 113, 0.2);
+            border-color: var(--success-color);
+            color: var(--success-color);
+        }
+
+        .skills-summary {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--glass-shadow);
+            margin-top: 3rem;
+        }
+
+        .skills-summary h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Modifié pour 4 blocs */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        @media (max-width: 992px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .skill-category h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--glass-border);
+        }
+
+        .skill-item {
+            margin-bottom: 1rem;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-level {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            border-radius: 4px;
+        }
+
+        .document-info {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+
+        .document-info p {
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        footer {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--glass-border);
+            color: var(--primary-color);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--glass-bg);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 2rem;
+                transition: var(--transition);
+                border-right: 1px solid var(--glass-border);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+
+            .documents-section {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                padding: 90px 1rem 1rem;
+            }
+
+            .document-card, .skills-summary {
+                padding: 2rem;
+            }
+
+            .document-preview {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .document-preview {
+                height: 250px;
+            }
+            
+            .document-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Portfolio - Elliot Simonet</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="profil.html">Profil</a></li>
+                <li><a href="entreprise.html">Entreprise</a></li>
+                <li><a href="cv-competences.html">Tableau de compétences & CV</a></li>
+                <li><a href="veille.html">Veille</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>CV & Compétences</h1>
+            <p>Consultez mon CV et mon tableau de compétences détaillé</p>
+        </div>
+
+        <div class="documents-section">
+            <!-- Carte CV PDF -->
+            <div class="document-card">
+                <div class="document-header">
+                    <i class="fas fa-file-pdf"></i>
+                    <h3>Curriculum Vitae</h3>
+                    <span class="file-format">PDF</span>
+                </div>
+                
+                <div class="document-preview">
+                    <!-- Remplacez par votre fichier PDF -->
+                    <iframe src="CV_2026-01-17_Elliot_Simonet.pdf" class="pdf-preview" 
+                            title="Prévisualisation du CV">
+                        <p>Votre navigateur ne supporte pas l'affichage des PDF.
+                           <a href="CV_2026-01-17_Elliot_Simonet.pdf" target="_blank">Télécharger le CV</a>
+                        </p>
+                    </iframe>
+                </div>
+
+                <div class="document-info">
+                    <p><strong>Dernière mise à jour :</strong> 3 Janvier 2026</p>
+                    <p><strong>Version :</strong> 2.0</p>
+                </div>
+
+                <div class="document-actions">
+                    <a href="CV_2026-01-17_Elliot_Simonet.pdf" target="_blank" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i> Ouvrir dans une nouvelle fenêtre
+                    </a>
+                    <a href="CV_2026-01-17_Elliot_Simonet.pdf" download class="btn btn-success">
+                        <i class="fas fa-download"></i> Télécharger le CV
+                    </a>
+                </div>
+            </div>
+
+            <!-- Carte Tableau de Compétences Excel -->
+            <div class="document-card">
+                <div class="document-header">
+                    <i class="fas fa-file-excel"></i>
+                    <h3>Tableau de Compétences</h3>
+                    <span class="file-format">EXCEL</span>
+                </div>
+                
+                <div class="document-preview">
+                    <!-- Remplacez le chemin par votre fichier Excel -->
+                    <div class="excel-preview">
+                        <div class="excel-preview-container">
+                            <table class="excel-table">
+                                <thead>
+                                    <tr>
+                                        <th>Compétence</th>
+                                        <th>Catégorie</th>
+                                        <th>Niveau</th>
+                                        <th>Expérience</th>
+                                        <th>Projets</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>HTML5/CSS3</td>
+                                        <td>Front-end</td>
+                                        <td><span class="skill-level level-expert">Expert</span></td>
+                                        <td>3 ans</td>
+                                        <td>15+</td>
+                                    </tr>
+                                    <tr>
+                                        <td>JavaScript ES6+</td>
+                                        <td>Front-end</td>
+                                        <td><span class="skill-level level-advanced">Avancé</span></td>
+                                        <td>2 ans</td>
+                                        <td>10+</td>
+                                    </tr>
+                                    <tr>
+                                        <td>React.js</td>
+                                        <td>Front-end</td>
+                                        <td><span class="skill-level level-intermediate">Intermédiaire</span></td>
+                                        <td>1 an</td>
+                                        <td>5+</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Node.js</td>
+                                        <td>Back-end</td>
+                                        <td><span class="skill-level level-intermediate">Intermédiaire</span></td>
+                                        <td>1 an</td>
+                                        <td>3+</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Express.js</td>
+                                        <td>Back-end</td>
+                                        <td><span class="skill-level level-intermediate">Intermédiaire</span></td>
+                                        <td>1 an</td>
+                                        <td>3+</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Git/GitHub</td>
+                                        <td>Outils</td>
+                                        <td><span class="skill-level level-advanced">Avancé</span></td>
+                                        <td>2 ans</td>
+                                        <td>20+</td>
+                                    </tr>
+                                    <tr>
+                                        <td>MySQL</td>
+                                        <td>Base de données</td>
+                                        <td><span class="skill-level level-intermediate">Intermédiaire</span></td>
+                                        <td>1 an</td>
+                                        <td>5+</td>
+                                    </tr>
+                                    <tr>
+                                        <td>MongoDB</td>
+                                        <td>Base de données</td>
+                                        <td><span class="skill-level level-beginner">Débutant</span></td>
+                                        <td>6 mois</td>
+                                        <td>2+</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="document-info">
+                    <p><strong>Dernière mise à jour :</strong> 10 Janvier 2024</p>
+                    <p><strong>Nombre de compétences :</strong> 25</p>
+                </div>
+
+                <div class="document-actions">
+                    <!-- Remplacez le chemin par votre fichier Excel -->
+                    <a href="votre_tableau_competences.xlsx" target="_blank" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i> Ouvrir dans Excel
+                    </a>
+                    <a href="votre_tableau_competences.xlsx" download class="btn btn-success">
+                        <i class="fas fa-download"></i> Télécharger le tableau
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="skills-summary">
+            <h2>Synthèse des Compétences</h2>
+            <div class="skills-grid">
+                <!-- Bloc 1 : Développement Front-end -->
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Développement Front-end</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>HTML5/CSS3</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>JavaScript</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>React.js</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bloc 2 : Développement Back-end -->
+                <div class="skill-category">
+                    <h3><i class="fas fa-server"></i> Développement Back-end</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Node.js</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Express.js</span>
+                            <span>65%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>API REST</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bloc 3 : Base de données -->
+                <div class="skill-category">
+                    <h3><i class="fas fa-database"></i> Base de données</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>MySQL</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>MongoDB</span>
+                            <span>60%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>SQL</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bloc 4 : Outils & Méthodologies -->
+                <div class="skill-category">
+                    <h3><i class="fas fa-tools"></i> Outils & Méthodologies</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Git/GitHub</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>DevOps</span>
+                            <span>65%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Méthodes Agiles</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-level" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Portfolio Elliot Simonet. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        // Menu mobile
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Animation des barres de compétences
+        document.addEventListener('DOMContentLoaded', () => {
+            const skillBars = document.querySelectorAll('.skill-level');
+            
+            skillBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                
+                setTimeout(() => {
+                    bar.style.transition = 'width 1.5s ease-in-out';
+                    bar.style.width = width;
+                }, 300);
+            });
+
+            // Animation des blocs de compétences
+            const skillCategories = document.querySelectorAll('.skill-category');
+            skillCategories.forEach((category, index) => {
+                category.style.opacity = '0';
+                category.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    category.style.transition = 'all 0.6s ease';
+                    category.style.opacity = '1';
+                    category.style.transform = 'translateY(0)';
+                }, index * 200 + 500);
+            });
+        });
+    </script>
+</body>
+</html>
