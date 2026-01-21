@@ -185,6 +185,7 @@
             border: none;
         }
 
+        /* Prévisualisation Excel avec iframe de Google Sheets */
         .excel-preview {
             width: 100%;
             height: 100%;
@@ -194,60 +195,26 @@
             background: #f8f9fa;
         }
 
-        /* Prévisualisation Excel améliorée */
-        .excel-preview-container {
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            padding: 20px;
-            background: white;
+        .excel-placeholder {
+            text-align: center;
+            padding: 2rem;
         }
 
-        .excel-table {
-            width: 100%;
-            min-width: 600px;
-            border-collapse: collapse;
-            background: white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        .excel-placeholder i {
+            font-size: 4rem;
+            color: #217346;
+            margin-bottom: 1rem;
         }
 
-        .excel-table th {
-            background: #3498db;
-            color: white;
-            padding: 12px 15px;
-            text-align: left;
-            border: 1px solid #2980b9;
-            font-weight: 600;
-            position: sticky;
-            top: 0;
+        .excel-placeholder h4 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
         }
 
-        .excel-table td {
-            padding: 10px 15px;
-            border: 1px solid #e0e0e0;
-            transition: var(--transition);
+        .excel-placeholder p {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
         }
-
-        .excel-table tr:nth-child(even) {
-            background: #f8f9fa;
-        }
-
-        .excel-table tr:hover td {
-            background: #e3f2fd;
-        }
-
-        .excel-table .skill-level {
-            display: inline-block;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        .excel-table .level-expert { background: #2ecc71; color: white; }
-        .excel-table .level-advanced { background: #3498db; color: white; }
-        .excel-table .level-intermediate { background: #f39c12; color: white; }
-        .excel-table .level-beginner { background: #e74c3c; color: white; }
 
         .document-actions {
             display: flex;
@@ -291,6 +258,12 @@
             color: var(--success-color);
         }
 
+        .btn-excel {
+            background: rgba(33, 115, 70, 0.2);
+            border-color: #217346;
+            color: #217346;
+        }
+
         .skills-summary {
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
@@ -307,7 +280,7 @@
             text-align: center;
         }
 
-        /* Modifié pour 4 blocs */
+        /* 4 blocs en grille */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -388,6 +361,42 @@
             padding: 2rem;
             text-align: center;
             margin-top: 4rem;
+        }
+
+        /* Instructions pour Excel */
+        .excel-instructions {
+            background: rgba(33, 115, 70, 0.1);
+            border: 1px solid rgba(33, 115, 70, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .excel-instructions h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: #217346;
+        }
+
+        .excel-instructions ul {
+            list-style: none;
+            padding-left: 1rem;
+        }
+
+        .excel-instructions li {
+            margin-bottom: 0.3rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .excel-instructions li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #217346;
         }
 
         @media (max-width: 768px) {
@@ -528,92 +537,53 @@
                 </div>
                 
                 <div class="document-preview">
-                    <!-- Remplacez le chemin par votre fichier Excel -->
+                    <!-- OPTION 1: Prévisualisation simple avec placeholder -->
                     <div class="excel-preview">
-                        <div class="excel-preview-container">
-                            <table class="excel-table">
-                                <thead>
-                                    <tr>
-                                        <th>Compétence</th>
-                                        <th>Catégorie</th>
-                                        <th>Niveau</th>
-                                        <th>Expérience</th>
-                                        <th>Projets</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>HTML5/CSS3</td>
-                                        <td>Front-end</td>
-                                        <td><span class="skill-level level-expert">Expert</span></td>
-                                        <td>3 ans</td>
-                                        <td>15+</td>
-                                    </tr>
-                                    <tr>
-                                        <td>JavaScript ES6+</td>
-                                        <td>Front-end</td>
-                                        <td><span class="skill-level level-advanced">Avancé</span></td>
-                                        <td>2 ans</td>
-                                        <td>10+</td>
-                                    </tr>
-                                    <tr>
-                                        <td>React.js</td>
-                                        <td>Front-end</td>
-                                        <td><span class="skill-level level-intermediate">Intermédiaire</span></td>
-                                        <td>1 an</td>
-                                        <td>5+</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Node.js</td>
-                                        <td>Back-end</td>
-                                        <td><span class="skill-level level-intermediate">Intermédiaire</span></td>
-                                        <td>1 an</td>
-                                        <td>3+</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Express.js</td>
-                                        <td>Back-end</td>
-                                        <td><span class="skill-level level-intermediate">Intermédiaire</span></td>
-                                        <td>1 an</td>
-                                        <td>3+</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Git/GitHub</td>
-                                        <td>Outils</td>
-                                        <td><span class="skill-level level-advanced">Avancé</span></td>
-                                        <td>2 ans</td>
-                                        <td>20+</td>
-                                    </tr>
-                                    <tr>
-                                        <td>MySQL</td>
-                                        <td>Base de données</td>
-                                        <td><span class="skill-level level-intermediate">Intermédiaire</span></td>
-                                        <td>1 an</td>
-                                        <td>5+</td>
-                                    </tr>
-                                    <tr>
-                                        <td>MongoDB</td>
-                                        <td>Base de données</td>
-                                        <td><span class="skill-level level-beginner">Débutant</span></td>
-                                        <td>6 mois</td>
-                                        <td>2+</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="excel-placeholder">
+                            <i class="fas fa-file-excel"></i>
+                            <h4>Tableau de Compétences Excel</h4>
+                            <p>Cliquez sur les boutons ci-dessous pour visualiser ou télécharger le tableau complet</p>
+                            <p><small>Format: .xlsx (Microsoft Excel)</small></p>
                         </div>
                     </div>
+
+                    <!-- OPTION 2: Si vous avez Google Sheets (décommentez cette section) -->
+                    <!--
+                    <iframe src="https://docs.google.com/spreadsheets/d/VOTRE_ID/sheet?gid=0&single=true&widget=true&headers=false" 
+                            style="width:100%; height:100%; border:none;">
+                    </iframe>
+                    -->
                 </div>
 
                 <div class="document-info">
                     <p><strong>Dernière mise à jour :</strong> 10 Janvier 2024</p>
-                    <p><strong>Nombre de compétences :</strong> 25</p>
+                    <p><strong>Format :</strong> Microsoft Excel (.xlsx)</p>
+                </div>
+
+                <!-- Instructions pour visualiser le fichier Excel -->
+                <div class="excel-instructions">
+                    <h4><i class="fas fa-info-circle"></i> Comment visualiser le tableau :</h4>
+                    <ul>
+                        <li>Cliquez sur "Aperçu en ligne" pour voir le tableau dans Google Sheets</li>
+                        <li>Cliquez sur "Télécharger" pour obtenir une copie locale</li>
+                        <li>Le tableau contient toutes mes compétences détaillées par catégorie</li>
+                    </ul>
                 </div>
 
                 <div class="document-actions">
-                    <!-- Remplacez le chemin par votre fichier Excel -->
-                    <a href="votre_tableau_competences.xlsx" target="_blank" class="btn btn-primary">
-                        <i class="fas fa-external-link-alt"></i> Ouvrir dans Excel
+                    <!-- OPTION 1: Lien direct vers le fichier Excel -->
+                    <a href="votre_tableau_competences.xlsx" target="_blank" class="btn btn-excel">
+                        <i class="fas fa-external-link-alt"></i> Aperçu en ligne
                     </a>
+                    
+                    <!-- OPTION 2: Lien vers Google Sheets (si vous avez uploadé sur Google Drive) -->
+                    <!--
+                    <a href="https://docs.google.com/spreadsheets/d/VOTRE_ID/edit?usp=sharing" 
+                       target="_blank" class="btn btn-excel">
+                        <i class="fas fa-external-link-alt"></i> Voir sur Google Sheets
+                    </a>
+                    -->
+                    
                     <a href="votre_tableau_competences.xlsx" download class="btn btn-success">
                         <i class="fas fa-download"></i> Télécharger le tableau
                     </a>
