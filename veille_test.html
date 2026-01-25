@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veille Technologique - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #7f8c8d;
+            --accent-color: rgba(255, 255, 255, 0.2);
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --text-color: #2c3e50;
+            --transition: all 0.3s ease;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 2rem 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .veille-intro {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--glass-shadow);
+            text-align: center;
+        }
+
+        .veille-intro h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .veille-intro p {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .veille-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .articles-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .article-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--glass-shadow);
+            transition: var(--transition);
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .article-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            line-height: 1.3;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .article-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.4rem 0.9rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--glass-border);
+            color: var(--primary-color);
+        }
+
+        .veille-sidebar {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--glass-shadow);
+            height: fit-content;
+        }
+
+        .sidebar-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .sidebar-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-section h3 {
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--glass-border);
+            color: var(--primary-color);
+            font-size: 1.3rem;
+        }
+
+        .resources-list {
+            list-style: none;
+        }
+
+        .resources-list li {
+            margin-bottom: 0.8rem;
+            padding: 0.8rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .resources-list li:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--glass-border);
+        }
+
+        .resources-list a {
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .resources-list i {
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .tool-item {
+            text-align: center;
+            padding: 1.2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            transition: var(--transition);
+            border: 1px solid var(--glass-border);
+        }
+
+        .tool-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .tool-item i {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary-color);
+        }
+
+        .tool-item div {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: var(--primary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--glass-border);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 30px;
+            transition: var(--transition);
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--glass-border);
+            color: var(--primary-color);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--glass-bg);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 2rem;
+                transition: var(--transition);
+                border-right: 1px solid var(--glass-border);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+
+            .veille-content {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                padding: 90px 1rem 1rem;
+            }
+
+            .veille-intro {
+                padding: 2rem;
+            }
+
+            .veille-intro h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .article-card {
+                padding: 1.5rem;
+            }
+            
+            .article-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Portfolio - Elliot Simonet</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="profil.html">Profil</a></li>
+                <li><a href="entreprise.html">Entreprise</a></li>
+                <li><a href="cv-competences.html">Tableau de compétences & CV</a></li>
+                <li><a href="veille.html">Veille</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Veille Technologique</h1>
+            <p>Analyse des tendances en gestion d'identité et d'accès, infrastructure IT et sécurité</p>
+        </div>
+
+        <div class="veille-intro">
+            <h2>Ma Veille Technologique</h2>
+            <p>Surveillance des évolutions en gestion d'identité (IAM), gestion de parc informatique et sécurisation d'environnements Linux. Mes principales sources incluent des rapports de sécurité, des blogs spécialisés, des publications techniques et des outils d'automatisation.</p>
+        </div>
+
+        <div class="veille-content">
+            <div class="articles-grid">
+                <div class="article-card">
+                    <h3>Gestion de l'identité en entreprise (IAM)</h3>
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i>2025 - 2026</span>
+                        <span><i class="far fa-clock"></i>4 min de lecture</span>
+                    </div>
+                    <div class="article-tags">
+                        <span class="tag">IAM</span>
+                        <span class="tag">SSO</span>
+                        <span class="tag">Sécurité</span>
+                    </div>
+                    <a href="veille1.html" class="btn">Lire l'article complet</a>
+                </div>
+
+                <div class="article-card">
+                    <h3>Gestion de parc informatique</h3>
+                    <div class="article-meta">
+                        <span><i class="far fa-calendar"></i>2025 - 2026</span>
+                        <span><i class="far fa-clock"></i>6 min de lecture</span>
+                    </div>
+                    <div class="article-tags">
+                        <span class="tag">DSI</span>
+                        <span class="tag">IA</span>
+                        <span class="tag">Sécurité</span>
+                    </div>
+                    <a href="veille2.html" class="btn">Lire l'article complet</a>
+                </div>
+            </div>           
+
+            <div class="veille-sidebar">
+                <div class="sidebar-section">
+                    <h3>Mes Sources</h3>
+                    <ul class="resources-list">
+                        <li><a href="https://medium.com" target="_blank"><i class="fab fa-medium"></i>Medium (articles sécurité)</a></li>
+                        <li><a href="https://www.gartner.fr/fr" target="_blank"><i class="fab fa-stack-overflow"></i>Rapports techniques (Microsoft, Gartner, Forrester)</a></li>
+                        <li><a href="https://dndagency.fr" target="_blank"><i class="fa-solid fa-file"></i>Blogs spécialisés (DNDAgency, SUSE, TuxCare, Stonetusker)</a></li>
+                        <li><a href="https://github.com" target="_blank"><i class="fa-brands fa-github"></i>Forums (Stack Overflow, GitHub)</a></li>
+                        <li><a href="https://www.francenum.gouv.fr" target="_blank"><i class="fas fa-rss"></i>Actualités sécurité (Cybersecurité-management.fr, FranceNum)</a></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Outils de Veille</h3>
+                    <div class="tools-grid">
+                        <div class="tool-item">
+                            <i class="fas fa-newspaper"></i>
+                            <div>Feedly / Feedly (agrégation flux RSS)</div>
+                        </div>
+                        <div class="tool-item">
+                            <i class="fa-brands fa-google"></i>
+                            <div>Google Alerts (mots-clés sécurité, IAM, Linux)</div>
+                        </div>
+                        <div class="tool-item">
+                            <i class="fa-brands fa-linkedin"></i>
+                            <div>LinkedIn (veille professionnelle)</div>
+                        </div>
+                        <div class="tool-item">
+                            <i class="fas fa-share-alt"></i>
+                            <div>Documentation officielle (Red Hat, Ubuntu, Microsoft)</div>
+                        </div>
+                        <div class="tool-item">
+                            <i class="fas fa-chart-line"></i>
+                            <div>SIEM / Monitoring (Wazuh)</div>
+                        </div>
+                        <div class="tool-item">
+                            <i class="fa-brands fa-github"></i>
+                            <div>GitHub (tendances open-source)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Portfolio de Elliot SIMONET. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Animation des cartes d'articles
+        document.addEventListener('DOMContentLoaded', () => {
+            const articleCards = document.querySelectorAll('.article-card');
+            const toolItems = document.querySelectorAll('.tool-item');
+            
+            articleCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200 + 300);
+            });
+            
+            toolItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(10px)';
+                
+                setTimeout(() => {
+                    item.style.transition = 'all 0.4s ease';
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, index * 100 + 600);
+            });
+        });
+    </script>
+</body>
+</html>
