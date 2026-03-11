@@ -383,6 +383,29 @@
             line-height: 1.6;
         }
 
+        /* Conteneur pour le schéma */
+        .gsb-schema {
+            margin-top: 2.5rem;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .gsb-schema img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .gsb-schema img:hover {
+            transform: scale(1.02);
+        }
+
         .missions-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -794,6 +817,12 @@
             <div class="gsb-intro">
                 <h2><i class="fas fa-flask" style="margin-right: 0.5rem;"></i> Projet GSB (Galaxy Swiss Bourdin)</h2>
                 <p>Projet de gestion des frais pour une entreprise pharmaceutique. Réalisation en équipe, mise en place d'une application web permettant la saisie, la validation et le suivi des notes de frais des visiteurs médicaux.</p>
+                
+                <!-- Conteneur pour le schéma -->
+                <div class="gsb-schema">
+                    <img src="chemin/vers/schema-gsb.png" alt="Schéma de l'architecture du projet GSB">
+                    <!-- Vous pouvez ajouter une légende si nécessaire -->
+                </div>
             </div>
 
             <div class="missions-grid">
