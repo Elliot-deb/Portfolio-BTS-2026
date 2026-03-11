@@ -682,145 +682,24 @@
             </div>
         </div>
 
-        <!-- Section des compétences (4 blocs) -->
-        <div class="skills-summary">
-            <h2>Synthèse des Compétences</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> Développement Front-end</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>HTML5/CSS3</span>
-                            <span>95%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 95%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>JavaScript</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>React.js</span>
-                            <span>75%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 75%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3><i class="fas fa-server"></i> Développement Back-end</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Node.js</span>
-                            <span>70%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 70%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Express.js</span>
-                            <span>65%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 65%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>API REST</span>
-                            <span>75%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 75%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3><i class="fas fa-database"></i> Base de données</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>MySQL</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 80%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>MongoDB</span>
-                            <span>60%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 60%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>SQL</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 85%"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3><i class="fas fa-tools"></i> Outils & Méthodologies</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Git/GitHub</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 90%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>DevOps</span>
-                            <span>65%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 65%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Méthodes Agiles</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-level" style="width: 85%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Nouvelle section : Projet GSB -->
         <div class="gsb-section">
             <div class="gsb-intro">
                 <h2><i class="fas fa-flask" style="margin-right: 0.5rem;"></i> Projet GSB (Galaxy Swiss Bourdin)</h2>
-                <p>Projet de gestion des frais pour une entreprise pharmaceutique. Réalisation en équipe, mise en place d'une application web permettant la saisie, la validation et le suivi des notes de frais des visiteurs médicaux.</p>
+                <p>L’entreprise GSB souhaite avoir une infrastructure plus professionnelle avec un domaine des différents services comme un DHCP qui permettrons de distribuer des adresse IP automatiquement aux machines. L’entreprise GSB souhaite aussi avoir un infrastructure sécurisées et utilisable même en cas de panne d’un serveur et des sauvegarde en cas de perte. 
+
+Le premier élément important s’appelle Active Directory. On peut le comparer à un « annuaire d’entreprise » intelligent: il contient la liste de tous les utilisateurs, de tous les ordinateurs et des règles qui définissent qui a le droit d’accéder à quoi. Ce service fonctionne grâce à un contrôleurs de domaine, qui sont des serveurs chargés de vérifier les identités et d’autoriser les connexions.  l’entreprise GSB souhaite ajouter un deuxième contrôleur de domaine, afin d’avoir une redondance car si le premier tombe en panne, le second peut prendre le relais et permettre aux employés de continuer à travailler.
+
+Un autre point essentiel est la sécurité des échanges. Pour cela, on utilisera une technologie appelée PKI (Infrastructure à Clé Publique), qui permet de délivrer des certificats numériques aux ordinateurs et aux utilisateurs permettant de chiffrer les communications et de s’assurer que les machines et les utilisateurs sont bien ceux qu’ils prétendent être. La mise en place de cette PKI sera réalisée à l’aide d’un service Windows appelé Active Directory Certificate Services. En complément, des sauvegardes régulières du système notamment de l’annuaire Active Directory sont programmées sur un lecteur dédié, afin de pouvoir restaurer l’infrastructure en cas de problème.
+
+Enfin, pour qu’un ordinateur puisse communiquer sur le réseau, il a besoin d’une adresse IP. Plutôt que de les configurer à la main sur chaque machine, l’entreprise utilisera un service appelé DHCP, qui distribue automatiquement ces adresses aux postes de travail. Dans le cas de GSB, le réseau interne (LAN) utilisera une plage d’adresses commençant par 10.42.1.x. Une partie de ces adresses doit être réservée à des machines critiques comme des serveurs et le reste est attribué dynamiquement aux ordinateurs des employés. La bonne configuration du serveur DHCP garantit que chaque appareil reçoit une adresse adaptée et qu’il peut accéder aux ressources nécessaires sans intervention manuelle.
+
+L’objectif global de ces mises en place est donc de rendre l’infrastructure de GSB plus fiable, plus sécurisée et plus simple à gérer au quotidien.
+</p>
                 
                 <!-- Conteneur pour le schéma -->
                 <div class="gsb-schema">
-                    <img src="chemin/vers/schema-gsb.png" alt="Schéma de l'architecture du projet GSB">
+                    <img src="GSB.drawio_V1.png" alt="Schéma de l'architecture du projet GSB">
                     <!-- Vous pouvez ajouter une légende si nécessaire -->
                 </div>
             </div>
