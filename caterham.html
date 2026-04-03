@@ -1,6 +1,137 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caterham Visible</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --panel: #161b22;
+      --line: rgba(255,255,255,.12);
+      --text: #f3f6fb;
+      --muted: #b2bcc9;
+      --accent: #8ee36b;
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #11161d 0%, #090c10 100%);
+    }
+    .wrap { width: min(1120px, calc(100% - 28px)); margin: 0 auto; }
+    header { padding: 22px 0; }
+    .top {
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    }
+    .brand { font-weight: 800; letter-spacing: .08em; text-transform: uppercase; font-size: 14px; }
+    .hero {
+      display: grid; grid-template-columns: .9fr 1.1fr; gap: 32px; align-items: center;
+      padding: 28px 0 56px;
+    }
+    h1 {
+      font-size: clamp(38px, 7vw, 74px);
+      line-height: .96;
+      margin: 0 0 16px;
+    }
+    p { color: var(--muted); font-size: 18px; line-height: 1.65; }
+    .tag {
+      display: inline-block; margin-bottom: 14px; color: var(--accent); text-transform: uppercase;
+      letter-spacing: .18em; font-size: 12px; font-weight: 700;
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 18px;
+      border-radius: 999px; margin-top: 24px; background: var(--accent); color: #0f140a; font-weight: 800;
+      text-decoration: none;
+    }
+    .photo-card {
+      background: #ffffff;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.22);
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+    }
+    .photo-card img {
+      display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: #fff;
+    }
+    .caption {
+      padding: 14px 18px; color: #1a1f26; font-size: 14px; font-weight: 700;
+      display: flex; justify-content: space-between; gap: 12px;
+    }
+    .notes {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 52px;
+    }
+    .note {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 18px;
+    }
+    .note strong { display: block; margin-bottom: 8px; color: var(--accent); font-size: 20px; }
+    footer { color: var(--muted); padding-bottom: 32px; font-size: 14px; }
+    @media (max-width: 860px) {
+      .hero, .notes { grid-template-columns: 1fr; }
+      p { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="top">
+        <div class="brand">Caterham mini site</div>
+        <a class="btn" href="#voiture">Voir l'image</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <span class="tag">Roadster léger</span>
+          <h1>Cette fois, la Caterham est bien visible.</h1>
+          <p>J’ai refait une version plus simple avec une grande photo sur fond clair, pour éviter que la voiture se perde visuellement dans la mise en page.</p>
+          <a class="btn" href="https://www.caterhamcars.com/" target="_blank" rel="noopener noreferrer">Ouvrir le site officiel</a>
+        </div>
+
+        <div class="photo-card" id="voiture">
+          <img
+            src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/c02405339037e87472fcfebf33682bfdf68eba4b.jpg"
+            alt="Caterham Seven blanche vue de trois quarts sur fond neutre"
+            width="1920"
+            height="1038"
+            loading="eager"
+          />
+          <div class="caption">
+            <span>Caterham Seven</span>
+            <span>Vue studio, plus lisible</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="notes">
+        <article class="note">
+          <strong>Image agrandie</strong>
+          <span>La photo prend davantage de place dans la page.</span>
+        </article>
+        <article class="note">
+          <strong>Fond clair</strong>
+          <span>Le contraste rend la voiture plus facile à distinguer.</span>
+        </article>
+        <article class="note">
+          <strong>Mise en page simple</strong>
+          <span>Moins d’effets, donc la voiture reste l’élément principal.</span>
+        </article>
+      </section>
+    </main>
+
+    <footer>Version corrigée avec image Caterham plus visible.</footer>
+  </div>
+</body>
+</html><!DOCTYPE html>
+<html lang="fr">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Caterham Seven | L'essence de la pureté automobile</title>
